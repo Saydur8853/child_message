@@ -1,0 +1,148 @@
+body {
+  background-color: white !important;
+}
+.sticky-navbar.fixed {
+    position: fixed; /* Make navbar fixed on scroll down */
+    top: 0;
+    left: 0;
+    width: 100%;  /* Adjust width as needed */
+    z-index: 100; /* Ensure navbar is on top of other elements */
+  }
+/* Popup Container */
+#popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  visibility: visible;
+  z-index: 1000;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Hide the popup */
+#popup.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Popup Content */
+.popup-content {
+  position: relative;
+  background: #fff;
+  padding: 2px;
+  border-radius: 2px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Popup Image */
+.popup-image {
+  max-width: 500px;
+  border-radius: 2px;
+  display: block;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #ede6e6;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover Effect for Close Button */
+.close-btn:hover {
+  color: rgb(234, 13, 13);
+}
+
+.blink-animation {
+  width: 12px;
+  /* Match the 'h-3' and 'w-3' from Tailwind */
+  height: 12px;
+  border-radius: 50%;
+  /* Circle shape */
+  margin-right: 8px;
+  /* Match 'mr-2' */
+  animation: blink 2s infinite;
+  /* Apply the animation */
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    background-color: red;
+    /* Start and end with red */
+  }
+
+  50% {
+    background-color: white;
+    /* Middle point is white */
+  }
+}
+
+.video-container img {
+  transition: filter 0.3s ease;
+  /* Smooth transition */
+}
+
+.video-container img:hover {
+  filter: brightness(0) invert(1);
+  /* Turns the image white */
+}
+
+/* Media query to hide images for screens smaller than 1600px */
+@media (max-width: 1384px) {
+  #fixed-add .fixed {
+    display: none !important;
+  }
+}
+
+/* Animation for the left image */
+/*
+@keyframes slideInLeft {
+  0% {
+    left: -600px; 
+  }
+  10% {
+    left: 0; 
+  }
+  60% {
+    left: 0; 
+  }
+  100% {
+    left: -600px; 
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    right: -600px; 
+  }
+  10% {
+    right: 0; 
+  }
+  60% {
+    right: 0; 
+  }
+  100% {
+    right: -600px; 
+  }
+}
+ */

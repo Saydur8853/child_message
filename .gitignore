@@ -1,0 +1,58 @@
+# Python compiled files
+*.pyc
+*.pyo
+__pycache__/
+*.pyd
+
+# Virtual environment
+venv/
+wagtail_env/
+
+# Django log files
+*.log
+
+# Django secret key file (if applicable)
+.env
+
+# Database files
+*.sqlite3
+
+# Static and media files
+/static/
+/media/
+
+# Ignore collected static files (if using collectstatic)
+staticfiles/
+
+# Node modules (if using npm or yarn for frontend)
+node_modules/
+
+# macOS-specific files
+.DS_Store
+
+# VSCode settings
+.vscode/
+
+# PyCharm settings
+.idea/
+
+# Backup files
+*.bak
+*.swp
+
+# Coverage reports
+htmlcov/
+.coverage
+*.cover
+*.py,cover
+
+# Testing files
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+*.hypothesis/
+.cache/
+
+# Wagtail cache and search index
+search_index/
