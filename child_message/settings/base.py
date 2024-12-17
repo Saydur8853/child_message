@@ -26,8 +26,10 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     "home",
     "search",
+    "wagtail_modeladmin",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.settings",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "wagtail.contrib.typed_table_block",
 ]
 
 MIDDLEWARE = [
@@ -116,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Dhaka"
 
 USE_I18N = True
 
@@ -156,7 +159,7 @@ STORAGES = {
     },
 }
 
-
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "child_message"

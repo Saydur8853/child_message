@@ -5,28 +5,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>SMF</title>
-
     <!-- Include Font Awesome for icons -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
       rel="stylesheet"
     />
-
     <!-- Custom Stylesheet -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
 
-    <!-- Favicon -->
-    <link
-      rel="icon"
-      type="image/ico"
-      href="{% static 'assets/favicon.ico' %}"
-    />
   </head>
 
   <body class="bg-gray-100 font-sans leading-normal relative tracking-normal">
-    <!-- Popup Container -->
+    <!-- Popup  Advertisement -->
     <div id="popup" class="popup-container">
       <div class="popup-content">
         <button id="closePopup" class="close-btn">&times;</button>
@@ -314,12 +304,13 @@
             class="col-span-8 lg:col-span-10 md:col-span-8 bg-[#E8851C] bg-opacity-90"
           >
             <marquee
-              class="text-white p-4 font-bold"
+              class="text-white p-4"
               behavior="scroll"
               direction="left"
             >
-              ঘন কুয়াশায় মঙ্গলবার ভোর থেকে পাটুরিয়া
+            {{ page.news_bulletin|richtext }}
             </marquee>
+            
           </div>
         </div>
       </div>
@@ -387,8 +378,7 @@
               <!-- Left Column -->
               <div>
                 <h1 class="font-bold text-xl lg:text-2xl text-[#F67F00]">
-                  আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
-                  প্রেস সচিব
+                    {{ latest_news.main_heading }}
                 </h1>
                 <p class="text-[#616161] text-sm mt-3 lg:mt-5">১০ মিনিট আগে</p>
                 <p class="text-[#616161] mt-3 lg:mt-5 mb-5">
