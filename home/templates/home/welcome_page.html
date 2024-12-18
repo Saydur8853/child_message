@@ -12,7 +12,6 @@
     />
     <!-- Custom Stylesheet -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
-
   </head>
 
   <body class="bg-gray-100 font-sans leading-normal relative tracking-normal">
@@ -303,14 +302,9 @@
           <div
             class="col-span-8 lg:col-span-10 md:col-span-8 bg-[#E8851C] bg-opacity-90"
           >
-            <marquee
-              class="text-white p-4"
-              behavior="scroll"
-              direction="left"
-            >
-            {{ page.news_bulletin|richtext }}
+            <marquee class="text-white p-4" behavior="scroll" direction="left">
+              {{ page.news_bulletin|richtext }}
             </marquee>
-            
           </div>
         </div>
       </div>
@@ -378,16 +372,14 @@
               <!-- Left Column -->
               <div>
                 <h1 class="font-bold text-xl lg:text-2xl text-[#F67F00]">
-                    {{ latest_news.main_heading }}
+                  {{ latest_news.main_heading }}
                 </h1>
                 <p class="text-[#616161] text-sm mt-3 lg:mt-5">১০ মিনিট আগে</p>
                 <p class="text-[#616161] mt-3 lg:mt-5 mb-5">
-                  মুক্তিযুদ্ধকে কেন্দ্র করে ভারত-পাকিস্তানের যুদ্ধ নিয়ে
-                  জাতিসংঘের নিরাপত্তা পরিষদের জরুরি বৈঠক ডাকতে ৪ ডিসেম্বর উদ্যোগ
-                  নেওয়া হয়
+                  {{ latest_news.subtitle }}
                 </p>
                 <img
-                  src="{% static 'assets/childrens.png' %}"
+                  src="{{ latest_news.image.file.url }}"
                   class="w-full h-auto rounded-lg shadow-md"
                   alt="news"
                 />
