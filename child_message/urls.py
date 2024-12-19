@@ -9,7 +9,7 @@ from wagtail.images.views.serve import ServeView
 
 from search import views as search_views
 
-from home.views import latest_news_view
+from home.views import *
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
@@ -21,8 +21,7 @@ urlpatterns = [
         ServeView.as_view(action="redirect"),
         name="wagtailimages_serve",
     ),
-    path("", latest_news_view, name="latest_news"),
-    
+    path("", combined_view, name="home"),
 ]
 
 

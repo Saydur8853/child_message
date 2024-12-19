@@ -5,7 +5,9 @@ certifi==2024.12.14
 charset-normalizer==3.4.0
 defusedxml==0.7.1
 Django==5.1.4
+django-cogwheels==0.3
 django-filter==24.3
+django-json-widget==2.0.1
 django-modelcluster==6.3
 django-permissionedforms==0.1
 django-taggit==6.1.0
@@ -20,6 +22,8 @@ laces==0.1.1
 openpyxl==3.1.5
 pillow==11.0.0
 pillow_heif==0.21.0
+psycopg2==2.9.10
+psycopg2-binary==2.9.10
 pytz==2024.2
 requests==2.32.3
 six==1.17.0
@@ -29,4 +33,6 @@ telepath==0.3.1
 tzdata==2024.2
 urllib3==2.2.3
 wagtail==6.3.1
+wagtail-modeladmin==2.1.0
+wagtailmenus==4.0.1
 Willow==1.9.0

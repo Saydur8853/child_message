@@ -19,11 +19,11 @@
     <div id="popup" class="popup-container">
       <div class="popup-content">
         <button id="closePopup" class="close-btn">&times;</button>
-        <img
-          src="{% static 'assets/mojo.png' %}"
-          alt="Popup Image"
-          class="popup-image"
-        />
+        {% if popup_adv_url %}
+        <img src="{{ popup_adv_url }}" alt="Popup Image" class="popup-image" />
+        {% else %}
+        <p>No advertisement available.</p>
+        {% endif %}
       </div>
     </div>
 
@@ -374,7 +374,9 @@
                 <h1 class="font-bold text-xl lg:text-2xl text-[#F67F00]">
                   {{ latest_news.main_heading }}
                 </h1>
-                <p class="text-[#616161] text-sm mt-3 lg:mt-5">১০ মিনিট আগে</p>
+                <p class="text-[#616161] text-sm mt-3 lg:mt-5">
+                  {{ latest_news.updated_date|timesince }} Ago
+                </p>
                 <p class="text-[#616161] mt-3 lg:mt-5 mb-5">
                   {{ latest_news.subtitle }}
                 </p>
@@ -403,37 +405,41 @@
                   <!-- Missing Person Image -->
                   <div>
                     <img
-                      src="{% static 'assets/missing2.png' %}"
+                      src="{{ missing_person.image.file.url }}"
                       class="w-full h-auto rounded-lg shadow-md"
-                      alt="missing"
+                      alt="missing person photo"
                     />
                   </div>
                   <!-- Missing Person Details -->
                   <div class="space-y-2">
                     <p class="text-[#616161]">
-                      <span class="font-bold">নাম</span> : হাসান আহমেদ
+                      <span class="font-bold">নাম</span> : {{
+                      missing_person.name }}
                     </p>
                     <p class="text-[#616161]">
-                      <span class="font-bold">বয়স</span> : ৯ বছর
+                      <span class="font-bold">বয়স</span> : {{ missing_person.age
+                      }} বছর
                     </p>
                     <p class="text-[#616161]">
-                      <span class="font-bold">গায়ের রং</span> : ফর্সা
+                      <span class="font-bold">গায়ের রং</span> : {{
+                      missing_person.skin_tone }}
                     </p>
                     <p class="text-[#616161]">
-                      <span class="font-bold">পরনে ছিল</span> : লাল রঙের গেঞ্জি
-                      ও নীল প্যান্ট
+                      <span class="font-bold">পরনে ছিল</span> : {{
+                      missing_person.dress }}
                     </p>
                     <p class="text-[#616161]">
-                      <span class="font-bold">নিখোঁজ হওয়ার সময়</span> : ১০
-                      ডিসেম্বর ২০২৪
+                      <span class="font-bold">নিখোঁজ হওয়ার সময়</span> : {{
+                      missing_person.missing_time_date|date:"d F Y, h:i A" }}
                     </p>
                     <p class="text-[#616161]">
-                      <span class="font-bold">যোগাযোগের নম্বর</span> :
-                      ০১৮xxxxxxxx
+                      <span class="font-bold">যোগাযোগের নম্বর</span> : {{
+                      missing_person.contact_number }}
                     </p>
                     <p class="text-[#616161]">
-                      <span class="font-bold">দ্রষ্টব্য</span> : কেউ এই শিশুটির
-                      সন্ধান পেলে উপরের নম্বরে যোগাযোগ করুন
+                      <span class="font-bold">দ্রষ্টব্য</span> : কেউ এই {{
+                      missing_person.name }} এর সন্ধান পেলে {{
+                      missing_person.contact_number }} নম্বরে যোগাযোগ করুন।
                     </p>
                   </div>
                 </div>
