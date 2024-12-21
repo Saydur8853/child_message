@@ -41,14 +41,17 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 9px;
 }
 
 /* Popup Image */
 .popup-image {
-  max-width: 500px;
+  max-width: 100%;
   border-radius: 2px;
   display: block;
+  
 }
+
 
 /* Close Button */
 .close-btn {

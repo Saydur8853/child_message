@@ -31,10 +31,10 @@ class LabeledCallToActionBlock(CallToActionBlock):
 class VerticalAddBlock(blocks.StructBlock):
     image = util_blocks.ImageChooserBlock(
         required=False,
-        help_text="Optimal Dimension : 165x625",
+        help_text="Optimal Dimension : 168x934",
         rendition_rules={
-            "original": "fill-165x625-c0|format-webp",
-            "original_fallback": "fill-165x625-c0",
+            "original": "fill-168x934-c0|format-webp",
+            "original_fallback": "fill-168x934-c0",
         },
     )
 
