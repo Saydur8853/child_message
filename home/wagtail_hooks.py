@@ -4,6 +4,7 @@ from wagtail_modeladmin.options import ModelAdmin,ModelAdminGroup, modeladmin_re
 
 
 
+
 """
 .##....##.########.##......##..######.
 .###...##.##.......##..##..##.##....##
@@ -34,9 +35,12 @@ class NewsDetailsAdmin(ModelAdmin):
         "published_date",
         "make_featured_news",
     )
+    list_display = ("news_category",)
+    search_fields = ("news_category",)
+    
 class Newsroom(ModelAdminGroup):
     menu_label = "Newsroom"
-    menu_icon = "fa-newspaper-o"
+    menu_icon = "glasses"
     menu_order = 300
     items = (NewsCategoryAdmin, NewsDetailsAdmin)
 
