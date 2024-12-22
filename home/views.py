@@ -1,3 +1,4 @@
+from datetime import timedelta
 from django.shortcuts import render
 from .models import *
 
@@ -130,6 +131,13 @@ def box_advertisement_view(request):
 .##...###.##.......##..##..##.##....##
 .##....##.########..###..###...######.
 """
+# Fetch the current news (for the scrolling marquee)
+def current_news_view(request):
+    # Fetch current news published in the last week, or None if none are available
+    current_news = CurrentNews.objects.filter(published_date__gte=timezone.now() - timedelta(weeks=1)).order_by('-published_date') if CurrentNews.objects.exists() else None
+    return current_news
+
+# Fetch the latest news (for the Amar barta home page)
 def latest_news_view(request):
     try:
         latest_news = AmarBarta.objects.latest('published_date')  # Get the most recent news item
@@ -171,6 +179,7 @@ def combined_view(request):
 
     missing_person = missing_person_details_view(request)
     latest_news = latest_news_view(request)
+    current_news = current_news_view(request)
     return render(
         request,
         'home/home_page.html',
@@ -193,5 +202,6 @@ def combined_view(request):
             'popup_adv_url': popup_adv_url,
             'missing_person': missing_person, 
             'latest_news': latest_news,
+            'current_news': current_news,
         }
     )

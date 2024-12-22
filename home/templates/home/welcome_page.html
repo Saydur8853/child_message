@@ -204,11 +204,19 @@
           <p class="p-4 text-white font-bold text-center">সদ্য প্রাপ্ত :</p>
         </div>
         <!-- Right Section -->
-        <div class="col-span-8 lg:col-span-10 md:col-span-8 bg-[#E8851C] bg-opacity-90">
-          <marquee class="text-white p-4" behavior="scroll" direction="left">
-            {{ page.news_bulletin|richtext }}
-          </marquee>
-        </div>
+<div class="col-span-8 lg:col-span-10 md:col-span-8 bg-[#E8851C] bg-opacity-90">
+  <marquee class="text-white p-4" behavior="scroll" direction="left">
+    {% if current_news %}
+        {% for news_item in current_news %}
+            <span>{{ news_item }}{% if not forloop.last %} • {% endif %}</span>
+        {% endfor %}
+    {% elif no_news %}
+        <span>No current news published.</span>
+    {% else %}
+        <span>No current news available.</span>
+    {% endif %}
+</marquee>
+</div>
       </div>
     </div>
 
