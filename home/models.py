@@ -30,6 +30,7 @@ class HomePage(Page):
         
     ]
     
+    
  ######  ##     ## ########  ########  ######## ##    ## ########    ##    ## ######## ##      ##  ######  
 ##    ## ##     ## ##     ## ##     ## ##       ###   ##    ##       ###   ## ##       ##  ##  ## ##    ## 
 ##       ##     ## ##     ## ##     ## ##       ####  ##    ##       ####  ## ##       ##  ##  ## ##       
@@ -123,9 +124,7 @@ class MissingMessage(models.Model):
     ##    ## ########  ###  ###   ######  
 
 class NewsCategory(models.Model):
-    category = models.CharField(
-        _("News Category"), max_length=50, blank=True, null=True
-    )
+    category = models.CharField(_("News Category"), max_length=50, blank=True, null=True)
 
     def __str__(self):
         return self.category
@@ -134,7 +133,7 @@ class NewsCategory(models.Model):
     # ---------------------------------------------------------------------
     #                             NewsIndexPage
     # ---------------------------------------------------------------------
-class NewsIndexPage(MenuPage):
+class NewsIndexPage(Page):
     advertisement = StreamField(
         [
             ("Vertical_Adv", VerticalAddBlock()),
@@ -150,8 +149,8 @@ class NewsIndexPage(MenuPage):
         FieldPanel('advertisement'),
         
     ]
-    parent_page_types = ["home.HomePage"]
-    subpage_types = ["home.NewsDetailsPage"]
+    # parent_page_types = ["home.HomePage",]
+    subpage_types = ["home.NewsDetailsPage",]
     
     
     # ---------------------------------------------------------------------
@@ -160,7 +159,7 @@ class NewsIndexPage(MenuPage):
     
     
     
-class NewsDetailsPage(MenuPage):
+class NewsDetailsPage(Page):
     news_category = models.ForeignKey(
         NewsCategory,
         verbose_name=_("Select a Category"),
@@ -169,7 +168,7 @@ class NewsDetailsPage(MenuPage):
         blank=True,
         related_name="news_details_page",
     )
-    main_heading = models.CharField(max_length=255, help_text="Main Heading of the News")
+    main_heading = models.CharField(max_length=255, help_text="Main Heading of the News",blank=True,)
     subtitle = models.CharField(max_length=255, blank=True, null=True, help_text="Subtitle of the News")
     image = models.ForeignKey(
         "wagtailimages.Image",
@@ -198,11 +197,10 @@ class NewsDetailsPage(MenuPage):
     )
     content_panels = Page.content_panels + [
         FieldPanel('advertisement'),
+        FieldPanel('news_category'),
+        FieldPanel('main_heading'),
         
     ]
-    parent_page_types = ["home.NewsIndexPage"]
-    subpage_types = ["home.NewsDetailsPage"]
-
-    def __str__(self):
-        return self.main_heading
+    # parent_page_types = ["home.NewsIndexPage",]
+    # subpage_types = ["home.NewsDetailsPage",]
     
