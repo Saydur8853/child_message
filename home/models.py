@@ -133,6 +133,7 @@ class NewsCategory(models.Model):
     # ---------------------------------------------------------------------
     #                             NewsIndexPage
     # ---------------------------------------------------------------------
+# from functools import cached_property
 class NewsIndexPage(Page):
     advertisement = StreamField(
         [
@@ -145,12 +146,29 @@ class NewsIndexPage(Page):
         null=True,
         blank=True,
     )
+    def additional_menu_data(self, context={}):
+        return {
+            "use_initial_child": self.use_initial_child,
+        }
+    def get_template(self, request, *args, **kwargs):
+        return "home/news_index_page.html"
+    
+    def get_context(self, request, *args, **kwargs):
+        context = super(NewsIndexPage,self).get_context(request, *args, **kwargs)
+        return context
+
+        
+    
     content_panels = Page.content_panels + [
         FieldPanel('advertisement'),
         
     ]
-    # parent_page_types = ["home.HomePage",]
     subpage_types = ["home.NewsDetailsPage",]
+    
+    # @cached_property
+    # def parent_page(self):
+    #     return self.get_parent().specific
+    
     
     
     # ---------------------------------------------------------------------
@@ -201,6 +219,5 @@ class NewsDetailsPage(Page):
         FieldPanel('main_heading'),
         
     ]
-    # parent_page_types = ["home.NewsIndexPage",]
-    # subpage_types = ["home.NewsDetailsPage",]
+   
     
