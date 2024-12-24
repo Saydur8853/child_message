@@ -27,17 +27,19 @@ class HomePage(Page):
     ]
     subpage_types = [
         "home.NewsIndexPage",
+        "home.CheifVoicePage",
         
     ]
     
     
- ######  ##     ## ########  ########  ######## ##    ## ########    ##    ## ######## ##      ##  ######  
-##    ## ##     ## ##     ## ##     ## ##       ###   ##    ##       ###   ## ##       ##  ##  ## ##    ## 
-##       ##     ## ##     ## ##     ## ##       ####  ##    ##       ####  ## ##       ##  ##  ## ##       
-##       ##     ## ########  ########  ######   ## ## ##    ##       ## ## ## ######   ##  ##  ##  ######  
-##       ##     ## ##   ##   ##   ##   ##       ##  ####    ##       ##  #### ##       ##  ##  ##       ## 
-##    ## ##     ## ##    ##  ##    ##  ##       ##   ###    ##       ##   ### ##       ##  ##  ## ##    ## 
- ######   #######  ##     ## ##     ## ######## ##    ##    ##       ##    ## ########  ###  ###   ######  
+##    ## ######## ##      ##  ######     ########  ##     ## ##       ##       ######## ######## #### ##    ## 
+###   ## ##       ##  ##  ## ##    ##    ##     ## ##     ## ##       ##       ##          ##     ##  ###   ## 
+####  ## ##       ##  ##  ## ##          ##     ## ##     ## ##       ##       ##          ##     ##  ####  ## 
+## ## ## ######   ##  ##  ##  ######     ########  ##     ## ##       ##       ######      ##     ##  ## ## ## 
+##  #### ##       ##  ##  ##       ##    ##     ## ##     ## ##       ##       ##          ##     ##  ##  #### 
+##   ### ##       ##  ##  ## ##    ##    ##     ## ##     ## ##       ##       ##          ##     ##  ##   ### 
+##    ## ########  ###  ###   ######     ########   #######  ######## ######## ########    ##    #### ##    ## 
+
 class CurrentNews(models.Model):
     news_bulletin = models.CharField(max_length=500, help_text="Enter news heading")
     published_date = models.DateTimeField(auto_now_add=True)
@@ -220,4 +222,38 @@ class NewsDetailsPage(Page):
         
     ]
    
+   
+ ######  ##     ## ######## #### ########    ##     ##  #######  ####  ######  ######## 
+##    ## ##     ## ##        ##  ##          ##     ## ##     ##  ##  ##    ## ##       
+##       ##     ## ##        ##  ##          ##     ## ##     ##  ##  ##       ##       
+##       ######### ######    ##  ######      ##     ## ##     ##  ##  ##       ######   
+##       ##     ## ##        ##  ##           ##   ##  ##     ##  ##  ##       ##       
+##    ## ##     ## ##        ##  ##            ## ##   ##     ##  ##  ##    ## ##       
+ ######  ##     ## ######## #### ##             ###     #######  ####  ######  ######## 
+ 
+ 
+class CheifVoicePage(Page):
+    advertisement = StreamField(
+        [
+            ("Vertical_Adv", VerticalAddBlock()),
+            ("Horizontal_Adv", HorizontalAddBlock()),
+            ("Poster_Adv", PosterAddBlock()),
+            ("Box_Adv", BoxAddBlock()),
+            ("Popup_Adv", PopupAddBlock()),
+        ],
+        null=True,
+        blank=True,
+    )
+    body = StreamField(
+        [
+            ("Chief_voice", ChiefBlock()),
+        ],
+        null=True,
+        blank=True,
+    )
     
+    content_panels = Page.content_panels + [
+        FieldPanel('advertisement'),
+        FieldPanel('body'),
+    ]
+   

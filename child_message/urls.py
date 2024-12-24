@@ -12,6 +12,7 @@ from search import views as search_views
 from home.views import *
 from home.newsindex_view import *
 from home.newsdetails_view import *
+from home.cheifvoice_view import *
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
@@ -24,7 +25,7 @@ urlpatterns = [
         name="wagtailimages_serve",
     ),
     path("", combined_view, name="home"),
-    
+    path('<slug:slug>/', cheif_voice_view, name='cheif_voice_combined'),
     # Parent page:
     path('<slug:category_slug>/', news_combined_view, name='news_combined'),
     # Child page:

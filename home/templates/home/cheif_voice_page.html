@@ -1,0 +1,432 @@
+{% load static %} {% load i18n wagtailcore_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Include Font Awesome for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <!-- Custom Stylesheet -->
+  <link href="{% static 'css/welcome_page.css' %}" rel="stylesheet" />
+</head>
+
+<body class="bg-gray-100 font-sans leading-normal relative tracking-normal">
+  <!-- Popup  Advertisement -->
+  <div id="popup" class="popup-container">
+    <div class="popup-content">
+      <button id="closePopup" class="close-btn">&times;</button>
+      {% if popup_adv_url %}
+      <img src="{{ popup_adv_url }}" alt="Popup Image" class="popup-image" />
+      {% else %}
+      <p>No advertisement available.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- left-right side Advertisement -->
+  <div id="fixed-add">
+    <div class="fixed hidden sm:block md:block top-[140px] left-0" id="fixed-add" style="
+          animation-name: slideInLeft;
+          animation-duration: 10s;
+          animation-timing-function: ease-in-out;
+          animation-iteration-count: infinite;
+          display: block;
+          z-index: 5;
+        ">
+      {% if vertical_adv_left_url  %}
+      <img src="{{ vertical_adv_left_url  }}" class="h-[600px]" alt="side add" />
+      {% endif %}
+    </div>
+    <div class="fixed hidden sm:block md:block top-[140px] right-0" id="fixed-add" style="
+          animation-name: slideInRight;
+          animation-duration: 10s;
+          animation-timing-function: ease-in-out;
+          animation-iteration-count: infinite;
+          display: block;
+          z-index: 5;
+        ">
+      {% if vertical_adv_right_url %}
+      <img src="{{ vertical_adv_right_url }}" class="h-[600px]" alt="side add" />
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Header section add -->
+  <div id="header">
+    <!-- Top Advertisement 1 -->
+    <div id="top-advertisement" class="flex justify-center mx-auto text-center p-1">
+      {% if horizontal_adv_url_1 %}
+      <img class="w-full max-w-[1280px] max-h-[132px]" src="{{ horizontal_adv_url_1 }}" alt="header section add" />
+      {% endif %}
+    </div>
+
+    <!-- Header -->
+
+    <div id="navbar" class="bg-gradient-to-b from-[#F67F00] to-[#fff] text-white w-full top-0 z-50 sticky-navbar">
+      <div class="max-w-[1200px] mx-auto flex items-center justify-between p-4">
+        <div class="grid grid-cols-12 items-center mx-auto w-full text-center">
+          <div class="col-span-2 flex items-start justify-start">
+            <img src="{% static 'assets/logo.png' %}" alt="Logo" class="w-[129px] h-[100px] object-contain mr-3" />
+          </div>
+
+          <div class="col-span-9 flex flex-col gap-10 justify-center items-center sticky top-0 z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-15 space-y-1">
+              <div class="flex mx-auto">
+                <ul class="flex gap-8">
+                  <li>
+                    <i class="hover:text-gray-100 fa-brands fa-facebook-f text-black"></i>
+                  </li>
+                  <li>
+                    <i class="hover:text-gray-100 fa-brands fa-twitter text-black"></i>
+                  </li>
+                  <li>
+                    <i class="hover:text-gray-100 fa-brands fa-instagram text-black"></i>
+                  </li>
+                  <li>
+                    <i class="hover:text-gray-100 fa-brands fa-youtube text-black"></i>
+                  </li>
+                </ul>
+              </div>
+              <div class="text-xs flex mx-auto font-bold text-black">
+                <span id="gregorian-date"></span>,
+                <span id="bangla-date"></span>
+              </div>
+              <div class="flex mx-auto gap-5">
+                <div class="inline-flex items-center">
+                  <span class="blink-animation h-3 w-3 rounded-full mr-2"></span>
+                  <span class="text-black">LIVE</span>
+                </div>
+                <div class="video-container">
+                  <img src="{% static 'assets/video.svg' %}" alt="Video Icon" />
+                </div>
+                <div>
+                  <span class="bg-[#FBDEC1] px-3 py-1 text-black font-semibold rounded-md">English</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <nav class="hidden lg:flex text-black space-x-2 uppercase">
+                <a href="#home" class="md:text-sm hover:text-gray-500">আমার বার্তা</a>
+                <span>
+                  <div style="
+                        height: 24px;
+                        width: 1px;
+                        background: black;
+                        margin: 0 1px;
+                      "></div>
+                </span>
+                <a href="#service" class="md:text-sm hover:text-gray-500">দেশ বার্তা</a>
+                <span>
+                  <div style="
+                        height: 24px;
+                        width: 1px;
+                        background: black;
+                        margin: 0 1px;
+                      "></div>
+                </span>
+                <a href="#service" class="md:text-sm hover:text-gray-500">ক্রিড়া বার্তা</a>
+                <span>
+                  <div style="
+                        height: 24px;
+                        width: 1px;
+                        background: black;
+                        margin: 0 1px;
+                      "></div>
+                </span>
+                <a href="#service" class="md:text-sm hover:text-gray-500">বিনোদন বার্তা</a>
+                <span>
+                  <div style="
+                        height: 24px;
+                        width: 1px;
+                        background: black;
+                        margin: 0 1px;
+                      "></div>
+                </span>
+                <a href="#service" class="md:text-sm hover:text-gray-500">আইনি বার্তা</a>
+                <span>
+                  <div style="
+                        height: 24px;
+                        width: 1px;
+                        background: black;
+                        margin: 0 1px;
+                      "></div>
+                </span>
+                <a href="#service" class="md:text-sm hover:text-gray-500">বিশ্ব বার্তা</a>
+                <span>
+                  <div style="
+                        height: 24px;
+                        width: 1px;
+                        background: black;
+                        margin: 0 1px;
+                      "></div>
+                </span>
+                <a href="#service" class="md:text-sm hover:text-gray-500">নিখোঁজ বার্তা</a>
+                <span>
+                  <div style="
+                        height: 24px;
+                        width: 1px;
+                        background: black;
+                        margin: 0 1px;
+                      "></div>
+                </span>
+                <a href="#service" class="md:text-sm hover:text-gray-500">স্বাস্থ্য বার্তা</a>
+                <span>
+                  <div style="
+                        height: 24px;
+                        width: 1px;
+                        background: black;
+                        margin: 0 1px;
+                      "></div>
+                </span>
+                <a href="#service" class="md:text-sm hover:text-gray-500">জানুন</a>
+              </nav>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-4">
+          <button id="menu-toggle" class="lg:hidden hover:text-gray-300 focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-center mx-auto w-full">
+      <div class="grid grid-cols-12 max-w-[1200px] w-full">
+        <!-- Left Section -->
+        <div class="col-span-4 lg:col-span-2 md:col-span-4 bg-[#E8851C] items-center justify-center">
+          <p class="p-4 text-white font-bold text-center">সদ্য প্রাপ্ত :</p>
+        </div>
+        <!-- Right Section -->
+<div class="col-span-8 lg:col-span-10 md:col-span-8 bg-[#E8851C] bg-opacity-90">
+  <marquee class="text-white p-4" behavior="scroll" direction="left">
+    {% if current_news %}
+        {% for news_item in current_news %}
+            <span>{{ news_item }}{% if not forloop.last %} • {% endif %}</span>
+        {% endfor %}
+    {% elif no_news %}
+        <span>No current news published.</span>
+    {% else %}
+        <span>No current news available.</span>
+    {% endif %}
+</marquee>
+</div>
+      </div>
+    </div>
+
+    <!-- Sliding Menu Drawer -->
+    <div id="menu-drawer"
+      class="fixed right-0 w-64 bg-[#E8851C] bg-opacity-95 transform translate-x-full transition-transform duration-300 ease-in-out z-50 rounded-tl-lg rounded-bl-lg">
+      <div class="p-4 text-black">
+        <button id="menu-close" class="hover:text-gray-100 focus:outline-none mb-4">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+        <nav class="flex flex-col space-y-4">
+          <a href="#home" class="md:text-sm hover:text-gray-100">আমার বার্তা</a>
+
+          <a href="#service" class="md:text-sm hover:text-gray-100">দেশ বার্তা</a>
+
+          <a href="#service" class="md:text-sm hover:text-gray-100">ক্রিড়া বার্তা</a>
+
+          <a href="#service" class="md:text-sm hover:text-gray-100">বিনোদন বার্তা</a>
+
+          <a href="#service" class="md:text-sm hover:text-gray-100">আইনি বার্তা</a>
+
+          <a href="#service" class="md:text-sm hover:text-gray-100">বিশ্ব বার্তা</a>
+
+          <a href="#service" class="md:text-sm hover:text-gray-100">নিখোঁজ বার্তা</a>
+
+          <a href="#service" class="md:text-sm hover:text-gray-100">স্বাস্থ্য বার্তা</a>
+
+          <a href="#service" class="md:text-sm hover:text-gray-100">জানুন</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+
+
+
+<!--                                                                
+  ####  #    # ###### # ######    #    #  ####  #  ####  ###### 
+ #    # #    # #      # #         #    # #    # # #    # #      
+ #      ###### #####  # #####     #    # #    # # #      #####  
+ #      #    # #      # #         #    # #    # # #      #      
+ #    # #    # #      # #          #  #  #    # # #    # #      
+  ####  #    # ###### # #           ##    ####  #  ####  ######                                                               
+-->
+
+<section id="speech">
+    <div class="flex flex-col mx-auto justify-center items-center max-w-[1200px] px-4 sm:px-6 lg:px-8 py-6">
+        <!-- Section Header -->
+        <div class="w-full">
+            <div class="grid grid-cols-12 items-center gap-2 mt-5 mb-5">
+                <div class="col-span-12 sm:col-span-3 md:col-span-2">
+                    <span class="text-lg font-bold text-black">প্রধান নির্বাহীর বার্তা</span>
+                </div>
+                <div class="col-span-12 sm:col-span-9 md:col-span-10">
+                    <div class="flex items-center w-full">
+                        <div class="bg-orange-500 h-1 w-12 mr-2"></div>
+                        <hr class="flex-grow border-t border-gray-300" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="grid grid-cols-12 gap-6">
+            <!-- Text Section -->
+            <div class="col-span-12 lg:col-span-8">
+                <p class="text-justify leading-relaxed text-sm sm:text-base md:text-lg">
+                    প্রিয় পাঠকগণ, 
+                    <br /><br />
+                   আমি গভীর আনন্দ এবং কৃতজ্ঞতার সাথে আপনাদের সামনে চাইল্ড মেসেজ প্ল্যাটফর্মটি তুলে ধরতে চাই, যা তথ্য, বিশ্লেষণ এবং মতামতের এক অনন্য মঞ্চ হিসেবে গড়ে উঠেছে। আমাদের এই প্ল্যাটফর্মটি কেবল একটি সংবাদমাধ্যম নয়, বরং এটি সত্য, নিরপেক্ষতা এবং পেশাদার সাংবাদিকতার প্রতি আমাদের প্রতিশ্রুতির বহিঃপ্রকাশ। 
+                    <br /><br />
+                    আজকের বিশ্বে সংবাদ শুধু তথ্য সরবরাহের মধ্যে সীমাবদ্ধ নয়; এটি সমাজের প্রতিটি স্তরে আলোকিত করার একটি শক্তিশালী হাতিয়ার। চাইল্ড মেসেজ এর লক্ষ্য হলো, প্রতিটি গুরুত্বপূর্ণ খবর সঠিকভাবে এবং দ্রুততার সাথে আপনাদের কাছে পৌঁছে দেওয়া, যাতে আপনি সর্বদা সচেতন ও আপডেট থাকতে পারেন। 
+                    <br /><br />
+                    আমরা এমন একটি সময়ে বাস করছি, যেখানে সংবাদমাধ্যমের ভূমিকা দিন দিন আরও গুরুত্বপূর্ণ হয়ে উঠছে। কিন্তু সেই সঙ্গে, ভুয়া খবর, পক্ষপাতদুষ্ট তথ্য এবং বিভ্রান্তিকর প্রতিবেদনের চ্যালেঞ্জও বৃদ্ধি পাচ্ছে। এই পরিস্থিতিতে, চাইল্ড মেসেজ নিরপেক্ষতা, সত্যতা এবং বিশ্বাসযোগ্যতাকে আমাদের মূল নীতিমালা হিসেবে মেনে চলে। আমাদের প্রতিটি প্রতিবেদন আপনাদের আস্থা অর্জনের জন্য কঠোর যাচাই-বাছাই প্রক্রিয়ার মধ্য দিয়ে যায়।
+                    <br /><br />
+                     আমাদের সাংবাদিক দল নিরলস পরিশ্রম করে প্রতিদিন আপনাদের জন্য স্থানীয়, জাতীয় এবং আন্তর্জাতিক অঙ্গনের গুরুত্বপূর্ণ খবর সংগ্রহ করছে। আমাদের টিম কেবল খবর সরবরাহে সীমাবদ্ধ নয়, বরং সেই খবরের পেছনের সত্য এবং এর প্রভাব বিশ্লেষণ করতেও নিবেদিত। আমরা বিশ্বাস করি, তথ্য এবং বিশ্লেষণের সমন্বয় একটি সচেতন এবং প্রগতিশীল সমাজ গঠনে সহায়ক। 
+                     <br /><br />
+                     আমাদের প্ল্যাটফর্মে প্রযুক্তির সর্বোচ্চ ব্যবহারের মাধ্যমে পাঠকদের জন্য সহজ এবং ব্যবহারবান্ধব অভিজ্ঞতা নিশ্চিত করা হয়েছে। আমরা শুধুমাত্র খবর প্রকাশই নয়, বরং আপনাদের মতামত, প্রতিক্রিয়া এবং অংশগ্রহণকেও গুরুত্ব দিই। আমরা বিশ্বাস করি, পাঠক এবং সংবাদমাধ্যমের মধ্যে একটি সুদৃঢ় বন্ধনই আমাদের এগিয়ে নিয়ে যাবে।
+                     <br /><br />
+                      আপনাদের মূল্যবান সময় এবং চাইল্ড মেসেজ এর প্রতি বিশ্বাসের জন্য আমরা কৃতজ্ঞ। আমরা প্রতিজ্ঞাবদ্ধ, যেন আমাদের প্ল্যাটফর্মটি সত্য, ন্যায় এবং নির্ভরযোগ্যতার প্রতীক হয়ে ওঠে। আসুন, আমরা একসঙ্গে একটি সচেতন, সৎ এবং প্রগতিশীল সমাজ গড়ে তুলি। আপনাদের মূল্যবান সময় এবং চাইল্ড মেসেজ এর প্রতি বিশ্বাসের জন্য আমরা কৃতজ্ঞ। আমরা প্রতিজ্ঞাবদ্ধ, যেন আমাদের প্ল্যাটফর্মটি সত্য, ন্যায় এবং নির্ভরযোগ্যতার প্রতীক হয়ে ওঠে। আসুন, আমরা একসঙ্গে একটি সচেতন, সৎ এবং প্রগতিশীল সমাজ গড়ে তুলি। 
+                      <br /><br />
+                      আপনাদের মূল্যবান সময় এবং চাইল্ড মেসেজ এর প্রতি বিশ্বাসের জন্য আমরা কৃতজ্ঞ। আমরা প্রতিজ্ঞাবদ্ধ, যেন আমাদের প্ল্যাটফর্মটি সত্য, ন্যায় এবং নির্ভরযোগ্যতার প্রতীক হয়ে ওঠে। আসুন, আমরা একসঙ্গে একটি সচেতন, সৎ এবং প্রগতিশীল সমাজ গড়ে তুলি। 
+                      
+                      <br /><br />
+                      অশেষ ধন্যবাদ এবং শুভকামনা জানাই।
+                </p>
+            </div>
+
+            <!-- Image Section -->
+            <div class="col-span-12 lg:col-span-4 flex flex-col items-center ">
+                <img src="{% static 'assets/md.png' %}" alt="md" class="w-[200px] sm:w-[250px] h-[250px] sm:h-[300px] border border-black rounded-md shadow-md">
+                <h1 class="text-[#616161] font-bold text-xl mt-4">আরিফ রহমান</h1>
+                <p class="text-[#616161] mt-2">প্রধান নির্বাহী, চাইল্ড মেসেজ</p>
+            </div>
+        </div>
+        <div class="flex justify-center mt-8">
+            <img src="{% static 'assets/add8.png' %}" alt="add" class="w-full max-w-[1200px] h-auto rounded-md shadow-md">
+        </div>
+    </div>
+</section>
+
+<!-- 
+########  #######   #######  ######## ######## ########  
+##       ##     ## ##     ##    ##    ##       ##     ## 
+##       ##     ## ##     ##    ##    ##       ##     ## 
+######   ##     ## ##     ##    ##    ######   ########  
+##       ##     ## ##     ##    ##    ##       ##   ##   
+##       ##     ## ##     ##    ##    ##       ##    ##  
+##        #######   #######     ##    ######## ##     ##  -->
+
+  <section>
+    <div class="footers justify-center bg-[#E5841C] items-center py-6" style="position: relative; z-index: 10;">
+      <div class="mx-auto w-full max-w-[1400px]">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-10">
+          <!-- First Div -->
+          <div class="flex flex-col justify-center w-[70%] sm:w-[50%] md:w-full lg:w-full mx-auto">
+            <div class="mx-auto">
+              <h1 class="text-left mx-auto font-bold text-lg md:text-xl text-white mt-3 md:mt-5">
+                চাইল্ড মেসেজ
+              </h1>
+              <p class="text-white w-full md:w-[70%] mt-3 md:mt-5 text-sm leading-loose">
+                আপত্তিকর স্বত্ত্বাধীন পদোন্নতি বিধান এবং ওহ এটা নিজেদের সাথে
+                পরামর্শ করা. আশীর্বাদ স্বাগত ভদ্রমহিলা সে দেখা হাস্যরস স্যার
+                তার প্রজনন.
+              </p>
+
+              <ul class="flex flex-row gap-5 mt-5">
+                <li class="bg-white p-3 rounded-full">
+                  <a href="#"> <img src="{% static 'assets/fb.png' %}" /></a>
+                </li>
+                <li class="bg-white p-3 rounded-full">
+                  <a href="#">
+                    <img src="{% static 'assets/twitter.png' %}" /></a>
+                </li>
+                <li class="bg-white p-3 rounded-full">
+                  <a href="#">
+                    <img src="{% static 'assets/instagram.png' %}" /></a>
+                </li>
+                <li class="bg-white p-3 rounded-full">
+                  <a href="#">
+                    <img src="{% static 'assets/youtube.png' %}" /></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Second Div -->
+          <div class="flex flex-col justify-center mx-auto">
+            <p class="text-white mb-3 md:mb-5">দ্রুত লিঙ্ক</p>
+            <ul class="space-y-2 md:space-y-4 text-white">
+              <li>
+                <a href="#" class="hover:text-gray-400">
+                  > মহিলা ও শিশু বিষয়ক মন্ত্রণালয়</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-gray-400">
+                  > প্রধান উপদেষ্টার কার্যালয়
+                </a>
+              </li>
+              <li><a href="#" class="hover:text-gray-400"> > ইউনিসেফ</a></li>
+            </ul>
+          </div>
+
+          <!-- Third Div -->
+          <div class="flex justify-center md:justify-start lg:justify-end">
+            <ul class="space-y-2 md:space-y-4 text-white mt-3 md:mt-10">
+              <li>
+                <a href="#" class="hover:text-gray-400">
+                  > তথ্য ও যোগাযোগ বিষয় মন্ত্রণালয়</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-gray-400">
+                  > প্রধান উপদেষ্টার কার্যালয়
+                </a>
+              </li>
+              <li>
+                <a href="speech.html" class="hover:text-gray-400"> > অর্জন</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <hr class="mt-5" />
+      <div class="grid grid-cols-12 mx-auto">
+        <div class="col-span-1">
+          <!-- <p class="text-white font-medium text-center mt-5 mx-auto">© 2023 All rights reserved</p> -->
+        </div>
+        <div class="mx-auto col-span-9">
+          <p class="text-white font-medium text-center mt-5 mx-auto">
+            © 2023 All rights reserved
+          </p>
+        </div>
+        <div class="col-span-1">
+          <p class="text-white font-medium text-right mt-5">Made By</p>
+        </div>
+        <div class="col-span-1">
+          <a href="https://www.google.com" target="_blank"><img src="{% static 'assets/l2.png' %}" al="logo"
+              class="w-16 h-15" /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- script file connections area -->
+  <script src="{% static 'js/navbar.js' %}"></script>
+  <script type="module" src="{% static 'js/swiper-popup.js' %}"></script>
+  <script type="module" src="{% static 'js/datetime.js' %}"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bangla-calendar@7.0.0/+esm"></script>
+  <!-- script file connections area -->
+</body>
+
+</html>

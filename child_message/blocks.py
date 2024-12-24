@@ -79,13 +79,28 @@ class PopupAddBlock(blocks.StructBlock):
     )
 
 
-##    ## ######## ##      ##  ######     ########  ##     ## ##       ##       ######## ######## #### ##    ## 
-###   ## ##       ##  ##  ## ##    ##    ##     ## ##     ## ##       ##       ##          ##     ##  ###   ## 
-####  ## ##       ##  ##  ## ##          ##     ## ##     ## ##       ##       ##          ##     ##  ####  ## 
-## ## ## ######   ##  ##  ##  ######     ########  ##     ## ##       ##       ######      ##     ##  ## ## ## 
-##  #### ##       ##  ##  ##       ##    ##     ## ##     ## ##       ##       ##          ##     ##  ##  #### 
-##   ### ##       ##  ##  ## ##    ##    ##     ## ##     ## ##       ##       ##          ##     ##  ##   ### 
-##    ## ########  ###  ###   ######     ########   #######  ######## ######## ########    ##    #### ##    ## 
+ ######  ##     ## ######## #### ########    ##     ##  #######  ####  ######  ######## 
+##    ## ##     ## ##        ##  ##          ##     ## ##     ##  ##  ##    ## ##       
+##       ##     ## ##        ##  ##          ##     ## ##     ##  ##  ##       ##       
+##       ######### ######    ##  ######      ##     ## ##     ##  ##  ##       ######   
+##       ##     ## ##        ##  ##           ##   ##  ##     ##  ##  ##       ##       
+##    ## ##     ## ##        ##  ##            ## ##   ##     ##  ##  ##    ## ##       
+ ######  ##     ## ######## #### ##             ###     #######  ####  ######  ######## 
+ 
+ 
+ 
+class ChiefBlock(blocks.StructBlock):
+    title = blocks.CharBlock(required=False)
+    name = blocks.CharBlock(required=False)
+    designation = blocks.CharBlock(required=False)
+    
+    image = util_blocks.ImageChooserBlock(
+        required=False,
+        help_text="Optimal Dimension : width max-500",
+        rendition_rules={
+            "original": "width-500|format-webp",
+            "original_fallback": "width-500",
+        },
+    )
+    note = util_blocks.RichTextBlock(required=False)
 
-class NewsBulletinBlock(blocks.StructBlock):
-    news_bulletin = util_blocks.RichTextBlock(features=["bold", "italic"],blank=True, help_text="The News Bulletin.")
