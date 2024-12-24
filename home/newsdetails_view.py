@@ -12,16 +12,16 @@ from .models import *
 
 from .views import current_news_view
 from django.shortcuts import render, get_object_or_404
-from .models import NewsIndexPage
+
 
 # Fetch the popup advertisement
-def popup_advertisement_view(request, category_slug):
+def popup_advertisement_view(request, news_slug):
     try:
-        newsindexpage = get_object_or_404(NewsIndexPage, slug=category_slug)
+        newsdetailspage = get_object_or_404(NewsDetailsPage, slug=news_slug)
         popup_adv_url = None
         
         # Iterate through the advertisement blocks
-        for block in newsindexpage.advertisement:
+        for block in newsdetailspage.advertisement:
             if block.block_type == "Popup_Adv":
                 image = block.value.get("image")
                 # print(f"Image found: {image}")  # Debugging line
@@ -31,18 +31,18 @@ def popup_advertisement_view(request, category_slug):
                     popup_adv_url = rendition.url  # Get the URL of the rendition
                     # print(f"Popup Image URL: {popup_adv_url}")  # Debugging line
                 break
-    except NewsIndexPage.DoesNotExist:
+    except NewsDetailsPage.DoesNotExist:
         popup_adv_url = None
 
     return popup_adv_url
 
 # Fetch the vertical advertisement
-def vertical_advertisement_view(request, category_slug):
+def vertical_advertisement_view(request, news_slug):
     try:
-        newsindexpage = get_object_or_404(NewsIndexPage, slug=category_slug)
+        newsdetailspage = get_object_or_404(NewsDetailsPage, slug=news_slug)
         vertical_adv_urls = []
         
-        for block in newsindexpage.advertisement:
+        for block in newsdetailspage.advertisement:
             if block.block_type == "Vertical_Adv":
                 image = block.value.get("image")
                 if image:
@@ -51,7 +51,7 @@ def vertical_advertisement_view(request, category_slug):
                     
                 if len(vertical_adv_urls) >= 2:  # Limit to two images
                     break
-    except NewsIndexPage.DoesNotExist:
+    except NewsDetailsPage.DoesNotExist:
         vertical_adv_urls = [None, None]
 
     # Ensure two entries for left and right ads
@@ -61,12 +61,12 @@ def vertical_advertisement_view(request, category_slug):
     return vertical_adv_urls
 
 # Fetch the horizontal advertisement
-def horizontal_advertisement_view(request, category_slug):
+def horizontal_advertisement_view(request, news_slug):
     try:
-        newsindexpage = get_object_or_404(NewsIndexPage, slug=category_slug)
+        newsdetailspage = get_object_or_404(NewsDetailsPage, slug=news_slug)
         horizontal_adv_urls = []
 
-        for block in newsindexpage.advertisement:
+        for block in newsdetailspage.advertisement:
             if block.block_type == "Horizontal_Adv":
                 image = block.value.get("image")
                 if image:
@@ -75,7 +75,7 @@ def horizontal_advertisement_view(request, category_slug):
 
                 if len(horizontal_adv_urls) >= 7:  # Limit to one image
                     break
-    except NewsIndexPage.DoesNotExist:
+    except NewsDetailsPage.DoesNotExist:
         horizontal_adv_urls = [None]
 
     # Ensure at least one entry for horizontal ad
@@ -86,37 +86,37 @@ def horizontal_advertisement_view(request, category_slug):
 
 
 # Fetch the poster advertisement
-def poster_advertisement_view(request, category_slug):
+def poster_advertisement_view(request, news_slug):
     try:
-        newsindexpage = get_object_or_404(NewsIndexPage, slug=category_slug)
+        newsdetailspage = get_object_or_404(NewsDetailsPage, slug=news_slug)
         poster_adv_url = None
         
-        for block in newsindexpage.advertisement:
+        for block in newsdetailspage.advertisement:
             if block.block_type == "Poster_Adv":
                 image = block.value.get("image")
                 if image:
                     rendition = image.get_rendition("fill-305x545-c0")
                     poster_adv_url = rendition.url
                 break
-    except NewsIndexPage.DoesNotExist:
+    except NewsDetailsPage.DoesNotExist:
         poster_adv_url = None
 
     return poster_adv_url
 
 # Fetch the box advertisement
-def box_advertisement_view(request, category_slug):
+def box_advertisement_view(request, news_slug):
     try:
-        newsindexpage = get_object_or_404(NewsIndexPage, slug=category_slug)
+        newsdetailspage = get_object_or_404(NewsDetailsPage, slug=news_slug)
         box_adv_url = None
         
-        for block in newsindexpage.advertisement:
+        for block in newsdetailspage.advertisement:
             if block.block_type == "Box_Adv":
                 image = block.value.get("image")
                 if image:
                     rendition = image.get_rendition("width-420")
                     box_adv_url = rendition.url
                 break
-    except NewsIndexPage.DoesNotExist:
+    except NewsDetailsPage.DoesNotExist:
         box_adv_url = None
 
     return box_adv_url
@@ -124,12 +124,12 @@ def box_advertisement_view(request, category_slug):
 
 
 
-def news_combined_view(request, category_slug):
-    vertical_adv_urls = vertical_advertisement_view(request,category_slug)
-    horizontal_adv_urls = horizontal_advertisement_view(request,category_slug)
-    poster_adv_url = poster_advertisement_view(request,category_slug)
-    box_adv_url = box_advertisement_view(request,category_slug)
-    popup_adv_url = popup_advertisement_view(request,category_slug)
+def newsdetails_combined_view(request,category_slug,news_slug):
+    vertical_adv_urls = vertical_advertisement_view(request,news_slug)
+    horizontal_adv_urls = horizontal_advertisement_view(request,news_slug)
+    poster_adv_url = poster_advertisement_view(request,news_slug)
+    box_adv_url = box_advertisement_view(request,news_slug)
+    popup_adv_url = popup_advertisement_view(request,news_slug)
 
     current_news = current_news_view(request)  
 
@@ -152,4 +152,4 @@ def news_combined_view(request, category_slug):
     }
 
     # Render the template
-    return render(request, 'home/news_index_page.html', context)
+    return render(request, 'home/news_details_page.html', context)

@@ -11,6 +11,7 @@ from search import views as search_views
 
 from home.views import *
 from home.newsindex_view import *
+from home.newsdetails_view import *
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
@@ -23,9 +24,11 @@ urlpatterns = [
         name="wagtailimages_serve",
     ),
     path("", combined_view, name="home"),
-    path('<slug:slug>/', news_combined_view, name='news_combined'),
-    # path('/home/', news_combined_view, name='news_index_page'),
-]
+    
+    # Parent page:
+    path('<slug:category_slug>/', news_combined_view, name='news_combined'),
+    # Child page:
+    path('<slug:category_slug>/<slug:news_slug>/', newsdetails_combined_view, name='newsdetails_combined'),]
 
 
 if settings.DEBUG:
