@@ -28,7 +28,7 @@ class HomePage(Page):
     subpage_types = [
         "home.NewsIndexPage",
         "home.CheifVoicePage",
-        
+        "home.MissingNewsPage",
     ]
     
     
@@ -116,6 +116,27 @@ class MissingMessage(models.Model):
         verbose_name = "Missing Message"
         verbose_name_plural = "Missing Messages"
 
+    # ---------------------------------------------------------------------
+    #                             Missing message Page
+    # ---------------------------------------------------------------------
+class MissingNewsPage(Page):
+    advertisement = StreamField(
+        [
+            ("Vertical_Adv", VerticalAddBlock()),
+            ("Horizontal_Adv", HorizontalAddBlock()),
+            ("Poster_Adv", PosterAddBlock()),
+            ("Box_Adv", BoxAddBlock()),
+            ("Popup_Adv", PopupAddBlock()),
+        ],
+        null=True,
+        blank=True,
+    )
+    content_panels = Page.content_panels + [
+        FieldPanel('advertisement'),
+    ]
+   
+   
+
 
     ##    ## ######## ##      ##  ######  
     ###   ## ##       ##  ##  ## ##    ## 
@@ -130,6 +151,10 @@ class NewsCategory(models.Model):
 
     def __str__(self):
         return self.category
+
+    class Meta:
+        verbose_name = "News Category"
+        verbose_name_plural = "News Categories"   
     
     
     # ---------------------------------------------------------------------
@@ -219,6 +244,11 @@ class NewsDetailsPage(Page):
         FieldPanel('advertisement'),
         FieldPanel('news_category'),
         FieldPanel('main_heading'),
+        FieldPanel('subtitle'),
+        FieldPanel('image'),
+        FieldPanel('published_date'),
+        FieldPanel('details'),
+        FieldPanel('make_featured_news'),
         
     ]
    

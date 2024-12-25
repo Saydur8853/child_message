@@ -104,3 +104,4 @@ class ChiefBlock(blocks.StructBlock):
     )
     note = util_blocks.RichTextBlock(required=False)
 
+

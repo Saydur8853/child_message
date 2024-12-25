@@ -13,7 +13,7 @@ from home.views import *
 from home.newsindex_view import *
 from home.newsdetails_view import *
 from home.cheifvoice_view import *
-
+from home.missingindex_view import *
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
@@ -25,11 +25,15 @@ urlpatterns = [
         name="wagtailimages_serve",
     ),
     path("", combined_view, name="home"),
-    path('<slug:slug>/', cheif_voice_view, name='cheif_voice_combined'),
+    path('cheif/<slug:slug>/', cheif_voice_view, name='cheif_voice_combined'),
+    path('missing-news/<slug:missing_slug>/', missing_news_view, name='messing_news_combined'),
+    
     # Parent page:
     path('<slug:category_slug>/', news_combined_view, name='news_combined'),
     # Child page:
-    path('<slug:category_slug>/<slug:news_slug>/', newsdetails_combined_view, name='newsdetails_combined'),]
+    path('<slug:category_slug>/<slug:news_slug>/', newsdetails_combined_view, name='newsdetails_combined'),
+    
+    ]
 
 
 if settings.DEBUG:
