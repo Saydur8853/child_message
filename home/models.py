@@ -3,7 +3,7 @@ from django.utils import timezone
 
 from wagtail.models import Page
 from wagtail.fields import RichTextField, StreamField
-from wagtail.admin.panels import FieldPanel
+from wagtail.admin.panels import FieldPanel,MultiFieldPanel
 from wagtail.images.models import Image
 from wagtail.search import index
 from child_message.blocks import *
@@ -48,37 +48,6 @@ class CurrentNews(models.Model):
     def __str__(self):
         return self.news_bulletin
 
-
-   ###    ##     ##    ###    ########     ########     ###    ########  ########    ###    
-  ## ##   ###   ###   ## ##   ##     ##    ##     ##   ## ##   ##     ##    ##      ## ##   
- ##   ##  #### ####  ##   ##  ##     ##    ##     ##  ##   ##  ##     ##    ##     ##   ##  
-##     ## ## ### ## ##     ## ########     ########  ##     ## ########     ##    ##     ## 
-######### ##     ## ######### ##   ##      ##     ## ######### ##   ##      ##    ######### 
-##     ## ##     ## ##     ## ##    ##     ##     ## ##     ## ##    ##     ##    ##     ## 
-##     ## ##     ## ##     ## ##     ##    ########  ##     ## ##     ##    ##    ##     ## 
-                                                                                                                                                                          
-class AmarBarta(models.Model, index.Indexed):
-    main_heading = models.CharField(max_length=255, help_text="Main Heading of the News")
-    subtitle = models.CharField(max_length=255, blank=True, null=True, help_text="Subtitle of the News")
-    image = models.ForeignKey(
-        "wagtailimages.Image",
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        help_text="Optimal_Dimension : 520x365",
-        related_name="+",
-    )
-    published_date = models.DateTimeField(default=timezone.now, help_text="Publish Date and Time")
-    updated_date = models.DateTimeField(auto_now=True, help_text="Updated Date and Time")
-    details = RichTextField(blank=True, help_text="Details of the news")
-    
-
-    def __str__(self):
-        return self.main_heading
-    
-    class Meta:
-        verbose_name = "Amar Barta"
-        verbose_name_plural = "Amar Bartas"
 
     
 
@@ -287,3 +256,104 @@ class CheifVoicePage(Page):
         FieldPanel('body'),
     ]
    
+
+
+########  #######   #######  ######## ######## ########  
+##       ##     ## ##     ##    ##    ##       ##     ## 
+##       ##     ## ##     ##    ##    ##       ##     ## 
+######   ##     ## ##     ##    ##    ######   ########  
+##       ##     ## ##     ##    ##    ##       ##   ##   
+##       ##     ## ##     ##    ##    ##       ##    ##  
+##        #######   #######     ##    ######## ##     ## 
+
+from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
+from wagtail.images import get_image_model_string
+
+IMAGE_MODEL = get_image_model_string()
+@register_setting
+class FooterSettings(BaseSiteSetting):
+
+    menu_title_1 = models.CharField(
+        _("Menu Title 1"),
+        max_length=200,
+        null=True,
+        blank=True,
+    )
+
+    text = models.CharField(
+        _("Text"),
+        max_length=200,
+        null=True,
+        blank=True,
+    )
+
+    facebook = models.URLField(_("Facebook"), max_length=255, blank=True)
+    twitter = models.URLField(_("Twitter"), max_length=255, blank=True)
+    instagram = models.URLField(_("Instagram"), max_length=255, blank=True)
+    youtube = models.URLField(_("Youtube"), max_length=255, blank=True)
+
+
+    menu_column_title_1 = models.CharField(
+        _("Menu Column Title 1"),
+        max_length=200,
+        null=True,
+        blank=True,
+    )
+
+    menu_column_1 = models.ForeignKey(
+        "wagtailmenus.FlatMenu",
+        verbose_name=_("Menu Column 1"),
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+
+    menu_column_title_2 = models.CharField(
+        _("Menu Column Title 2"),
+        max_length=200,
+        null=True,
+        blank=True,
+    )
+    menu_column_2 = models.ForeignKey(
+        "wagtailmenus.FlatMenu",
+        verbose_name=_("Menu Column 2"),
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+
+    copyright_line = models.CharField(
+        _("copyright"),
+        max_length=255,
+        blank=True,
+        default="Copyright © 2024 Child Message. All right reserved.",
+    )
+
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel("menu_title_1"),
+                FieldPanel("text"),
+                FieldPanel("menu_column_title_1"),
+                FieldPanel("menu_column_1"),
+                FieldPanel("menu_column_title_2"),
+                FieldPanel("menu_column_2"),
+            ],
+            heading="Menus",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("facebook"),
+                FieldPanel("twitter"),
+                FieldPanel("instagram"),
+                FieldPanel("youtube"),
+            ],
+            heading="Social Links",
+        ),
+        FieldPanel("copyright_line"),
+    ]
+
+    class Meta:
+        verbose_name = "Footer Settings"
