@@ -147,7 +147,6 @@ def newsdetails_combined_view(request,category_slug,news_slug):
         "poster_adv_url": poster_adv_url,
         "box_adv_url": box_adv_url,
         "popup_adv_url": popup_adv_url,
-        # "latest_news": latest_news,
         "current_news": current_news,
     }
 

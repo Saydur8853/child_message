@@ -74,3 +74,43 @@ class MissingMessageAdmin(ModelAdmin):
 
 # Register the ModelAdmin class
 modeladmin_register(MissingMessageAdmin)
+
+ ######  ##     ## #### ##       ########  ########  ######## ##    ##    ##     ##    ###    ##    ##    ###     ######   ######## ##     ## ######## ##    ## ######## 
+##    ## ##     ##  ##  ##       ##     ## ##     ## ##       ###   ##    ###   ###   ## ##   ###   ##   ## ##   ##    ##  ##       ###   ### ##       ###   ##    ##    
+##       ##     ##  ##  ##       ##     ## ##     ## ##       ####  ##    #### ####  ##   ##  ####  ##  ##   ##  ##        ##       #### #### ##       ####  ##    ##    
+##       #########  ##  ##       ##     ## ########  ######   ## ## ##    ## ### ## ##     ## ## ## ## ##     ## ##   #### ######   ## ### ## ######   ## ## ##    ##    
+##       ##     ##  ##  ##       ##     ## ##   ##   ##       ##  ####    ##     ## ######### ##  #### ######### ##    ##  ##       ##     ## ##       ##  ####    ##    
+##    ## ##     ##  ##  ##       ##     ## ##    ##  ##       ##   ###    ##     ## ##     ## ##   ### ##     ## ##    ##  ##       ##     ## ##       ##   ###    ##    
+ ######  ##     ## #### ######## ########  ##     ## ######## ##    ##    ##     ## ##     ## ##    ## ##     ##  ######   ######## ##     ## ######## ##    ##    ##    
+
+# Admin for StudentClass
+class StudentClassAdmin(ModelAdmin):
+    model = StudentClass
+    menu_label = "Student Classes"
+    menu_icon = "list-ul"  # Choose an icon from Wagtail's icon set
+    list_display = ("name",)
+    search_fields = ("name",)
+   
+class ChildGeneralistAdmin(ModelAdmin):
+    model = ChildGeneralist
+    menu_label = "Child Generalists" 
+    menu_icon = "user"  
+    list_display = ("name", "father_name", "mother_name", "student_class", "district", "phone_no")
+    search_fields = ("name", "father_name", "mother_name", "district", "phone_no")
+    list_filter = ('student_class','district')
+
+
+class ChildPresenterAdmin(ModelAdmin):
+    model = ChildPresenter
+    menu_label = "Child Presenters"
+    menu_icon = "user"  
+    list_display = ("name", "father_name", "mother_name", "student_class", "district", "phone_no")
+    search_fields = ("name", "father_name", "mother_name", "district", "phone_no")
+    list_filter = ('student_class','district')
+
+class ChildAdminGroup(ModelAdminGroup):
+    menu_label = "Children Management"
+    menu_icon = "group"
+    items = (StudentClassAdmin,ChildGeneralistAdmin, ChildPresenterAdmin)
+
+modeladmin_register(ChildAdminGroup)

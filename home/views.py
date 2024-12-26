@@ -137,14 +137,6 @@ def current_news_view(request):
     current_news = CurrentNews.objects.filter(published_date__gte=timezone.now() - timedelta(weeks=1)).order_by('-published_date') if CurrentNews.objects.exists() else None
     return current_news
 
-# Fetch the latest news (for the Amar barta home page)
-def latest_news_view(request):
-    try:
-        latest_news = AmarBarta.objects.latest('published_date')  # Get the most recent news item
-    except AmarBarta.DoesNotExist:
-        latest_news = None  # Or you can set a default value here, such as an empty string or a placeholder
-    
-    return latest_news
 
 
 ##     ## ####  ######   ######  #### ##    ##  ######      ##     ## ########  ######   ######     ###     ######   ######## 
@@ -178,7 +170,6 @@ def combined_view(request):
     popup_adv_url = popup_advertisement_view(request)
 
     missing_person = missing_person_details_view(request)
-    latest_news = latest_news_view(request)
     current_news = current_news_view(request)
     return render(
         request,
@@ -201,7 +192,6 @@ def combined_view(request):
             'box_adv_url': box_adv_url,
             'popup_adv_url': popup_adv_url,
             'missing_person': missing_person, 
-            'latest_news': latest_news,
             'current_news': current_news,
         }
     )
