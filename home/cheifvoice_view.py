@@ -14,9 +14,9 @@ from .views import current_news_view
 from django.shortcuts import render, get_object_or_404
 
 # Fetch the popup advertisement
-def popup_advertisement_view(request, slug):
+def popup_advertisement_view(request, cheif_slug):
     try:
-        cheifvoicepage = get_object_or_404(CheifVoicePage, slug=slug)
+        cheifvoicepage = get_object_or_404(CheifVoicePage, slug=cheif_slug)
         popup_adv_url = None
         
         # Iterate through the advertisement blocks
@@ -36,9 +36,9 @@ def popup_advertisement_view(request, slug):
     return popup_adv_url
 
 # Fetch the vertical advertisement
-def vertical_advertisement_view(request, slug):
+def vertical_advertisement_view(request, cheif_slug):
     try:
-        cheifvoicepage = get_object_or_404(CheifVoicePage, slug=slug)
+        cheifvoicepage = get_object_or_404(CheifVoicePage, slug=cheif_slug)
         vertical_adv_urls = []
         
         for block in cheifvoicepage.advertisement:
@@ -60,9 +60,9 @@ def vertical_advertisement_view(request, slug):
     return vertical_adv_urls
 
 # Fetch the horizontal advertisement
-def horizontal_advertisement_view(request, slug):
+def horizontal_advertisement_view(request, cheif_slug):
     try:
-        cheifvoicepage = get_object_or_404(CheifVoicePage, slug=slug)
+        cheifvoicepage = get_object_or_404(CheifVoicePage, slug=cheif_slug)
         horizontal_adv_urls = []
 
         for block in cheifvoicepage.advertisement:
@@ -85,9 +85,9 @@ def horizontal_advertisement_view(request, slug):
 
 
 # Fetch the poster advertisement
-def poster_advertisement_view(request, slug):
+def poster_advertisement_view(request, cheif_slug):
     try:
-        cheifvoicepage = get_object_or_404(CheifVoicePage, slug=slug)
+        cheifvoicepage = get_object_or_404(CheifVoicePage, slug=cheif_slug)
         poster_adv_url = None
         
         for block in cheifvoicepage.advertisement:
@@ -103,9 +103,9 @@ def poster_advertisement_view(request, slug):
     return poster_adv_url
 
 # Fetch the box advertisement
-def box_advertisement_view(request, slug):
+def box_advertisement_view(request, cheif_slug):
     try:
-        cheifvoicepage = get_object_or_404(CheifVoicePage, slug=slug)
+        cheifvoicepage = get_object_or_404(CheifVoicePage, slug=cheif_slug)
         box_adv_url = None
         
         for block in cheifvoicepage.advertisement:
@@ -123,12 +123,12 @@ def box_advertisement_view(request, slug):
 
 
 
-def cheif_voice_view(request, slug):
-    vertical_adv_urls = vertical_advertisement_view(request,slug)
-    horizontal_adv_urls = horizontal_advertisement_view(request,slug)
-    poster_adv_url = poster_advertisement_view(request,slug)
-    box_adv_url = box_advertisement_view(request,slug)
-    popup_adv_url = popup_advertisement_view(request,slug)
+def cheif_voice_view(request, cheif_slug):
+    vertical_adv_urls = vertical_advertisement_view(request,cheif_slug)
+    horizontal_adv_urls = horizontal_advertisement_view(request,cheif_slug)
+    poster_adv_url = poster_advertisement_view(request,cheif_slug)
+    box_adv_url = box_advertisement_view(request,cheif_slug)
+    popup_adv_url = popup_advertisement_view(request,cheif_slug)
 
     current_news = current_news_view(request)  
 
@@ -146,7 +146,6 @@ def cheif_voice_view(request, slug):
         "poster_adv_url": poster_adv_url,
         "box_adv_url": box_adv_url,
         "popup_adv_url": popup_adv_url,
-        # "latest_news": latest_news,
         "current_news": current_news,
     }
 

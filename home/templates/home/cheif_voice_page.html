@@ -109,79 +109,26 @@
 
             <div>
               <nav class="hidden lg:flex text-black space-x-2 uppercase">
-                <a href="#home" class="md:text-sm hover:text-gray-500">আমার বার্তা</a>
-                <span>
-                  <div style="
-                        height: 24px;
-                        width: 1px;
-                        background: black;
-                        margin: 0 1px;
-                      "></div>
-                </span>
-                <a href="#service" class="md:text-sm hover:text-gray-500">দেশ বার্তা</a>
-                <span>
-                  <div style="
-                        height: 24px;
-                        width: 1px;
-                        background: black;
-                        margin: 0 1px;
-                      "></div>
-                </span>
-                <a href="#service" class="md:text-sm hover:text-gray-500">ক্রিড়া বার্তা</a>
-                <span>
-                  <div style="
-                        height: 24px;
-                        width: 1px;
-                        background: black;
-                        margin: 0 1px;
-                      "></div>
-                </span>
-                <a href="#service" class="md:text-sm hover:text-gray-500">বিনোদন বার্তা</a>
-                <span>
-                  <div style="
-                        height: 24px;
-                        width: 1px;
-                        background: black;
-                        margin: 0 1px;
-                      "></div>
-                </span>
-                <a href="#service" class="md:text-sm hover:text-gray-500">আইনি বার্তা</a>
-                <span>
-                  <div style="
-                        height: 24px;
-                        width: 1px;
-                        background: black;
-                        margin: 0 1px;
-                      "></div>
-                </span>
-                <a href="#service" class="md:text-sm hover:text-gray-500">বিশ্ব বার্তা</a>
-                <span>
-                  <div style="
-                        height: 24px;
-                        width: 1px;
-                        background: black;
-                        margin: 0 1px;
-                      "></div>
-                </span>
-                <a href="#service" class="md:text-sm hover:text-gray-500">নিখোঁজ বার্তা</a>
-                <span>
-                  <div style="
-                        height: 24px;
-                        width: 1px;
-                        background: black;
-                        margin: 0 1px;
-                      "></div>
-                </span>
-                <a href="#service" class="md:text-sm hover:text-gray-500">স্বাস্থ্য বার্তা</a>
-                <span>
-                  <div style="
-                        height: 24px;
-                        width: 1px;
-                        background: black;
-                        margin: 0 1px;
-                      "></div>
-                </span>
-                <a href="#service" class="md:text-sm hover:text-gray-500">জানুন</a>
+                {% for item in menu_items %}
+                  <a
+                    href="{{ item.get_url }}"
+                    class="md:text-sm hover:text-gray-500 {% if request.path == item.get_url %}bg-white rounded px-2{% endif %}"
+                  >
+                    {{ item.title }}
+                  </a>
+                  {% if not forloop.last %}
+                    <span>
+                      <div
+                        style="
+                          height: 24px;
+                          width: 1px;
+                          background: black;
+                          margin: 0 1px;
+                        "
+                      ></div>
+                    </span>
+                  {% endif %}
+                {% endfor %}
               </nav>
             </div>
           </div>
@@ -221,33 +168,26 @@
     </div>
 
     <!-- Sliding Menu Drawer -->
-    <div id="menu-drawer"
-      class="fixed right-0 w-64 bg-[#E8851C] bg-opacity-95 transform translate-x-full transition-transform duration-300 ease-in-out z-50 rounded-tl-lg rounded-bl-lg">
-      <div class="p-4 text-black">
-        <button id="menu-close" class="hover:text-gray-100 focus:outline-none mb-4">
-          <i class="fa-solid fa-xmark text-xl"></i>
-        </button>
-        <nav class="flex flex-col space-y-4">
-          <a href="#home" class="md:text-sm hover:text-gray-100">আমার বার্তা</a>
-
-          <a href="#service" class="md:text-sm hover:text-gray-100">দেশ বার্তা</a>
-
-          <a href="#service" class="md:text-sm hover:text-gray-100">ক্রিড়া বার্তা</a>
-
-          <a href="#service" class="md:text-sm hover:text-gray-100">বিনোদন বার্তা</a>
-
-          <a href="#service" class="md:text-sm hover:text-gray-100">আইনি বার্তা</a>
-
-          <a href="#service" class="md:text-sm hover:text-gray-100">বিশ্ব বার্তা</a>
-
-          <a href="#service" class="md:text-sm hover:text-gray-100">নিখোঁজ বার্তা</a>
-
-          <a href="#service" class="md:text-sm hover:text-gray-100">স্বাস্থ্য বার্তা</a>
-
-          <a href="#service" class="md:text-sm hover:text-gray-100">জানুন</a>
-        </nav>
+    <div
+        id="menu-drawer"
+        class="fixed right-0 w-64 bg-[#E8851C] bg-opacity-95 transform translate-x-full transition-transform duration-300 ease-in-out z-50 rounded-tl-lg rounded-bl-lg"
+      >
+        <div class="p-4 text-black">
+          <button
+            id="menu-close"
+            class="hover:text-gray-100 focus:outline-none mb-4"
+          >
+            <i class="fa-solid fa-xmark text-xl"></i>
+          </button>
+          <nav class="flex flex-col space-y-4">
+            {% for item in menu_items %}
+            <a href="{{ item.get_url }}" class="md:text-sm hover:text-gray-100">
+              {{ item.title }}
+            </a>
+            {% endfor %}
+          </nav>
+        </div>
       </div>
-    </div>
   </div>
 
 

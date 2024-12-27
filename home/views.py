@@ -1,9 +1,14 @@
 from datetime import timedelta
 from django.shortcuts import render
 from .models import *
+from wagtail.models import Site
 
-
-
+def menu_items(request):
+    site = Site.find_for_request(request)
+    if not site:
+        return {'menu_items': []}
+    menu = MainMenu.for_site(site)
+    return {'menu_items': menu.menu_items.all()}
 
    ###    ########  ##     ## ######## ########  ######## ####  ######  ######## ##     ## ######## ##    ## ######## 
   ## ##   ##     ## ##     ## ##       ##     ##    ##     ##  ##    ## ##       ###   ### ##       ###   ##    ##    

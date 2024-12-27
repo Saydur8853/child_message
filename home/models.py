@@ -3,12 +3,63 @@ from django.utils import timezone
 
 from wagtail.models import Page
 from wagtail.fields import RichTextField, StreamField
-from wagtail.admin.panels import FieldPanel,MultiFieldPanel
+from wagtail.admin.panels import FieldPanel,MultiFieldPanel, InlinePanel, PageChooserPanel
 from wagtail.images.models import Image
 from wagtail.search import index
 from child_message.blocks import *
 from django.utils.translation import gettext_lazy as _
-from wagtailmenus.models import MenuPage
+from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
+from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
+
+
+@register_setting
+class MainMenu(BaseSiteSetting, ClusterableModel):
+    """Main menu settings."""
+    panels = [
+        InlinePanel('menu_items', label="Menu Items"),
+    ]
+
+
+class MenuItem(models.Model):
+    """Menu item for the main menu."""
+    menu = ParentalKey(MainMenu, related_name='menu_items', on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    link = models.URLField(blank=True, null=True, help_text="External link (optional).")
+    page = models.ForeignKey(
+        Page,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        help_text="Link to a Wagtail page (optional)."
+    )
+    order = models.PositiveIntegerField(default=0)
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('link'),
+        PageChooserPanel('page'),
+        FieldPanel('order'),
+    ]
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.title
+
+    def get_url(self):
+        """Return the URL for the menu item, prioritizing page links over external links."""
+        if self.page:
+            return self.page.url
+        return self.link
+    
+    
+    
+    
+    
+    
 
 class HomePage(Page):
     advertisement = StreamField(
@@ -30,8 +81,8 @@ class HomePage(Page):
         "home.CheifVoicePage",
         "home.MissingNewsPage",
     ]
-    
-    
+
+
 ##    ## ######## ##      ##  ######     ########  ##     ## ##       ##       ######## ######## #### ##    ## 
 ###   ## ##       ##  ##  ## ##    ##    ##     ## ##     ## ##       ##       ##          ##     ##  ###   ## 
 ####  ## ##       ##  ##  ## ##          ##     ## ##     ## ##       ##       ##          ##     ##  ####  ## 

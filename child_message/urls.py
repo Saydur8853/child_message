@@ -24,9 +24,11 @@ urlpatterns = [
         ServeView.as_view(action="redirect"),
         name="wagtailimages_serve",
     ),
-    path("", combined_view, name="home"),
-    path('cheif/<slug:slug>/', cheif_voice_view, name='cheif_voice_combined'),
-    path('missing-news/<slug:missing_slug>/', missing_news_view, name='messing_news_combined'),
+    path("home/", combined_view, name="home"),
+    path('home/<slug:cheif_slug>/', cheif_voice_view, name='cheif_voice_combined'),
+    # path('home/<slug:missing_slug>/', missing_news_view, name='messing_news_combined'),
+
+    
     
     # Parent page:
     path('<slug:category_slug>/', news_combined_view, name='news_combined'),

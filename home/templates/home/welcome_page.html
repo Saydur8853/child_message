@@ -1,978 +1,1187 @@
 {% load static %} {% load i18n wagtailcore_tags %}
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Include Font Awesome for icons -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Custom Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Include Font Awesome for icons -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-  <!-- Custom Stylesheet -->
-  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
-</head>
-
-<body class="bg-gray-100 font-sans leading-normal relative tracking-normal">
-  <!-- Popup  Advertisement -->
-  <div id="popup" class="popup-container">
-    <div class="popup-content">
-      <button id="closePopup" class="close-btn">&times;</button>
-      {% if popup_adv_url %}
-      <img src="{{ popup_adv_url }}" alt="Popup Image" class="popup-image" />
-      {% else %}
-      <p>No advertisement available.</p>
-      {% endif %}
+  <body class="bg-gray-100 font-sans leading-normal relative tracking-normal">
+    <!-- Popup  Advertisement -->
+    <div id="popup" class="popup-container">
+      <div class="popup-content">
+        <button id="closePopup" class="close-btn">&times;</button>
+        {% if popup_adv_url %}
+        <img src="{{ popup_adv_url }}" alt="Popup Image" class="popup-image" />
+        {% else %}
+        <p>No advertisement available.</p>
+        {% endif %}
+      </div>
     </div>
-  </div>
 
-  <!-- left-right side Advertisement -->
-  <div id="fixed-add">
-    <div class="fixed hidden sm:block md:block top-[140px] left-0" id="fixed-add" style="
+    <!-- left-right side Advertisement -->
+    <div id="fixed-add">
+      <div
+        class="fixed hidden sm:block md:block top-[140px] left-0"
+        id="fixed-add"
+        style="
           animation-name: slideInLeft;
           animation-duration: 10s;
           animation-timing-function: ease-in-out;
           animation-iteration-count: infinite;
           display: block;
           z-index: 5;
-        ">
-      {% if vertical_adv_left_url  %}
-      <img src="{{ vertical_adv_left_url  }}" class="h-[600px]" alt="side add" />
-      {% endif %}
-    </div>
-    <div class="fixed hidden sm:block md:block top-[140px] right-0" id="fixed-add" style="
+        "
+      >
+        {% if vertical_adv_left_url %}
+        <img
+          src="{{ vertical_adv_left_url  }}"
+          class="h-[600px]"
+          alt="side add"
+        />
+        {% endif %}
+      </div>
+      <div
+        class="fixed hidden sm:block md:block top-[140px] right-0"
+        id="fixed-add"
+        style="
           animation-name: slideInRight;
           animation-duration: 10s;
           animation-timing-function: ease-in-out;
           animation-iteration-count: infinite;
           display: block;
           z-index: 5;
-        ">
-      {% if vertical_adv_right_url %}
-      <img src="{{ vertical_adv_right_url }}" class="h-[600px]" alt="side add" />
-      {% endif %}
-    </div>
-  </div>
-
-  <!-- Header section add -->
-  <div id="header">
-    <!-- Top Advertisement 1 -->
-    <div id="top-advertisement" class="flex justify-center mx-auto text-center p-1">
-      {% if horizontal_adv_url_1 %}
-      <img class="w-full max-w-[1280px] max-h-[132px]" src="{{ horizontal_adv_url_1 }}" alt="header section add" />
-      {% endif %}
+        "
+      >
+        {% if vertical_adv_right_url %}
+        <img
+          src="{{ vertical_adv_right_url }}"
+          class="h-[600px]"
+          alt="side add"
+        />
+        {% endif %}
+      </div>
     </div>
 
-    <!-- Header -->
+    <!-- Header section add -->
+    <div id="header">
+      <!-- Top Advertisement 1 -->
+      <div
+        id="top-advertisement"
+        class="flex justify-center mx-auto text-center p-1"
+      >
+        {% if horizontal_adv_url_1 %}
+        <img
+          class="w-full max-w-[1280px] max-h-[132px]"
+          src="{{ horizontal_adv_url_1 }}"
+          alt="header section add"
+        />
+        {% endif %}
+      </div>
 
-    <div id="navbar" class="bg-gradient-to-b from-[#F67F00] to-[#fff] text-white w-full top-0 z-50 sticky-navbar">
-      <div class="max-w-[1200px] mx-auto flex items-center justify-between p-4">
-        <div class="grid grid-cols-12 items-center mx-auto w-full text-center">
-          <div class="col-span-2 flex items-start justify-start">
-            <img src="{% static 'assets/logo.png' %}" alt="Logo" class="w-[129px] h-[100px] object-contain mr-3" />
+      <!-- Header -->
+
+      <div
+        id="navbar"
+        class="bg-gradient-to-b from-[#F67F00] to-[#fff] text-white w-full top-0 z-50 sticky-navbar"
+      >
+        <div
+          class="max-w-[1200px] mx-auto flex items-center justify-between p-4"
+        >
+          <div
+            class="grid grid-cols-12 items-center mx-auto w-full text-center"
+          >
+            <div class="col-span-2 flex items-start justify-start">
+              <img
+                src="{% static 'assets/logo.png' %}"
+                alt="Logo"
+                class="w-[129px] h-[100px] object-contain mr-3"
+              />
+            </div>
+
+            <div
+              class="col-span-9 flex flex-col gap-10 justify-center items-center sticky top-0 z-10"
+            >
+              <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-15 space-y-1">
+                <div class="flex mx-auto">
+                  <ul class="flex gap-8">
+                    <li>
+                      <i
+                        class="hover:text-gray-100 fa-brands fa-facebook-f text-black"
+                      ></i>
+                    </li>
+                    <li>
+                      <i
+                        class="hover:text-gray-100 fa-brands fa-twitter text-black"
+                      ></i>
+                    </li>
+                    <li>
+                      <i
+                        class="hover:text-gray-100 fa-brands fa-instagram text-black"
+                      ></i>
+                    </li>
+                    <li>
+                      <i
+                        class="hover:text-gray-100 fa-brands fa-youtube text-black"
+                      ></i>
+                    </li>
+                  </ul>
+                </div>
+                <div class="text-xs flex mx-auto font-bold text-black">
+                  <span id="gregorian-date"></span>,
+                  <span id="bangla-date"></span>
+                </div>
+                <div class="flex mx-auto gap-5">
+                  <div class="inline-flex items-center">
+                    <span
+                      class="blink-animation h-3 w-3 rounded-full mr-2"
+                    ></span>
+                    <span class="text-black">LIVE</span>
+                  </div>
+                  <div class="video-container">
+                    <img
+                      src="{% static 'assets/video.svg' %}"
+                      alt="Video Icon"
+                    />
+                  </div>
+                  <div>
+                    <span
+                      class="bg-[#FBDEC1] px-3 py-1 text-black font-semibold rounded-md"
+                      >English</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <nav class="hidden lg:flex text-black space-x-2 uppercase">
+                  {% for item in menu_items %}
+                    <a
+                      href="{{ item.get_url }}"
+                      class="md:text-sm hover:text-gray-500 {% if request.path == item.get_url %}bg-white rounded px-2{% endif %}"
+                    >
+                      {{ item.title }}
+                    </a>
+                    {% if not forloop.last %}
+                      <span>
+                        <div
+                          style="
+                            height: 24px;
+                            width: 1px;
+                            background: black;
+                            margin: 0 1px;
+                          "
+                        ></div>
+                      </span>
+                    {% endif %}
+                  {% endfor %}
+                </nav>
+              </div>
+              
+            </div>
           </div>
 
-          <div class="col-span-9 flex flex-col gap-10 justify-center items-center sticky top-0 z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-15 space-y-1">
-              <div class="flex mx-auto">
-                <ul class="flex gap-8">
-                  <li>
-                    <i class="hover:text-gray-100 fa-brands fa-facebook-f text-black"></i>
+          <div class="flex items-center space-x-4">
+            <button
+              id="menu-toggle"
+              class="lg:hidden hover:text-gray-300 focus:outline-none"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-6 h-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center mx-auto w-full">
+        <div class="grid grid-cols-12 max-w-[1200px] w-full">
+          <!-- Left Section -->
+          <div
+            class="col-span-4 lg:col-span-2 md:col-span-4 bg-[#E8851C] items-center justify-center"
+          >
+            <p class="p-4 text-white font-bold text-center">সদ্য প্রাপ্ত :</p>
+          </div>
+          <!-- Right Section -->
+          <div
+            class="col-span-8 lg:col-span-10 md:col-span-8 bg-[#E8851C] bg-opacity-90"
+          >
+            <marquee class="text-white p-4" behavior="scroll" direction="left">
+              {% if current_news %} {% for news_item in current_news %}
+              <span
+                >{{ news_item }}{% if not forloop.last %} • {% endif %}</span
+              >
+              {% endfor %} {% elif no_news %}
+              <span>No current news published.</span>
+              {% else %}
+              <span>No current news available.</span>
+              {% endif %}
+            </marquee>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sliding Menu Drawer -->
+      <div
+        id="menu-drawer"
+        class="fixed right-0 w-64 bg-[#E8851C] bg-opacity-95 transform translate-x-full transition-transform duration-300 ease-in-out z-50 rounded-tl-lg rounded-bl-lg"
+      >
+        <div class="p-4 text-black">
+          <button
+            id="menu-close"
+            class="hover:text-gray-100 focus:outline-none mb-4"
+          >
+            <i class="fa-solid fa-xmark text-xl"></i>
+          </button>
+          <nav class="flex flex-col space-y-4">
+            {% for item in menu_items %}
+            <a href="{{ item.get_url }}" class="md:text-sm hover:text-gray-100">
+              {{ item.title }}
+            </a>
+            {% endfor %}
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- Front News -->
+
+    <div id="front-news">
+      <section>
+        <div
+          class="flex flex-col mx-auto justify-center items-center max-w-[1200px]"
+        >
+          <div class="mx-auto p-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+              <!-- Left Column -->
+              <div>
+                <h1 class="font-bold text-xl lg:text-2xl text-[#F67F00]">
+                  {{ latest_news.main_heading }}
+                </h1>
+                <p class="text-[#616161] text-sm mt-3 lg:mt-5">
+                  {{ latest_news.updated_date|timesince }} Ago
+                </p>
+                <p class="text-[#616161] mt-3 lg:mt-5 mb-5">
+                  {{ latest_news.subtitle }}
+                </p>
+                <img
+                  src="{{ latest_news.image.file.url }}"
+                  class="w-full h-auto rounded-lg shadow-md"
+                  alt="news"
+                />
+                <p class="mt-5">
+                  <span class="text-[#E7252D]"
+                    >শিশু হেল্প লাইন নাম্বার : ১০৯৮</span
+                  >
+                  <span class="ml-2 text-[#F67F00]"
+                    >হেল্প লাইন নাম্বার : ৯৯৯</span
+                  >
+                </p>
+              </div>
+
+              <!-- Right Column -->
+              <div>
+                <h1 class="font-bold mb-3 text-black">নিখোঁজ বার্তা</h1>
+                <p class="w-full lg:w-[50%] mb-3">
+                  নিখোঁজ সংবাদ প্রচারের জন্য আমাদের সাথে যোগাযোগ করুন।
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <!-- Missing Person Image -->
+                  <div>
+                    <img
+                      src="{{ missing_person.image.file.url }}"
+                      class="w-full h-auto rounded-lg shadow-md"
+                      alt="missing person photo"
+                    />
+                  </div>
+                  <!-- Missing Person Details -->
+                  <div class="space-y-2">
+                    <p class="text-[#616161]">
+                      <span class="font-bold">নাম</span> : {{missing_person.name
+                      }}
+                    </p>
+                    <p class="text-[#616161]">
+                      <span class="font-bold">বয়স</span> : {{
+                      missing_person.age}} বছর
+                    </p>
+                    <p class="text-[#616161]">
+                      <span class="font-bold">গায়ের রং</span> :
+                      {{missing_person.skin_tone }}
+                    </p>
+                    <p class="text-[#616161]">
+                      <span class="font-bold">পরনে ছিল</span> :
+                      {{missing_person.dress }}
+                    </p>
+                    <p class="text-[#616161]">
+                      <span class="font-bold">নিখোঁজ হওয়ার সময়</span> :
+                      {{missing_person.missing_time_date|date:"d F Y,h:i A" }}
+                    </p>
+                    <p class="text-[#616161]">
+                      <span class="font-bold">যোগাযোগের নম্বর</span> :
+                      {{missing_person.contact_number }}
+                    </p>
+                    <p class="text-[#616161]">
+                      <span class="font-bold">দ্রষ্টব্য</span> : কেউ এই
+                      {{missing_person.name }} এর সন্ধান পেলে
+                      {{missing_person.contact_number }} নম্বরে যোগাযোগ করুন।
+                    </p>
+                  </div>
+                </div>
+
+                <h1 class="text-xl lg:text-2xl font-bold text-black mt-5">
+                  আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
+                  প্রেস সচিব
+                </h1>
+                <p class="mt-3">১০ ডিসেম্বর ২০২৪</p>
+                <img
+                  src="{% static 'assets/car.png' %}"
+                  alt="car"
+                  class="w-full max-h-[205px] lg:max-h-[250px] rounded-lg shadow-md mt-3"
+                />
+              </div>
+            </div>
+            <!-- Advertisement 2 -->
+            <div class="mt-8 shadow-md flex justify-center max-w-[1200px]">
+              {% if horizontal_adv_url_2 %}
+              <img
+                class="w-full rounded-md"
+                src="{{ horizontal_adv_url_2  }}"
+                alt="add"
+                class="w-full h-auto"
+              />
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- reporter section -->
+    <section id="law-section" class="py-0">
+      <div
+        class="flex flex-col mx-auto justify-center items-center max-w-[1200px]"
+      >
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+          <div class="space-y-2">
+            <img
+              src="{% static 'assets/reporter.png' %}"
+              alt="image"
+              class="w-full h-auto"
+            />
+            <button
+              class="bg-[#F67F00] rounded-md text-white font-bold py-3 mx-auto flex justify-center w-full text-center"
+            >
+              শিশু সাংবাদিক হতে চাই
+            </button>
+          </div>
+          <div class="space-y-2">
+            <img
+              src="{% static 'assets/presenter.png' %}"
+              alt="image"
+              class="w-full h-auto"
+            />
+            <button
+              class="bg-[#F67F00] rounded-md text-white font-bold py-3 mx-auto flex justify-center w-full text-center"
+            >
+              শিশু সাংবাদিক হতে চাই
+            </button>
+          </div>
+          <div class="space-y-2">
+            <img
+              src="{% static 'assets/add4.png' %}"
+              alt="image"
+              class="w-full h-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Amar Barta Section -->
+    <div id="amar-barta">
+      <section id="amar-barta">
+        <div
+          class="flex mx-auto justify-center items-center max-w-[1200px] overflow-hidden"
+        >
+          <div class="mx-auto p-4">
+            <!-- Main Content -->
+            <div class="grid sm:grid-cols-12 grid-cols-1 gap-6">
+              <!-- Left Section -->
+              <div class="lg:col-span-7 sm:col-span-12 col-span-12">
+                <div class="grid grid-cols-12 items-center gap-2 mb-5">
+                  <div class="col-span-3 lg:col-span-2">
+                    <span class="text-lg font-bold text-black"
+                      >আমার বার্তা</span
+                    >
+                  </div>
+                  <div class="col-span-9 lg:col-span-10">
+                    <div class="flex items-center w-full">
+                      <div class="bg-orange-500 h-1 w-12 mr-2"></div>
+                      <hr class="flex-grow border-t border-gray-300" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- News Content -->
+                <div class="grid lg:grid-cols-2 grid-cols-1 gap-4">
+                  <div>
+                    <img
+                      class="w-full max-w-full h-auto rounded-md shadow-md"
+                      src="{% static 'assets/news1.png' %}"
+                    />
+                  </div>
+                  <div>
+                    <p class="text-black">আমার বার্তা</p>
+                    <h1 class="font-bold text-black mt-3 text-lg lg:text-xl">
+                      আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া
+                      হবে: প্রেস সচিব
+                    </h1>
+                    <p class="mt-3 text-sm text-[#616161]">১০ ডিসেম্বর ২০২৪</p>
+                    <p
+                      class="mt-3 text-[#616161] text-sm lg:text-base leading-loose"
+                    >
+                      বিচারের প্রক্রিয়া সম্পন্ন হলেই শেখ হাসিনাকে ভারতের কাছে
+                      ফেরত চাওয়া হবে বলে জানিয়েছেন প্রধান উপদেষ্টার প্রেস সচিব
+                      শফিকুল আলম
+                    </p>
+                    <button
+                      class="border border-solid border-gray-500 text-black px-6 py-1 rounded-lg mt-3"
+                    >
+                      আরও পড়ুন
+                    </button>
+                  </div>
+                </div>
+                <hr class="mt-6 h-[2px] bg-[#DFDFDF]" />
+              </div>
+
+              <!-- Right Section -->
+              <div class="col-span-12 lg:col-span-5">
+                <div class="flex items-center w-full mt-5">
+                  <div class="bg-orange-500 h-1 w-12 mr-2"></div>
+                  <hr class="flex-grow border-t border-gray-300" />
+                </div>
+
+                <h1 class="font-bold text-black text-xl mt-5">দেশ বার্তা</h1>
+                <div class="mt-4">
+                  <p class="font-bold text-black text-base lg:text-xl">
+                    আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
+                    প্রেস সচিব
+                  </p>
+                  <p class="text-[#616161] mt-2 text-sm lg:text-base">
+                    ১০ ডিসেম্বর ২০২৪
+                  </p>
+                </div>
+                <div class="mt-4">
+                  <p class="font-bold text-black text-base lg:text-xl">
+                    আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
+                    প্রেস সচিব
+                  </p>
+                  <p class="text-[#616161] mt-2 text-sm lg:text-base">
+                    ১০ ডিসেম্বর ২০২৪
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Additional News Section -->
+            <div class="grid grid-cols-12 gap-6 mt-5">
+              <div class="col-span-12 lg:col-span-7">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div class="p-4 sm:border-r-2">
+                    <h1 class="font-bold text-black mt-3 text-base lg:text-xl">
+                      আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া
+                      হবে: প্রেস সচিব
+                    </h1>
+                    <p class="mt-3 text-sm text-[#616161] mb-4">
+                      ১০ ডিসেম্বর ২০২৪
+                    </p>
+                    <img
+                      class="w-full max-w-full h-auto rounded-md shadow-md"
+                      src="{% static 'assets/news1.png' %}"
+                    />
+                  </div>
+                  <div class="p-4">
+                    <h1 class="font-bold text-black mt-3 text-base lg:text-xl">
+                      আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া
+                      হবে: প্রেস সচিব
+                    </h1>
+                    <p class="mt-3 text-sm text-[#616161] mb-4">
+                      ১০ ডিসেম্বর ২০২৪
+                    </p>
+                    <img
+                      class="w-full max-w-full h-auto rounded-md shadow-md"
+                      src="{% static 'assets/news1.png' %}"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-span-12 lg:col-span-5 flex justify-center">
+                <img
+                  class="w-full max-w-[600px] h-auto mt-5 rounded-md shadow-md"
+                  src="{% static 'assets/add5.png' %}"
+                  alt="add"
+                />
+              </div>
+            </div>
+
+            <!-- Advertisement 3 -->
+            <div class="flex justify-center mt-8 rounded-md shadow-md">
+              {% if horizontal_adv_url_3 %}
+              <img
+                src="{{ horizontal_adv_url_3  }}"
+                alt="add"
+                class="w-full rounded-md shadow-md h-auto"
+              />
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Image News Section -->
+    <div id="image-news">
+      <section id="image-news" class="py-10">
+        <div
+          class="flex flex-col mx-auto justify-center items-center max-w-[1200px] px-4"
+        >
+          <!-- Title and Description -->
+          <div class="text-center mb-8">
+            <h1
+              class="font-bold text-3xl md:text-5xl lg:text-[60px] text-[#4D4D4D]"
+            >
+              ছবি বার্তা
+            </h1>
+            <p
+              class="mt-4 mb-5 text-sm md:text-base lg:text-lg text-[#616161] leading-6 md:leading-8 max-w-3xl mx-auto"
+            >
+              বিচারের প্রক্রিয়া সম্পন্ন হলেই শেখ হাসিনাকে ভারতের কাছে ফেরত চাওয়া
+              হবে বলে জানিয়েছেন প্রধান উপদেষ্টার প্রেস সচিব শফিকুল আলম রোববার (৮
+              ডিসেম্বর) সমসাময়িক বিষয়ে রাজধানীর ফরেন সার্ভিস একাডেমিতে
+              ব্রিফিংয়ে এ কথা জানান তিনি। শফিকুল আলম বলেন
+            </p>
+          </div>
+          <!-- Image Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="relative">
+              <img
+                src="{% static 'assets/building.png' %}"
+                class="w-full max-w-sm h-auto mx-auto rounded-lg shadow-md"
+                alt="image news"
+              />
+              <p
+                class="absolute top-2 text-sm font-bold text-black px-2 py-1 rounded"
+              >
+                আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
+                প্রেস সচিব
+              </p>
+              <div></div>
+            </div>
+            <div class="relative">
+              <img
+                src="{% static 'assets/building.png' %}"
+                class="w-full max-w-sm h-auto mx-auto rounded-lg shadow-md"
+                alt="image news"
+              />
+              <p
+                class="absolute top-2 text-sm font-bold text-black px-2 py-1 rounded"
+              >
+                আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
+                প্রেস সচিব
+              </p>
+            </div>
+            <div class="relative">
+              <img
+                src="{% static 'assets/building.png' %}"
+                class="w-full max-w-sm h-auto mx-auto rounded-lg shadow-md"
+                alt="image news"
+              />
+              <p
+                class="absolute top-2 text-sm font-bold text-black px-2 py-1 rounded"
+              >
+                আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
+                প্রেস সচিব
+              </p>
+            </div>
+          </div>
+
+          <!-- Advertisement 4-->
+          <div class="mt-8 w-full">
+            {% if horizontal_adv_url_4 %}
+            <img
+              src="{{ horizontal_adv_url_4 }}"
+              alt="add"
+              class="w-full max-w-[1200px] h-auto rounded-md shadow-md"
+            />
+            {% endif %}
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Sports News Section -->
+
+    <div id="sports-news">
+      <section id="sports-news" class="py-10">
+        <div
+          class="flex flex-col mx-auto justify-center items-center max-w-[1200px] px-4"
+        >
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <!-- Sports News -->
+            <div>
+              <div class="grid grid-cols-12 items-center gap-2 mb-5">
+                <div class="col-span-3">
+                  <span class="text-lg md:text-xl font-bold text-black"
+                    >ক্রিড়া বার্তা</span
+                  >
+                </div>
+                <div class="col-span-9">
+                  <div class="flex items-center w-full">
+                    <div class="bg-orange-500 h-1 w-12 mr-2"></div>
+                    <hr class="flex-grow border-t border-gray-300" />
+                  </div>
+                </div>
+              </div>
+
+              <img
+                src="{% static 'assets/news1.png' %}"
+                alt="news"
+                class="rounded-lg shadow-md w-full max-h-[400px] object-cover"
+              />
+              <p class="mt-4 text-black">ক্রিড়া বার্তা</p>
+              <h1 class="font-bold text-black text-xl md:text-2xl mt-4">
+                আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
+                প্রেস সচিব
+              </h1>
+              <p class="text-[#616161] mt-4">১০ ডিসেম্বর ২০২৪</p>
+              <p class="text-[#616161] mt-4 leading-8">
+                বিচারের প্রক্রিয়া সম্পন্ন হলেই শেখ হাসিনাকে ভারতের কাছে ফেরত
+                চাওয়া হবে বলে জানিয়েছেন প্রধান উপদেষ্টার প্রেস সচিব শফিকুল আলম
+              </p>
+            </div>
+
+            <!-- Entertainment News -->
+            <div>
+              <div class="grid grid-cols-12 items-center mb-5">
+                <div class="col-span-3">
+                  <span class="text-lg md:text-xl font-bold text-black"
+                    >বিনোদন বার্তা</span
+                  >
+                </div>
+                <div class="col-span-9">
+                  <div class="flex items-center w-full">
+                    <div class="bg-orange-500 h-1 w-12 mr-2"></div>
+                    <hr class="flex-grow border-t border-gray-300" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <img
+                    src="{% static 'assets/reporter.png' %}"
+                    class="w-full h-[270px] rounded-lg shadow-md object-cover"
+                    alt="news"
+                  />
+                  <h1 class="text-black font-bold w-full mt-5">
+                    আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
+                    প্রেস সচিব
+                  </h1>
+                  <p class="text-[#616161] mt-5">১০ ডিসেম্বর ২০২৪</p>
+                </div>
+                <div>
+                  <img
+                    src="{% static 'assets/reporter.png' %}"
+                    class="w-full h-[270px] rounded-lg shadow-md object-cover"
+                    alt="news"
+                  />
+                  <h1 class="text-black font-bold w-full mt-5">
+                    আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
+                    প্রেস সচিব
+                  </h1>
+                  <p class="text-[#616161] mt-5">১০ ডিসেম্বর ২০২৪</p>
+                </div>
+              </div>
+              <div>
+                <img
+                  src="{% static 'assets/burger.png' %}"
+                  class="w-full max-h-[300px] mt-5 object-cover rounded-lg shadow-md"
+                  alt="add"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Advertisement 5 -->
+          <div class="flex justify-center mt-8 shadow-md w-full max-w-[1200px]">
+            {% if horizontal_adv_url_5 %}
+            <img
+              src="{{ horizontal_adv_url_5 }}"
+              alt="add"
+              class="w-full h-auto rounded-md shadow-md"
+            />
+            {% endif %}
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Video News Section -->
+    <div id="video-news">
+      <section id="video-news" class="py-10">
+        <div class="max-w-[1200px] mx-auto p-4 rounded-md">
+          <!-- Header Section -->
+          <div class="flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-black">ভিডিও</h1>
+          </div>
+
+          <!-- Video Cards Section (Slider) -->
+          <div class="mt-6">
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10"
+            >
+              <div class="w-full bg-gray-200 rounded-lg">
+                <iframe
+                  src="https://www.youtube.com/embed/5LMyz1wm9SI?si=9zA7MOYncWWrvNlc"
+                  class="w-full h-[200px]"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                ></iframe>
+              </div>
+
+              <div class="w-full bg-gray-200 rounded-lg">
+                <iframe
+                  src="https://www.youtube.com/embed/5LMyz1wm9SI?si=9zA7MOYncWWrvNlc"
+                  class="w-full h-[200px]"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                ></iframe>
+              </div>
+
+              <div class="w-full bg-gray-200 rounded-lg">
+                <iframe
+                  src="https://www.youtube.com/embed/5LMyz1wm9SI?si=9zA7MOYncWWrvNlc"
+                  class="w-full h-[200px]"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                ></iframe>
+              </div>
+
+              <div class="w-full bg-gray-200 rounded-lg">
+                <iframe
+                  src="https://www.youtube.com/embed/5LMyz1wm9SI?si=9zA7MOYncWWrvNlc"
+                  class="w-full h-[200px]"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Law News Section -->
+    <div id="law-news">
+      <section id="law-section" class="py-10">
+        <div
+          class="flex flex-col mx-auto justify-center items-center max-w-[1200px] px-4"
+        >
+          <!-- Main Content Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 w-full">
+            <!-- Left Sidebar (Advertisement) -->
+            <div class="lg:col-span-3 hidden lg:block">
+              <img
+                src="{% static 'assets/add7.png' %}"
+                alt="news"
+                class="w-full h-auto max-h-[600px] rounded-lg shadow-md"
+              />
+            </div>
+
+            <!-- Main Content -->
+            <div class="lg:col-span-6">
+              <!-- Header -->
+              <div class="grid grid-cols-12 items-center gap-2 mb-5">
+                <div class="col-span-3 md:col-span-2">
+                  <span class="text-lg font-bold text-black">আইনি বার্তা</span>
+                </div>
+                <div class="col-span-9 md:col-span-10">
+                  <div class="flex items-center w-full">
+                    <div class="bg-orange-500 h-1 w-12 mr-2"></div>
+                    <hr class="flex-grow border-t border-gray-300" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Main Article -->
+              <img
+                src="{% static 'assets/news1.png' %}"
+                alt="news"
+                class="w-full h-auto rounded-lg shadow-md"
+              />
+              <p class="mt-4 text-black">ক্রিড়া বার্তা</p>
+              <h1 class="font-bold text-black text-xl md:text-2xl mt-4">
+                আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
+                প্রেস সচিব
+              </h1>
+              <p class="text-[#616161] mt-4">১০ ডিসেম্বর ২০২৪</p>
+              <p class="text-[#616161] mt-4 leading-8">
+                বিচারের প্রক্রিয়া সম্পন্ন হলেই শেখ হাসিনাকে ভারতের কাছে ফেরত
+                চাওয়া হবে বলে জানিয়েছেন প্রধান উপদেষ্টার প্রেস সচিব শফিকুল আলম
+              </p>
+            </div>
+
+            <!-- Right Sidebar (World News) -->
+            <div class="lg:col-span-3">
+              <!-- Header -->
+              <div class="grid grid-cols-12 items-center gap-2 mb-5">
+                <div class="col-span-4">
+                  <span class="text-lg font-bold text-black">বিশ্ব বার্তা</span>
+                </div>
+                <div class="col-span-8">
+                  <div class="flex items-center w-full">
+                    <div class="bg-orange-500 h-1 w-12 mr-2"></div>
+                    <hr class="flex-grow border-t border-gray-300" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- News Items -->
+              <div>
+                <h1 class="font-bold text-black text-sm mt-5">
+                  আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
+                  প্রেস সচিব
+                </h1>
+                <p class="text-[#616161] mt-2 text-xs">১০ ডিসেম্বর ২০২৪</p>
+                <hr class="mt-2" />
+                <h1 class="font-bold text-black text-sm mt-5">
+                  আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
+                  প্রেস সচিব
+                </h1>
+                <p class="text-[#616161] mt-2 text-xs">১০ ডিসেম্বর ২০২৪</p>
+                <hr class="mt-2" />
+                <h1 class="font-bold text-black text-sm mt-5">
+                  আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
+                  প্রেস সচিব
+                </h1>
+                <p class="text-[#616161] mt-2 text-xs">১০ ডিসেম্বর ২০২৪</p>
+              </div>
+
+              <!-- Advertisement -->
+              <img
+                src="{% static 'assets/add8.png' %}"
+                class="mt-5 w-full h-auto rounded-lg shadow-md"
+                alt="add"
+              />
+            </div>
+          </div>
+
+          <!-- Full-Width Advertisement 6 -->
+          <div class="flex justify-center mt-8 w-full">
+            {% if horizontal_adv_url_6 %}
+            <img
+              src="{{ horizontal_adv_url_6  }}"
+              alt="add"
+              class="w-full rounded-lg shadow-md"
+            />
+            {% endif %}
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Missing News Section -->
+    <div id="missing-news">
+      <section id="amar-barta">
+        <div
+          class="flex mx-auto justify-center items-center max-w-[1200px] overflow-hidden"
+        >
+          <div class="mx-auto p-4">
+            <!-- Main Content -->
+            <div class="grid sm:grid-cols-12 grid-cols-1 gap-6">
+              <!-- Left Section -->
+              <div class="lg:col-span-7 sm:col-span-12 col-span-12">
+                <div class="grid grid-cols-12 items-center gap-2 mb-5">
+                  <div class="col-span-3 lg:col-span-2">
+                    <span class="text-lg font-bold text-black"
+                      >নিখোঁজ বার্তা</span
+                    >
+                  </div>
+                  <div class="col-span-9 lg:col-span-10">
+                    <div class="flex items-center w-full">
+                      <div class="bg-orange-500 h-1 w-12 mr-2"></div>
+                      <hr class="flex-grow border-t border-gray-300" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- News Content -->
+                <div class="grid lg:grid-cols-2 grid-cols-1 gap-4">
+                  <div>
+                    <img
+                      class="w-full max-w-full h-auto rounded-md shadow-md"
+                      src="{% static 'assets/news10.png' %}"
+                    />
+                  </div>
+                  <div>
+                    <p class="text-black">নিখোঁজ বার্তা</p>
+                    <h1 class="font-bold text-black mt-3 text-lg lg:text-xl">
+                      আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া
+                      হবে: প্রেস সচিব
+                    </h1>
+                    <p class="mt-3 text-sm text-[#616161]">১০ ডিসেম্বর ২০২৪</p>
+                    <p
+                      class="mt-3 text-[#616161] text-sm lg:text-base leading-loose"
+                    >
+                      বিচারের প্রক্রিয়া সম্পন্ন হলেই শেখ হাসিনাকে ভারতের কাছে
+                      ফেরত চাওয়া হবে বলে জানিয়েছেন প্রধান উপদেষ্টার প্রেস সচিব
+                      শফিকুল আলম
+                    </p>
+                    <button
+                      class="border border-solid border-gray-500 text-black px-6 py-1 rounded-lg mt-3"
+                    >
+                      আরও পড়ুন
+                    </button>
+                  </div>
+                </div>
+                <hr class="mt-6 h-[2px] bg-[#DFDFDF]" />
+              </div>
+
+              <!-- Right Section -->
+              <div class="col-span-12 lg:col-span-5">
+                <div class="flex items-center w-full mt-5">
+                  <div class="bg-orange-500 h-1 w-12 mr-2"></div>
+                  <hr class="flex-grow border-t border-gray-300" />
+                </div>
+
+                <h1 class="font-bold text-black text-xl mt-5">দেশ বার্তা</h1>
+                <div class="mt-4">
+                  <p class="font-bold text-black text-base lg:text-xl">
+                    আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
+                    প্রেস সচিব
+                  </p>
+                  <p class="text-[#616161] mt-2 text-sm lg:text-base">
+                    ১০ ডিসেম্বর ২০২৪
+                  </p>
+                </div>
+                <div class="mt-4">
+                  <p class="font-bold text-black text-base lg:text-xl">
+                    আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
+                    প্রেস সচিব
+                  </p>
+                  <p class="text-[#616161] mt-2 text-sm lg:text-base">
+                    ১০ ডিসেম্বর ২০২৪
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Additional News Section -->
+            <div class="grid grid-cols-12 gap-6 mt-5">
+              <div class="col-span-12 lg:col-span-7">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div class="p-4 sm:border-r-2">
+                    <h1 class="font-bold text-black mt-3 text-base lg:text-xl">
+                      আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া
+                      হবে: প্রেস সচিব
+                    </h1>
+                    <p class="mt-3 text-sm text-[#616161] mb-4">
+                      ১০ ডিসেম্বর ২০২৪
+                    </p>
+                    <img
+                      class="w-full max-w-full h-auto rounded-md shadow-md"
+                      src="{% static 'assets/news1.png' %}"
+                    />
+                  </div>
+                  <div class="p-4">
+                    <h1 class="font-bold text-black mt-3 text-base lg:text-xl">
+                      আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া
+                      হবে: প্রেস সচিব
+                    </h1>
+                    <p class="mt-3 text-sm text-[#616161] mb-4">
+                      ১০ ডিসেম্বর ২০২৪
+                    </p>
+                    <img
+                      class="w-full max-w-full h-auto rounded-md shadow-md"
+                      src="{% static 'assets/news1.png' %}"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-span-12 lg:col-span-5 flex justify-center">
+                <img
+                  class="w-full max-w-[600px] h-auto mt-5 rounded-md shadow-md"
+                  src="{% static 'assets/add10.png' %}"
+                  alt="add"
+                />
+              </div>
+            </div>
+
+            <!-- Advertisement 7-->
+            <div class="flex justify-center rounded-md shadow-md mt-8">
+              {% if horizontal_adv_url_7 %}
+              <img
+                src="{{ horizontal_adv_url_7 }}"
+                alt="add"
+                class="rounded-md shadow-md w-full h-auto"
+              />
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+
+    <section>
+      <div
+        class="footers justify-center bg-[#E5841C] items-center py-6"
+        style="position: relative; z-index: 10"
+      >
+        <div class="mx-auto w-full max-w-[1400px]">
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-10"
+          >
+            <!-- First Div -->
+            <div
+              class="flex flex-col justify-center w-[70%] sm:w-[50%] md:w-full lg:w-full mx-auto"
+            >
+              <div class="mx-auto">
+                <h1
+                  class="text-left mx-auto font-bold text-lg md:text-xl text-white mt-3 md:mt-5"
+                >
+                  চাইল্ড মেসেজ
+                </h1>
+                <p
+                  class="text-white w-full md:w-[70%] mt-3 md:mt-5 text-sm leading-loose"
+                >
+                  আপত্তিকর স্বত্ত্বাধীন পদোন্নতি বিধান এবং ওহ এটা নিজেদের সাথে
+                  পরামর্শ করা. আশীর্বাদ স্বাগত ভদ্রমহিলা সে দেখা হাস্যরস স্যার
+                  তার প্রজনন.
+                </p>
+
+                <ul class="flex flex-row gap-5 mt-5">
+                  <li class="bg-white p-3 rounded-full">
+                    <a href="#"> <img src="{% static 'assets/fb.png' %}" /></a>
                   </li>
-                  <li>
-                    <i class="hover:text-gray-100 fa-brands fa-twitter text-black"></i>
+                  <li class="bg-white p-3 rounded-full">
+                    <a href="#">
+                      <img src="{% static 'assets/twitter.png' %}"
+                    /></a>
                   </li>
-                  <li>
-                    <i class="hover:text-gray-100 fa-brands fa-instagram text-black"></i>
+                  <li class="bg-white p-3 rounded-full">
+                    <a href="#">
+                      <img src="{% static 'assets/instagram.png' %}"
+                    /></a>
                   </li>
-                  <li>
-                    <i class="hover:text-gray-100 fa-brands fa-youtube text-black"></i>
+                  <li class="bg-white p-3 rounded-full">
+                    <a href="#">
+                      <img src="{% static 'assets/youtube.png' %}"
+                    /></a>
                   </li>
                 </ul>
               </div>
-              <div class="text-xs flex mx-auto font-bold text-black">
-                <span id="gregorian-date"></span>,
-                <span id="bangla-date"></span>
-              </div>
-              <div class="flex mx-auto gap-5">
-                <div class="inline-flex items-center">
-                  <span class="blink-animation h-3 w-3 rounded-full mr-2"></span>
-                  <span class="text-black">LIVE</span>
-                </div>
-                <div class="video-container">
-                  <img src="{% static 'assets/video.svg' %}" alt="Video Icon" />
-                </div>
-                <div>
-                  <span class="bg-[#FBDEC1] px-3 py-1 text-black font-semibold rounded-md">English</span>
-                </div>
-              </div>
             </div>
 
-            <div>
-              <nav class="hidden lg:flex text-black space-x-2 uppercase">
-                <a href="#home" class="md:text-sm hover:text-gray-500">আমার বার্তা</a>
-                <span>
-                  <div style="
-                        height: 24px;
-                        width: 1px;
-                        background: black;
-                        margin: 0 1px;
-                      "></div>
-                </span>
-                <a href="#service" class="md:text-sm hover:text-gray-500">দেশ বার্তা</a>
-                <span>
-                  <div style="
-                        height: 24px;
-                        width: 1px;
-                        background: black;
-                        margin: 0 1px;
-                      "></div>
-                </span>
-                <a href="#service" class="md:text-sm hover:text-gray-500">ক্রিড়া বার্তা</a>
-                <span>
-                  <div style="
-                        height: 24px;
-                        width: 1px;
-                        background: black;
-                        margin: 0 1px;
-                      "></div>
-                </span>
-                <a href="#service" class="md:text-sm hover:text-gray-500">বিনোদন বার্তা</a>
-                <span>
-                  <div style="
-                        height: 24px;
-                        width: 1px;
-                        background: black;
-                        margin: 0 1px;
-                      "></div>
-                </span>
-                <a href="#service" class="md:text-sm hover:text-gray-500">আইনি বার্তা</a>
-                <span>
-                  <div style="
-                        height: 24px;
-                        width: 1px;
-                        background: black;
-                        margin: 0 1px;
-                      "></div>
-                </span>
-                <a href="#service" class="md:text-sm hover:text-gray-500">বিশ্ব বার্তা</a>
-                <span>
-                  <div style="
-                        height: 24px;
-                        width: 1px;
-                        background: black;
-                        margin: 0 1px;
-                      "></div>
-                </span>
-                <a href="#service" class="md:text-sm hover:text-gray-500">নিখোঁজ বার্তা</a>
-                <span>
-                  <div style="
-                        height: 24px;
-                        width: 1px;
-                        background: black;
-                        margin: 0 1px;
-                      "></div>
-                </span>
-                <a href="#service" class="md:text-sm hover:text-gray-500">স্বাস্থ্য বার্তা</a>
-                <span>
-                  <div style="
-                        height: 24px;
-                        width: 1px;
-                        background: black;
-                        margin: 0 1px;
-                      "></div>
-                </span>
-                <a href="#service" class="md:text-sm hover:text-gray-500">জানুন</a>
-              </nav>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex items-center space-x-4">
-          <button id="menu-toggle" class="lg:hidden hover:text-gray-300 focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="flex justify-center mx-auto w-full">
-      <div class="grid grid-cols-12 max-w-[1200px] w-full">
-        <!-- Left Section -->
-        <div class="col-span-4 lg:col-span-2 md:col-span-4 bg-[#E8851C] items-center justify-center">
-          <p class="p-4 text-white font-bold text-center">সদ্য প্রাপ্ত :</p>
-        </div>
-        <!-- Right Section -->
-<div class="col-span-8 lg:col-span-10 md:col-span-8 bg-[#E8851C] bg-opacity-90">
-  <marquee class="text-white p-4" behavior="scroll" direction="left">
-    {% if current_news %}
-        {% for news_item in current_news %}
-            <span>{{ news_item }}{% if not forloop.last %} • {% endif %}</span>
-        {% endfor %}
-    {% elif no_news %}
-        <span>No current news published.</span>
-    {% else %}
-        <span>No current news available.</span>
-    {% endif %}
-</marquee>
-</div>
-      </div>
-    </div>
-
-    <!-- Sliding Menu Drawer -->
-    <div id="menu-drawer"
-      class="fixed right-0 w-64 bg-[#E8851C] bg-opacity-95 transform translate-x-full transition-transform duration-300 ease-in-out z-50 rounded-tl-lg rounded-bl-lg">
-      <div class="p-4 text-black">
-        <button id="menu-close" class="hover:text-gray-100 focus:outline-none mb-4">
-          <i class="fa-solid fa-xmark text-xl"></i>
-        </button>
-        <nav class="flex flex-col space-y-4">
-          <a href="#home" class="md:text-sm hover:text-gray-100">আমার বার্তা</a>
-
-          <a href="#service" class="md:text-sm hover:text-gray-100">দেশ বার্তা</a>
-
-          <a href="#service" class="md:text-sm hover:text-gray-100">ক্রিড়া বার্তা</a>
-
-          <a href="#service" class="md:text-sm hover:text-gray-100">বিনোদন বার্তা</a>
-
-          <a href="#service" class="md:text-sm hover:text-gray-100">আইনি বার্তা</a>
-
-          <a href="#service" class="md:text-sm hover:text-gray-100">বিশ্ব বার্তা</a>
-
-          <a href="#service" class="md:text-sm hover:text-gray-100">নিখোঁজ বার্তা</a>
-
-          <a href="#service" class="md:text-sm hover:text-gray-100">স্বাস্থ্য বার্তা</a>
-
-          <a href="#service" class="md:text-sm hover:text-gray-100">জানুন</a>
-        </nav>
-      </div>
-    </div>
-  </div>
-
-  <!-- Front News -->
-
-  <div id="front-news">
-    <section>
-      <div class="flex flex-col mx-auto justify-center items-center max-w-[1200px]">
-        <div class="mx-auto p-4">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-            <!-- Left Column -->
-            <div>
-              <h1 class="font-bold text-xl lg:text-2xl text-[#F67F00]">
-                {{ latest_news.main_heading }}
-              </h1>
-              <p class="text-[#616161] text-sm mt-3 lg:mt-5">
-                {{ latest_news.updated_date|timesince }} Ago
-              </p>
-              <p class="text-[#616161] mt-3 lg:mt-5 mb-5">
-                {{ latest_news.subtitle }}
-              </p>
-              <img src="{{ latest_news.image.file.url }}" class="w-full h-auto rounded-lg shadow-md" alt="news" />
-              <p class="mt-5">
-                <span class="text-[#E7252D]">শিশু হেল্প লাইন নাম্বার : ১০৯৮</span>
-                <span class="ml-2 text-[#F67F00]">হেল্প লাইন নাম্বার : ৯৯৯</span>
-              </p>
-            </div>
-
-            <!-- Right Column -->
-            <div>
-              <h1 class="font-bold mb-3 text-black">নিখোঁজ বার্তা</h1>
-              <p class="w-full lg:w-[50%] mb-3">
-                নিখোঁজ সংবাদ প্রচারের জন্য আমাদের সাথে যোগাযোগ করুন।
-              </p>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <!-- Missing Person Image -->
-                <div>
-                  <img src="{{ missing_person.image.file.url }}" class="w-full h-auto rounded-lg shadow-md"
-                    alt="missing person photo" />
-                </div>
-                <!-- Missing Person Details -->
-                <div class="space-y-2">
-                  <p class="text-[#616161]">
-                    <span class="font-bold">নাম</span> : {{missing_person.name }}
-                  </p>
-                  <p class="text-[#616161]">
-                    <span class="font-bold">বয়স</span> : {{ missing_person.age}} বছর
-                  </p>
-                  <p class="text-[#616161]">
-                    <span class="font-bold">গায়ের রং</span> : {{missing_person.skin_tone }}
-                  </p>
-                  <p class="text-[#616161]">
-                    <span class="font-bold">পরনে ছিল</span> : {{missing_person.dress }}
-                  </p>
-                  <p class="text-[#616161]">
-                    <span class="font-bold">নিখোঁজ হওয়ার সময়</span> : {{missing_person.missing_time_date|date:"d F Y,h:i A" }}
-                  </p>
-                  <p class="text-[#616161]">
-                    <span class="font-bold">যোগাযোগের নম্বর</span> : {{missing_person.contact_number }}
-                  </p>
-                  <p class="text-[#616161]">
-                    <span class="font-bold">দ্রষ্টব্য</span> : কেউ এই {{missing_person.name }} এর সন্ধান পেলে
-                    {{missing_person.contact_number }} নম্বরে যোগাযোগ করুন।
-                  </p>
-                </div>
-              </div>
-
-              <h1 class="text-xl lg:text-2xl font-bold text-black mt-5">
-                আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
-                প্রেস সচিব
-              </h1>
-              <p class="mt-3">১০ ডিসেম্বর ২০২৪</p>
-              <img src="{% static 'assets/car.png' %}" alt="car"
-                class="w-full max-h-[205px] lg:max-h-[250px] rounded-lg shadow-md mt-3" />
-            </div>
-          </div>
-          <!-- Advertisement 2 -->
-          <div class="mt-8 shadow-md flex justify-center max-w-[1200px]">
-            {% if horizontal_adv_url_2  %}
-            <img class="w-full rounded-md" src="{{ horizontal_adv_url_2  }}" alt="add" class="w-full h-auto" />
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-  <!-- reporter section -->
-  <section id="law-section" class="py-0">
-    <div class="flex flex-col mx-auto justify-center items-center max-w-[1200px]">
-      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-        <div class="space-y-2">
-          <img src="{% static 'assets/reporter.png' %}" alt="image" class="w-full h-auto" />
-          <button
-            class="bg-[#F67F00] rounded-md text-white font-bold py-3 mx-auto flex justify-center w-full text-center">
-            শিশু সাংবাদিক হতে চাই
-          </button>
-        </div>
-        <div class="space-y-2">
-          <img src="{% static 'assets/presenter.png' %}" alt="image" class="w-full h-auto" />
-          <button
-            class="bg-[#F67F00] rounded-md text-white font-bold py-3 mx-auto flex justify-center w-full text-center">
-            শিশু সাংবাদিক হতে চাই
-          </button>
-        </div>
-        <div class="space-y-2">
-          <img src="{% static 'assets/add4.png' %}" alt="image" class="w-full h-auto" />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Amar Barta Section -->
-  <div id="amar-barta">
-    <section id="amar-barta">
-      <div class="flex mx-auto justify-center items-center max-w-[1200px] overflow-hidden">
-        <div class="mx-auto p-4">
-          <!-- Main Content -->
-          <div class="grid sm:grid-cols-12 grid-cols-1 gap-6">
-            <!-- Left Section -->
-            <div class="lg:col-span-7 sm:col-span-12 col-span-12">
-              <div class="grid grid-cols-12 items-center gap-2 mb-5">
-                <div class="col-span-3 lg:col-span-2">
-                  <span class="text-lg font-bold text-black">আমার বার্তা</span>
-                </div>
-                <div class="col-span-9 lg:col-span-10">
-                  <div class="flex items-center w-full">
-                    <div class="bg-orange-500 h-1 w-12 mr-2"></div>
-                    <hr class="flex-grow border-t border-gray-300" />
-                  </div>
-                </div>
-              </div>
-
-              <!-- News Content -->
-              <div class="grid lg:grid-cols-2 grid-cols-1 gap-4">
-                <div>
-                  <img class="w-full max-w-full h-auto rounded-md shadow-md" src="{% static 'assets/news1.png' %}" />
-                </div>
-                <div>
-                  <p class="text-black">আমার বার্তা</p>
-                  <h1 class="font-bold text-black mt-3 text-lg lg:text-xl">
-                    আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া
-                    হবে: প্রেস সচিব
-                  </h1>
-                  <p class="mt-3 text-sm text-[#616161]">১০ ডিসেম্বর ২০২৪</p>
-                  <p class="mt-3 text-[#616161] text-sm lg:text-base leading-loose">
-                    বিচারের প্রক্রিয়া সম্পন্ন হলেই শেখ হাসিনাকে ভারতের কাছে
-                    ফেরত চাওয়া হবে বলে জানিয়েছেন প্রধান উপদেষ্টার প্রেস সচিব
-                    শফিকুল আলম
-                  </p>
-                  <button class="border border-solid border-gray-500 text-black px-6 py-1 rounded-lg mt-3">
-                    আরও পড়ুন
-                  </button>
-                </div>
-              </div>
-              <hr class="mt-6 h-[2px] bg-[#DFDFDF]" />
-            </div>
-
-            <!-- Right Section -->
-            <div class="col-span-12 lg:col-span-5">
-              <div class="flex items-center w-full mt-5">
-                <div class="bg-orange-500 h-1 w-12 mr-2"></div>
-                <hr class="flex-grow border-t border-gray-300" />
-              </div>
-
-              <h1 class="font-bold text-black text-xl mt-5">দেশ বার্তা</h1>
-              <div class="mt-4">
-                <p class="font-bold text-black text-base lg:text-xl">
-                  আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
-                  প্রেস সচিব
-                </p>
-                <p class="text-[#616161] mt-2 text-sm lg:text-base">
-                  ১০ ডিসেম্বর ২০২৪
-                </p>
-              </div>
-              <div class="mt-4">
-                <p class="font-bold text-black text-base lg:text-xl">
-                  আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
-                  প্রেস সচিব
-                </p>
-                <p class="text-[#616161] mt-2 text-sm lg:text-base">
-                  ১০ ডিসেম্বর ২০২৪
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Additional News Section -->
-          <div class="grid grid-cols-12 gap-6 mt-5">
-            <div class="col-span-12 lg:col-span-7">
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="p-4 sm:border-r-2">
-                  <h1 class="font-bold text-black mt-3 text-base lg:text-xl">
-                    আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া
-                    হবে: প্রেস সচিব
-                  </h1>
-                  <p class="mt-3 text-sm text-[#616161] mb-4">
-                    ১০ ডিসেম্বর ২০২৪
-                  </p>
-                  <img class="w-full max-w-full h-auto rounded-md shadow-md" src="{% static 'assets/news1.png' %}" />
-                </div>
-                <div class="p-4">
-                  <h1 class="font-bold text-black mt-3 text-base lg:text-xl">
-                    আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া
-                    হবে: প্রেস সচিব
-                  </h1>
-                  <p class="mt-3 text-sm text-[#616161] mb-4">
-                    ১০ ডিসেম্বর ২০২৪
-                  </p>
-                  <img class="w-full max-w-full h-auto rounded-md shadow-md" src="{% static 'assets/news1.png' %}" />
-                </div>
-              </div>
-            </div>
-
-            <div class="col-span-12 lg:col-span-5 flex justify-center">
-              <img class="w-full max-w-[600px] h-auto mt-5 rounded-md shadow-md" src="{% static 'assets/add5.png' %}"
-                alt="add" />
-            </div>
-          </div>
-
-          <!-- Advertisement 3 -->
-          <div class="flex justify-center mt-8 rounded-md shadow-md">
-            {% if horizontal_adv_url_3  %}
-            <img src="{{ horizontal_adv_url_3  }}" alt="add" class="w-full rounded-md shadow-md h-auto" />
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- Image News Section -->
-  <div id="image-news">
-    <section id="image-news" class="py-10">
-      <div class="flex flex-col mx-auto justify-center items-center max-w-[1200px] px-4">
-        <!-- Title and Description -->
-        <div class="text-center mb-8">
-          <h1 class="font-bold text-3xl md:text-5xl lg:text-[60px] text-[#4D4D4D]">
-            ছবি বার্তা
-          </h1>
-          <p class="mt-4 mb-5 text-sm md:text-base lg:text-lg text-[#616161] leading-6 md:leading-8 max-w-3xl mx-auto">
-            বিচারের প্রক্রিয়া সম্পন্ন হলেই শেখ হাসিনাকে ভারতের কাছে ফেরত চাওয়া
-            হবে বলে জানিয়েছেন প্রধান উপদেষ্টার প্রেস সচিব শফিকুল আলম রোববার (৮
-            ডিসেম্বর) সমসাময়িক বিষয়ে রাজধানীর ফরেন সার্ভিস একাডেমিতে
-            ব্রিফিংয়ে এ কথা জানান তিনি। শফিকুল আলম বলেন
-          </p>
-        </div>
-        <!-- Image Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div class="relative">
-            <img src="{% static 'assets/building.png' %}" class="w-full max-w-sm h-auto mx-auto rounded-lg shadow-md"
-              alt="image news" />
-            <p class="absolute top-2 text-sm font-bold text-black px-2 py-1 rounded">
-              আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
-              প্রেস সচিব
-            </p>
-            <div></div>
-          </div>
-          <div class="relative">
-            <img src="{% static 'assets/building.png' %}" class="w-full max-w-sm h-auto mx-auto rounded-lg shadow-md"
-              alt="image news" />
-            <p class="absolute top-2 text-sm font-bold text-black px-2 py-1 rounded">
-              আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
-              প্রেস সচিব
-            </p>
-          </div>
-          <div class="relative">
-            <img src="{% static 'assets/building.png' %}" class="w-full max-w-sm h-auto mx-auto rounded-lg shadow-md"
-              alt="image news" />
-            <p class="absolute top-2 text-sm font-bold text-black px-2 py-1 rounded">
-              আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
-              প্রেস সচিব
-            </p>
-          </div>
-        </div>
-
-        <!-- Advertisement 4-->
-        <div class="mt-8 w-full">
-          {% if horizontal_adv_url_4 %}
-          <img src="{{ horizontal_adv_url_4 }}" alt="add" class="w-full max-w-[1200px] h-auto rounded-md shadow-md" />
-          {% endif %}
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- Sports News Section -->
-
-  <div id="sports-news">
-    <section id="sports-news" class="py-10">
-      <div class="flex flex-col mx-auto justify-center items-center max-w-[1200px] px-4">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          <!-- Sports News -->
-          <div>
-            <div class="grid grid-cols-12 items-center gap-2 mb-5">
-              <div class="col-span-3">
-                <span class="text-lg md:text-xl font-bold text-black">ক্রিড়া বার্তা</span>
-              </div>
-              <div class="col-span-9">
-                <div class="flex items-center w-full">
-                  <div class="bg-orange-500 h-1 w-12 mr-2"></div>
-                  <hr class="flex-grow border-t border-gray-300" />
-                </div>
-              </div>
-            </div>
-
-            <img src="{% static 'assets/news1.png' %}" alt="news"
-              class="rounded-lg shadow-md w-full max-h-[400px] object-cover" />
-            <p class="mt-4 text-black">ক্রিড়া বার্তা</p>
-            <h1 class="font-bold text-black text-xl md:text-2xl mt-4">
-              আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
-              প্রেস সচিব
-            </h1>
-            <p class="text-[#616161] mt-4">১০ ডিসেম্বর ২০২৪</p>
-            <p class="text-[#616161] mt-4 leading-8">
-              বিচারের প্রক্রিয়া সম্পন্ন হলেই শেখ হাসিনাকে ভারতের কাছে ফেরত
-              চাওয়া হবে বলে জানিয়েছেন প্রধান উপদেষ্টার প্রেস সচিব শফিকুল আলম
-            </p>
-          </div>
-
-          <!-- Entertainment News -->
-          <div>
-            <div class="grid grid-cols-12 items-center mb-5">
-              <div class="col-span-3">
-                <span class="text-lg md:text-xl font-bold text-black">বিনোদন বার্তা</span>
-              </div>
-              <div class="col-span-9">
-                <div class="flex items-center w-full">
-                  <div class="bg-orange-500 h-1 w-12 mr-2"></div>
-                  <hr class="flex-grow border-t border-gray-300" />
-                </div>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <img src="{% static 'assets/reporter.png' %}" class="w-full h-[270px] rounded-lg shadow-md object-cover"
-                  alt="news" />
-                <h1 class="text-black font-bold w-full mt-5">
-                  আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
-                  প্রেস সচিব
-                </h1>
-                <p class="text-[#616161] mt-5">১০ ডিসেম্বর ২০২৪</p>
-              </div>
-              <div>
-                <img src="{% static 'assets/reporter.png' %}" class="w-full h-[270px] rounded-lg shadow-md object-cover"
-                  alt="news" />
-                <h1 class="text-black font-bold w-full mt-5">
-                  আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
-                  প্রেস সচিব
-                </h1>
-                <p class="text-[#616161] mt-5">১০ ডিসেম্বর ২০২৪</p>
-              </div>
-            </div>
-            <div>
-              <img src="{% static 'assets/burger.png' %}"
-                class="w-full max-h-[300px] mt-5 object-cover rounded-lg shadow-md" alt="add" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Advertisement 5 -->
-        <div class="flex justify-center mt-8 shadow-md w-full max-w-[1200px]">
-          {% if horizontal_adv_url_5 %}
-          <img src="{{ horizontal_adv_url_5 }}" alt="add" class="w-full h-auto rounded-md shadow-md" />
-          {% endif %}
-        </div>
-      </div>
-    </section>
-  </div>
-  <!-- Video News Section -->
-  <div id="video-news">
-    <section id="video-news" class="py-10">
-      <div class="max-w-[1200px] mx-auto p-4 rounded-md">
-        <!-- Header Section -->
-        <div class="flex justify-between items-center">
-          <h1 class="text-2xl font-bold text-black">ভিডিও</h1>
-        </div>
-
-        <!-- Video Cards Section (Slider) -->
-        <div class="mt-6">
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-            <div class="w-full bg-gray-200 rounded-lg">
-              <iframe src="https://www.youtube.com/embed/5LMyz1wm9SI?si=9zA7MOYncWWrvNlc" class="w-full h-[200px]"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-
-            <div class="w-full bg-gray-200 rounded-lg">
-              <iframe src="https://www.youtube.com/embed/5LMyz1wm9SI?si=9zA7MOYncWWrvNlc" class="w-full h-[200px]"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-
-            <div class="w-full bg-gray-200 rounded-lg">
-              <iframe src="https://www.youtube.com/embed/5LMyz1wm9SI?si=9zA7MOYncWWrvNlc" class="w-full h-[200px]"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-
-            <div class="w-full bg-gray-200 rounded-lg">
-              <iframe src="https://www.youtube.com/embed/5LMyz1wm9SI?si=9zA7MOYncWWrvNlc" class="w-full h-[200px]"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- Law News Section -->
-  <div id="law-news">
-    <section id="law-section" class="py-10">
-      <div class="flex flex-col mx-auto justify-center items-center max-w-[1200px] px-4">
-        <!-- Main Content Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 w-full">
-          <!-- Left Sidebar (Advertisement) -->
-          <div class="lg:col-span-3 hidden lg:block">
-            <img src="{% static 'assets/add7.png' %}" alt="news"
-              class="w-full h-auto max-h-[600px] rounded-lg shadow-md" />
-          </div>
-
-          <!-- Main Content -->
-          <div class="lg:col-span-6">
-            <!-- Header -->
-            <div class="grid grid-cols-12 items-center gap-2 mb-5">
-              <div class="col-span-3 md:col-span-2">
-                <span class="text-lg font-bold text-black">আইনি বার্তা</span>
-              </div>
-              <div class="col-span-9 md:col-span-10">
-                <div class="flex items-center w-full">
-                  <div class="bg-orange-500 h-1 w-12 mr-2"></div>
-                  <hr class="flex-grow border-t border-gray-300" />
-                </div>
-              </div>
-            </div>
-
-            <!-- Main Article -->
-            <img src="{% static 'assets/news1.png' %}" alt="news" class="w-full h-auto rounded-lg shadow-md" />
-            <p class="mt-4 text-black">ক্রিড়া বার্তা</p>
-            <h1 class="font-bold text-black text-xl md:text-2xl mt-4">
-              আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
-              প্রেস সচিব
-            </h1>
-            <p class="text-[#616161] mt-4">১০ ডিসেম্বর ২০২৪</p>
-            <p class="text-[#616161] mt-4 leading-8">
-              বিচারের প্রক্রিয়া সম্পন্ন হলেই শেখ হাসিনাকে ভারতের কাছে ফেরত
-              চাওয়া হবে বলে জানিয়েছেন প্রধান উপদেষ্টার প্রেস সচিব শফিকুল আলম
-            </p>
-          </div>
-
-          <!-- Right Sidebar (World News) -->
-          <div class="lg:col-span-3">
-            <!-- Header -->
-            <div class="grid grid-cols-12 items-center gap-2 mb-5">
-              <div class="col-span-4">
-                <span class="text-lg font-bold text-black">বিশ্ব বার্তা</span>
-              </div>
-              <div class="col-span-8">
-                <div class="flex items-center w-full">
-                  <div class="bg-orange-500 h-1 w-12 mr-2"></div>
-                  <hr class="flex-grow border-t border-gray-300" />
-                </div>
-              </div>
-            </div>
-
-            <!-- News Items -->
-            <div>
-              <h1 class="font-bold text-black text-sm mt-5">
-                আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
-                প্রেস সচিব
-              </h1>
-              <p class="text-[#616161] mt-2 text-xs">১০ ডিসেম্বর ২০২৪</p>
-              <hr class="mt-2" />
-              <h1 class="font-bold text-black text-sm mt-5">
-                আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
-                প্রেস সচিব
-              </h1>
-              <p class="text-[#616161] mt-2 text-xs">১০ ডিসেম্বর ২০২৪</p>
-              <hr class="mt-2" />
-              <h1 class="font-bold text-black text-sm mt-5">
-                আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
-                প্রেস সচিব
-              </h1>
-              <p class="text-[#616161] mt-2 text-xs">১০ ডিসেম্বর ২০২৪</p>
-            </div>
-
-            <!-- Advertisement -->
-            <img src="{% static 'assets/add8.png' %}" class="mt-5 w-full h-auto rounded-lg shadow-md" alt="add" />
-          </div>
-        </div>
-
-        <!-- Full-Width Advertisement 6 -->
-        <div class="flex justify-center mt-8 w-full">
-          {% if horizontal_adv_url_6  %}
-          <img src="{{ horizontal_adv_url_6  }}" alt="add" class="w-full rounded-lg shadow-md" />
-          {% endif %}
-        </div>
-      </div>
-    </section>
-  </div>
-  <!-- Missing News Section -->
-  <div id="missing-news">
-    <section id="amar-barta">
-      <div class="flex mx-auto justify-center items-center max-w-[1200px] overflow-hidden">
-        <div class="mx-auto p-4">
-          <!-- Main Content -->
-          <div class="grid sm:grid-cols-12 grid-cols-1 gap-6">
-            <!-- Left Section -->
-            <div class="lg:col-span-7 sm:col-span-12 col-span-12">
-              <div class="grid grid-cols-12 items-center gap-2 mb-5">
-                <div class="col-span-3 lg:col-span-2">
-                  <span class="text-lg font-bold text-black">নিখোঁজ বার্তা</span>
-                </div>
-                <div class="col-span-9 lg:col-span-10">
-                  <div class="flex items-center w-full">
-                    <div class="bg-orange-500 h-1 w-12 mr-2"></div>
-                    <hr class="flex-grow border-t border-gray-300" />
-                  </div>
-                </div>
-              </div>
-
-              <!-- News Content -->
-              <div class="grid lg:grid-cols-2 grid-cols-1 gap-4">
-                <div>
-                  <img class="w-full max-w-full h-auto rounded-md shadow-md" src="{% static 'assets/news10.png' %}" />
-                </div>
-                <div>
-                  <p class="text-black">নিখোঁজ বার্তা</p>
-                  <h1 class="font-bold text-black mt-3 text-lg lg:text-xl">
-                    আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া
-                    হবে: প্রেস সচিব
-                  </h1>
-                  <p class="mt-3 text-sm text-[#616161]">১০ ডিসেম্বর ২০২৪</p>
-                  <p class="mt-3 text-[#616161] text-sm lg:text-base leading-loose">
-                    বিচারের প্রক্রিয়া সম্পন্ন হলেই শেখ হাসিনাকে ভারতের কাছে
-                    ফেরত চাওয়া হবে বলে জানিয়েছেন প্রধান উপদেষ্টার প্রেস সচিব
-                    শফিকুল আলম
-                  </p>
-                  <button class="border border-solid border-gray-500 text-black px-6 py-1 rounded-lg mt-3">
-                    আরও পড়ুন
-                  </button>
-                </div>
-              </div>
-              <hr class="mt-6 h-[2px] bg-[#DFDFDF]" />
-            </div>
-
-            <!-- Right Section -->
-            <div class="col-span-12 lg:col-span-5">
-              <div class="flex items-center w-full mt-5">
-                <div class="bg-orange-500 h-1 w-12 mr-2"></div>
-                <hr class="flex-grow border-t border-gray-300" />
-              </div>
-
-              <h1 class="font-bold text-black text-xl mt-5">দেশ বার্তা</h1>
-              <div class="mt-4">
-                <p class="font-bold text-black text-base lg:text-xl">
-                  আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
-                  প্রেস সচিব
-                </p>
-                <p class="text-[#616161] mt-2 text-sm lg:text-base">
-                  ১০ ডিসেম্বর ২০২৪
-                </p>
-              </div>
-              <div class="mt-4">
-                <p class="font-bold text-black text-base lg:text-xl">
-                  আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
-                  প্রেস সচিব
-                </p>
-                <p class="text-[#616161] mt-2 text-sm lg:text-base">
-                  ১০ ডিসেম্বর ২০২৪
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Additional News Section -->
-          <div class="grid grid-cols-12 gap-6 mt-5">
-            <div class="col-span-12 lg:col-span-7">
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="p-4 sm:border-r-2">
-                  <h1 class="font-bold text-black mt-3 text-base lg:text-xl">
-                    আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া
-                    হবে: প্রেস সচিব
-                  </h1>
-                  <p class="mt-3 text-sm text-[#616161] mb-4">
-                    ১০ ডিসেম্বর ২০২৪
-                  </p>
-                  <img class="w-full max-w-full h-auto rounded-md shadow-md" src="{% static 'assets/news1.png' %}" />
-                </div>
-                <div class="p-4">
-                  <h1 class="font-bold text-black mt-3 text-base lg:text-xl">
-                    আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া
-                    হবে: প্রেস সচিব
-                  </h1>
-                  <p class="mt-3 text-sm text-[#616161] mb-4">
-                    ১০ ডিসেম্বর ২০২৪
-                  </p>
-                  <img class="w-full max-w-full h-auto rounded-md shadow-md" src="{% static 'assets/news1.png' %}" />
-                </div>
-              </div>
-            </div>
-
-            <div class="col-span-12 lg:col-span-5 flex justify-center">
-              <img class="w-full max-w-[600px] h-auto mt-5 rounded-md shadow-md" src="{% static 'assets/add10.png' %}"
-                alt="add" />
-            </div>
-          </div>
-
-          <!-- Advertisement 7-->
-          <div class="flex justify-center rounded-md shadow-md mt-8">
-            {% if horizontal_adv_url_7 %}
-            <img src="{{ horizontal_adv_url_7 }}" alt="add" class="rounded-md shadow-md w-full h-auto" />
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- Footer -->
-
-  <section>
-    <div class="footers justify-center bg-[#E5841C] items-center py-6" style="position: relative; z-index: 10;">
-      <div class="mx-auto w-full max-w-[1400px]">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-10">
-          <!-- First Div -->
-          <div class="flex flex-col justify-center w-[70%] sm:w-[50%] md:w-full lg:w-full mx-auto">
-            <div class="mx-auto">
-              <h1 class="text-left mx-auto font-bold text-lg md:text-xl text-white mt-3 md:mt-5">
-                চাইল্ড মেসেজ
-              </h1>
-              <p class="text-white w-full md:w-[70%] mt-3 md:mt-5 text-sm leading-loose">
-                আপত্তিকর স্বত্ত্বাধীন পদোন্নতি বিধান এবং ওহ এটা নিজেদের সাথে
-                পরামর্শ করা. আশীর্বাদ স্বাগত ভদ্রমহিলা সে দেখা হাস্যরস স্যার
-                তার প্রজনন.
-              </p>
-
-              <ul class="flex flex-row gap-5 mt-5">
-                <li class="bg-white p-3 rounded-full">
-                  <a href="#"> <img src="{% static 'assets/fb.png' %}" /></a>
+            <!-- Second Div -->
+            <div class="flex flex-col justify-center mx-auto">
+              <p class="text-white mb-3 md:mb-5">দ্রুত লিঙ্ক</p>
+              <ul class="space-y-2 md:space-y-4 text-white">
+                <li>
+                  <a href="#" class="hover:text-gray-400">
+                    > মহিলা ও শিশু বিষয়ক মন্ত্রণালয়</a
+                  >
                 </li>
-                <li class="bg-white p-3 rounded-full">
-                  <a href="#">
-                    <img src="{% static 'assets/twitter.png' %}" /></a>
+                <li>
+                  <a href="#" class="hover:text-gray-400">
+                    > প্রধান উপদেষ্টার কার্যালয়
+                  </a>
                 </li>
-                <li class="bg-white p-3 rounded-full">
-                  <a href="#">
-                    <img src="{% static 'assets/instagram.png' %}" /></a>
+                <li><a href="#" class="hover:text-gray-400"> > ইউনিসেফ</a></li>
+              </ul>
+            </div>
+
+            <!-- Third Div -->
+            <div class="flex justify-center md:justify-start lg:justify-end">
+              <ul class="space-y-2 md:space-y-4 text-white mt-3 md:mt-10">
+                <li>
+                  <a href="#" class="hover:text-gray-400">
+                    > তথ্য ও যোগাযোগ বিষয় মন্ত্রণালয়</a
+                  >
                 </li>
-                <li class="bg-white p-3 rounded-full">
-                  <a href="#">
-                    <img src="{% static 'assets/youtube.png' %}" /></a>
+                <li>
+                  <a href="#" class="hover:text-gray-400">
+                    > প্রধান উপদেষ্টার কার্যালয়
+                  </a>
+                </li>
+                <li>
+                  <a href="speech.html" class="hover:text-gray-400"> > অর্জন</a>
                 </li>
               </ul>
             </div>
           </div>
-
-          <!-- Second Div -->
-          <div class="flex flex-col justify-center mx-auto">
-            <p class="text-white mb-3 md:mb-5">দ্রুত লিঙ্ক</p>
-            <ul class="space-y-2 md:space-y-4 text-white">
-              <li>
-                <a href="#" class="hover:text-gray-400">
-                  > মহিলা ও শিশু বিষয়ক মন্ত্রণালয়</a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-gray-400">
-                  > প্রধান উপদেষ্টার কার্যালয়
-                </a>
-              </li>
-              <li><a href="#" class="hover:text-gray-400"> > ইউনিসেফ</a></li>
-            </ul>
+        </div>
+        <hr class="mt-5" />
+        <div class="grid grid-cols-12 mx-auto">
+          <div class="col-span-1">
+            <!-- <p class="text-white font-medium text-center mt-5 mx-auto">© 2023 All rights reserved</p> -->
           </div>
-
-          <!-- Third Div -->
-          <div class="flex justify-center md:justify-start lg:justify-end">
-            <ul class="space-y-2 md:space-y-4 text-white mt-3 md:mt-10">
-              <li>
-                <a href="#" class="hover:text-gray-400">
-                  > তথ্য ও যোগাযোগ বিষয় মন্ত্রণালয়</a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-gray-400">
-                  > প্রধান উপদেষ্টার কার্যালয়
-                </a>
-              </li>
-              <li>
-                <a href="speech.html" class="hover:text-gray-400"> > অর্জন</a>
-              </li>
-            </ul>
+          <div class="mx-auto col-span-9">
+            <p class="text-white font-medium text-center mt-5 mx-auto">
+              © 2023 All rights reserved
+            </p>
+          </div>
+          <div class="col-span-1">
+            <p class="text-white font-medium text-right mt-5">Made By</p>
+          </div>
+          <div class="col-span-1">
+            <a href="https://www.google.com" target="_blank"
+              ><img
+                src="{% static 'assets/l2.png' %}"
+                al="logo"
+                class="w-16 h-15"
+            /></a>
           </div>
         </div>
       </div>
-      <hr class="mt-5" />
-      <div class="grid grid-cols-12 mx-auto">
-        <div class="col-span-1">
-          <!-- <p class="text-white font-medium text-center mt-5 mx-auto">© 2023 All rights reserved</p> -->
-        </div>
-        <div class="mx-auto col-span-9">
-          <p class="text-white font-medium text-center mt-5 mx-auto">
-            © 2023 All rights reserved
-          </p>
-        </div>
-        <div class="col-span-1">
-          <p class="text-white font-medium text-right mt-5">Made By</p>
-        </div>
-        <div class="col-span-1">
-          <a href="https://www.google.com" target="_blank"><img src="{% static 'assets/l2.png' %}" al="logo"
-              class="w-16 h-15" /></a>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- script file connections area -->
-  <script src="{% static 'js/navbar.js' %}"></script>
-  <script type="module" src="{% static 'js/swiper-popup.js' %}"></script>
-  <script type="module" src="{% static 'js/datetime.js' %}"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bangla-calendar@7.0.0/+esm"></script>
-  <!-- script file connections area -->
-</body>
-
+    <!-- script file connections area -->
+    <script src="{% static 'js/navbar.js' %}"></script>
+    <script type="module" src="{% static 'js/swiper-popup.js' %}"></script>
+    <script type="module" src="{% static 'js/datetime.js' %}"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bangla-calendar@7.0.0/+esm"></script>
+    <!-- script file connections area -->
+  </body>
 </html>
