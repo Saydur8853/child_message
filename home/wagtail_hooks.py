@@ -1,6 +1,34 @@
 from .models import *
 from wagtail_modeladmin.options import ModelAdmin,ModelAdminGroup, modeladmin_register
 
+
+class LiveStreamingAdmin(ModelAdmin):
+    model = LiveStreaming
+    menu_label = "Live Streaming"
+    menu_icon = "view"  # Choose a Wagtail icon (e.g., 'link', 'media')
+    list_display = ("link", "published_date")
+    search_fields = ("link",)
+
+
+class FocusVideoAdmin(ModelAdmin):
+    model = FocusVideo
+    menu_label = "Focus Videos"
+    menu_icon = "media"  # Choose a Wagtail icon
+    list_display = ("video", "link", "published_date")
+    search_fields = ("video", "link")
+
+class HotlineAdmin(ModelAdmin):
+    model = Hotline
+    menu_label = "Hotlines"
+    menu_icon = "mobile-alt"  # Use an appropriate Wagtail icon
+    list_display = ("hotline_name", "number")  # Fields to display in the list view
+    search_fields = ("hotline_name", "number")  # Fields to include in search
+
+
+modeladmin_register(HotlineAdmin)
+modeladmin_register(LiveStreamingAdmin)
+modeladmin_register(FocusVideoAdmin)
+
 """
 .##....##.########.##......##..######.
 .###...##.##.......##..##..##.##....##

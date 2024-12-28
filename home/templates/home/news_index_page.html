@@ -114,7 +114,7 @@
                     href="{{ item.get_url }}"
                     class="md:text-sm hover:text-gray-500 {% if request.path == item.get_url %}bg-white rounded px-2{% endif %}"
                   >
-                    {{ item.title }}
+                    {{ item.page.title }}  
                   </a>
                   {% if not forloop.last %}
                     <span>
@@ -183,7 +183,7 @@
           <nav class="flex flex-col space-y-4">
             {% for item in menu_items %}
             <a href="{{ item.get_url }}" class="md:text-sm hover:text-gray-100">
-              {{ item.title }}
+              {{ item.page.title }}
             </a>
             {% endfor %}
           </nav>

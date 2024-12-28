@@ -12,7 +12,17 @@ from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 
+from django.core.exceptions import ValidationError
+from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
+from wagtail.images import get_image_model_string
 
+##     ##    ###    #### ##    ##    ##     ## ######## ##    ## ##     ## 
+###   ###   ## ##    ##  ###   ##    ###   ### ##       ###   ## ##     ## 
+#### ####  ##   ##   ##  ####  ##    #### #### ##       ####  ## ##     ## 
+## ### ## ##     ##  ##  ## ## ##    ## ### ## ######   ## ## ## ##     ## 
+##     ## #########  ##  ##  ####    ##     ## ##       ##  #### ##     ## 
+##     ## ##     ##  ##  ##   ###    ##     ## ##       ##   ### ##     ## 
+##     ## ##     ## #### ##    ##    ##     ## ######## ##    ##  #######  
 @register_setting
 class MainMenu(BaseSiteSetting, ClusterableModel):
     """Main menu settings."""
@@ -24,21 +34,17 @@ class MainMenu(BaseSiteSetting, ClusterableModel):
 class MenuItem(models.Model):
     """Menu item for the main menu."""
     menu = ParentalKey(MainMenu, related_name='menu_items', on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
-    link = models.URLField(blank=True, null=True, help_text="External link (optional).")
     page = models.ForeignKey(
         Page,
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
-        help_text="Link to a Wagtail page (optional)."
+        help_text="Link to a Wagtail page (required)."
     )
     order = models.PositiveIntegerField(default=0)
 
     panels = [
-        FieldPanel('title'),
-        FieldPanel('link'),
         PageChooserPanel('page'),
         FieldPanel('order'),
     ]
@@ -47,20 +53,18 @@ class MenuItem(models.Model):
         ordering = ['order']
 
     def __str__(self):
-        return self.title
+        return self.page.title if self.page else 'No Title'
 
     def get_url(self):
-        """Return the URL for the menu item, prioritizing page links over external links."""
+        """Return the URL for the menu item from the linked page."""
         if self.page:
             return self.page.url
-        return self.link
-    
-    
-    
-    
-    
-    
+        return '#'
 
+    
+    
+    
+ 
 class HomePage(Page):
     advertisement = StreamField(
         [
@@ -83,6 +87,41 @@ class HomePage(Page):
     ]
 
 
+
+class LiveStreaming(models.Model):
+    link = models.URLField(blank=True, null=True, help_text="External link.")
+    published_date = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.link
+
+
+class FocusVideo(models.Model):
+    video = models.FileField(upload_to='videos/', blank=True, null=True)
+    link = models.URLField(blank=True, null=True, help_text="External link.")
+    published_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.video) if self.video else self.link
+
+    def clean(self):
+        super().clean()  # Call the parent class's clean method
+        if self.video and self.link:
+            raise ValidationError("You can provide either a video or a link, but not both.")
+        if not self.video and not self.link:
+            raise ValidationError("You must provide either a video or a link.")
+        
+class Hotline(models.Model):
+    hotline_name = models.CharField(max_length=255, help_text="Name of the hotline")
+    number = models.CharField(max_length=20, help_text="Contact number")
+
+    def __str__(self):
+        return f"{self.hotline_name} ({self.number})"
+
+    class Meta:
+        verbose_name = "Hotline"
+        verbose_name_plural = "Hotlines"
+    
+    
 ##    ## ######## ##      ##  ######     ########  ##     ## ##       ##       ######## ######## #### ##    ## 
 ###   ## ##       ##  ##  ## ##    ##    ##     ## ##     ## ##       ##       ##          ##     ##  ###   ## 
 ####  ## ##       ##  ##  ## ##          ##     ## ##     ## ##       ##       ##          ##     ##  ####  ## 
@@ -306,6 +345,8 @@ class CheifVoicePage(Page):
         FieldPanel('advertisement'),
         FieldPanel('body'),
     ]
+    
+    
 
  ######  ##     ## #### ##       ########     ########     ###     ######  ######## 
 ##    ## ##     ##  ##  ##       ##     ##    ##     ##   ## ##   ##    ## ##       
@@ -512,13 +553,21 @@ class ChildPresenter(models.Model):
 ##       ##     ## ##     ##    ##    ##       ##    ##  
 ##        #######   #######     ##    ######## ##     ## 
 
-from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
-from wagtail.images import get_image_model_string
+
 
 IMAGE_MODEL = get_image_model_string()
 @register_setting
 class FooterSettings(BaseSiteSetting):
-
+    
+    logo = models.ForeignKey(
+        IMAGE_MODEL,
+        verbose_name=_("Footer logo"),
+        on_delete=models.SET_NULL,
+        help_text="Optimal_Dimension : max width 190px",
+        null=True,
+        blank=True,
+    )
+    
     menu_title_1 = models.CharField(
         _("Menu Title 1"),
         max_length=200,
@@ -578,6 +627,13 @@ class FooterSettings(BaseSiteSetting):
     )
 
     panels = [
+        
+        MultiFieldPanel(
+            [
+                FieldPanel("logo"),
+            ],
+            heading="Organization logo",
+        ),
         MultiFieldPanel(
             [
                 FieldPanel("menu_title_1"),

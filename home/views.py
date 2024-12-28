@@ -4,11 +4,22 @@ from .models import *
 from wagtail.models import Site
 
 def menu_items(request):
+    # Find the site based on the request
     site = Site.find_for_request(request)
+    
+    # If no site is found, return an empty menu list
     if not site:
         return {'menu_items': []}
-    menu = MainMenu.for_site(site)
-    return {'menu_items': menu.menu_items.all()}
+    
+    # Try to get the MainMenu for the site
+    try:
+        menu = MainMenu.for_site(site)
+        # Return the menu items if available, else return an empty list
+        return {'menu_items': menu.menu_items.all() if menu else []}
+    except MainMenu.DoesNotExist:
+        # In case MainMenu does not exist for the site, return an empty list
+        return {'menu_items': []}
+
 
    ###    ########  ##     ## ######## ########  ######## ####  ######  ######## ##     ## ######## ##    ## ######## 
   ## ##   ##     ## ##     ## ##       ##     ##    ##     ##  ##    ## ##       ###   ### ##       ###   ##    ##    

@@ -14,9 +14,9 @@ from .views import current_news_view
 from django.shortcuts import render, get_object_or_404
 
 # Fetch the popup advertisement
-def popup_advertisement_view(request, missing_slug):
+def popup_advertisement_view(request):
     try:
-        missingnewspage = get_object_or_404(MissingNewsPage, slug=missing_slug)
+        missingnewspage = get_object_or_404(MissingNewsPage)
         popup_adv_url = None
         
         # Iterate through the advertisement blocks
@@ -36,9 +36,9 @@ def popup_advertisement_view(request, missing_slug):
     return popup_adv_url
 
 # Fetch the vertical advertisement
-def vertical_advertisement_view(request, missing_slug):
+def vertical_advertisement_view(request):
     try:
-        missingnewspage = get_object_or_404(MissingNewsPage, slug=missing_slug)
+        missingnewspage = get_object_or_404(MissingNewsPage)
         vertical_adv_urls = []
         
         for block in missingnewspage.advertisement:
@@ -60,9 +60,9 @@ def vertical_advertisement_view(request, missing_slug):
     return vertical_adv_urls
 
 # Fetch the horizontal advertisement
-def horizontal_advertisement_view(request, missing_slug):
+def horizontal_advertisement_view(request):
     try:
-        missingnewspage = get_object_or_404(MissingNewsPage, slug=missing_slug)
+        missingnewspage = get_object_or_404(MissingNewsPage)
         horizontal_adv_urls = []
 
         for block in missingnewspage.advertisement:
@@ -85,9 +85,9 @@ def horizontal_advertisement_view(request, missing_slug):
 
 
 # Fetch the poster advertisement
-def poster_advertisement_view(request, missing_slug):
+def poster_advertisement_view(request):
     try:
-        missingnewspage = get_object_or_404(MissingNewsPage, slug=missing_slug)
+        missingnewspage = get_object_or_404(MissingNewsPage)
         poster_adv_url = None
         
         for block in missingnewspage.advertisement:
@@ -103,9 +103,9 @@ def poster_advertisement_view(request, missing_slug):
     return poster_adv_url
 
 # Fetch the box advertisement
-def box_advertisement_view(request, missing_slug):
+def box_advertisement_view(request):
     try:
-        missingnewspage = get_object_or_404(MissingNewsPage, slug=missing_slug)
+        missingnewspage = get_object_or_404(MissingNewsPage)
         box_adv_url = None
         
         for block in missingnewspage.advertisement:
@@ -123,12 +123,12 @@ def box_advertisement_view(request, missing_slug):
 
 
 
-def missing_news_view(request, missing_slug):
-    vertical_adv_urls = vertical_advertisement_view(request,missing_slug)
-    horizontal_adv_urls = horizontal_advertisement_view(request,missing_slug)
-    poster_adv_url = poster_advertisement_view(request,missing_slug)
-    box_adv_url = box_advertisement_view(request,missing_slug)
-    popup_adv_url = popup_advertisement_view(request,missing_slug)
+def missing_news_view(request):
+    vertical_adv_urls = vertical_advertisement_view(request)
+    horizontal_adv_urls = horizontal_advertisement_view(request)
+    poster_adv_url = poster_advertisement_view(request)
+    box_adv_url = box_advertisement_view(request)
+    popup_adv_url = popup_advertisement_view(request)
 
     current_news = current_news_view(request)  
 

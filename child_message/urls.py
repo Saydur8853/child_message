@@ -15,7 +15,7 @@ from home.newsdetails_view import *
 from home.cheifvoice_view import *
 from home.missingindex_view import *
 urlpatterns = [
-    path("django-admin/", admin.site.urls),
+    # path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
@@ -25,8 +25,8 @@ urlpatterns = [
         name="wagtailimages_serve",
     ),
     path("", combined_view, name="home"),
-    path("home/<slug:cheif_slug>/", cheif_voice_view, name="cheif_voice_combined"),
-    path('home/<slug:missing_slug>/', missing_news_view, name='messing_news_combined'),
+    path("chiefs-message/", cheif_voice_view, name="cheif_voice_combined"),
+    path('messing-news/', missing_news_view, name='messing_news_combined'),
 
     
     
