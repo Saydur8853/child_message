@@ -171,6 +171,14 @@ def missing_person_details_view(request):
 
     return missing_person
 
+def live_streaming_view(request):
+    try:
+        livestreaming  = LiveStreaming.objects.last()
+    except LiveStreaming.DoesNotExist:
+        livestreaming  = None
+
+    return livestreaming 
+
  ######   #######  ##     ## ########  #### ##    ## ######## 
 ##    ## ##     ## ###   ### ##     ##  ##  ###   ## ##       
 ##       ##     ## #### #### ##     ##  ##  ####  ## ##       
@@ -187,6 +195,7 @@ def combined_view(request):
 
     missing_person = missing_person_details_view(request)
     current_news = current_news_view(request)
+    live_streaming = live_streaming_view(request)
     return render(
         request,
         'home/home_page.html',
@@ -209,5 +218,6 @@ def combined_view(request):
             'popup_adv_url': popup_adv_url,
             'missing_person': missing_person, 
             'current_news': current_news,
+            'live_streaming': live_streaming,
         }
     )
