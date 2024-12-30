@@ -10,17 +10,23 @@ function openModal(heading) {
   }
   
   // Close the modal if the user clicks outside the modal content
-  document.getElementById("myModal").addEventListener("click", function(event) {
-    if (event.target === this) {
-      closeModal(); // Close the modal if the background (overlay) is clicked
-    }
-  });
-  
-  // Optional: Handle form submission
-  document.getElementById("childJournalistForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    // Handle form submission logic here
-    alert("Form submitted!");
-    closeModal(); // Close the modal after submission
-  });
-  
+  $('#childForm').submit(function(event) {
+    event.preventDefault(); // Prevent default form submission
+    var formData = $(this).serialize(); // Serialize form data
+    
+    $.ajax({
+        url: '{% url "home" %}',  // URL to send the form data to
+        method: 'POST',
+        data: formData,
+        success: function(response) {
+            if (response.success) {
+                alert('Form submitted successfully!');
+            } else {
+                alert('Form submission failed!');
+            }
+        },
+        error: function() {
+            alert('An error occurred.');
+        }
+    });
+});

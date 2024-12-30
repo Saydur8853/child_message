@@ -111,11 +111,14 @@ body {
 }
 
 /* Media query to hide images for screens smaller than 1600px */
+
 @media (max-width: 1384px) {
   #fixed-add .fixed {
     display: none !important;
   }
 }
+
+
 
 /* Animation for the left image */
 /*

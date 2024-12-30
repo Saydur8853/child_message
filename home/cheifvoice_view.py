@@ -124,6 +124,7 @@ def box_advertisement_view(request):
 
 
 def cheif_voice_view(request):
+    page = CheifVoicePage.objects.first()
     vertical_adv_urls = vertical_advertisement_view(request)
     horizontal_adv_urls = horizontal_advertisement_view(request)
     poster_adv_url = poster_advertisement_view(request)
@@ -152,6 +153,7 @@ def cheif_voice_view(request):
         'live_streaming': live_streaming,
         "focus_video": focus_video,
         "site_associate": site_associate,
+        "page": page,
     }
 
     # Render the template

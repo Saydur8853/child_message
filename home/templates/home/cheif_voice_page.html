@@ -344,62 +344,66 @@
  #    # #    # #      # #          #  #  #    # # #    # #      
   ####  #    # ###### # #           ##    ####  #  ####  ######                                                               
 -->
-
 <section id="speech">
-    <div class="flex flex-col mx-auto justify-center items-center max-w-[1200px] px-4 sm:px-6 lg:px-8 py-6">
-        <!-- Section Header -->
-        <div class="w-full">
-            <div class="grid grid-cols-12 items-center gap-2 mt-5 mb-5">
-                <div class="col-span-12 sm:col-span-3 md:col-span-2">
-                    <span class="text-lg font-bold text-black">প্রধান নির্বাহীর বার্তা</span>
-                </div>
-                <div class="col-span-12 sm:col-span-9 md:col-span-10">
-                    <div class="flex items-center w-full">
-                        <div class="bg-orange-500 h-1 w-12 mr-2"></div>
-                        <hr class="flex-grow border-t border-gray-300" />
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="container flex flex-col mx-auto justify-center items-center px-4 sm:px-6 lg:px-8 py-6">
+      <!-- Section Header -->
+      <div class="w-full">
+          <div class="grid grid-cols-12 items-center gap-2 mt-5 mb-5">
+              <div class="col-span-12 sm:col-span-3 md:col-span-2">
+                  <span class="text-lg font-bold text-black">
+                      {{ page.body.0.value.title|default:"Title will go here" }}
+                  </span>
+              </div>
+              <div class="col-span-12 sm:col-span-9 md:col-span-10">
+                  <div class="flex items-center w-full">
+                      <div class="bg-orange-500 h-1 w-12 mr-2"></div>
+                      <hr class="flex-grow border-t border-gray-300" />
+                  </div>
+              </div>
+          </div>
+      </div>
 
-        <!-- Content -->
-        <div class="grid grid-cols-12 gap-6">
-            <!-- Text Section -->
-            <div class="col-span-12 lg:col-span-8">
-                <p class="text-justify leading-relaxed text-sm sm:text-base md:text-lg">
-                    প্রিয় পাঠকগণ, 
-                    <br /><br />
-                   আমি গভীর আনন্দ এবং কৃতজ্ঞতার সাথে আপনাদের সামনে চাইল্ড মেসেজ প্ল্যাটফর্মটি তুলে ধরতে চাই, যা তথ্য, বিশ্লেষণ এবং মতামতের এক অনন্য মঞ্চ হিসেবে গড়ে উঠেছে। আমাদের এই প্ল্যাটফর্মটি কেবল একটি সংবাদমাধ্যম নয়, বরং এটি সত্য, নিরপেক্ষতা এবং পেশাদার সাংবাদিকতার প্রতি আমাদের প্রতিশ্রুতির বহিঃপ্রকাশ। 
-                    <br /><br />
-                    আজকের বিশ্বে সংবাদ শুধু তথ্য সরবরাহের মধ্যে সীমাবদ্ধ নয়; এটি সমাজের প্রতিটি স্তরে আলোকিত করার একটি শক্তিশালী হাতিয়ার। চাইল্ড মেসেজ এর লক্ষ্য হলো, প্রতিটি গুরুত্বপূর্ণ খবর সঠিকভাবে এবং দ্রুততার সাথে আপনাদের কাছে পৌঁছে দেওয়া, যাতে আপনি সর্বদা সচেতন ও আপডেট থাকতে পারেন। 
-                    <br /><br />
-                    আমরা এমন একটি সময়ে বাস করছি, যেখানে সংবাদমাধ্যমের ভূমিকা দিন দিন আরও গুরুত্বপূর্ণ হয়ে উঠছে। কিন্তু সেই সঙ্গে, ভুয়া খবর, পক্ষপাতদুষ্ট তথ্য এবং বিভ্রান্তিকর প্রতিবেদনের চ্যালেঞ্জও বৃদ্ধি পাচ্ছে। এই পরিস্থিতিতে, চাইল্ড মেসেজ নিরপেক্ষতা, সত্যতা এবং বিশ্বাসযোগ্যতাকে আমাদের মূল নীতিমালা হিসেবে মেনে চলে। আমাদের প্রতিটি প্রতিবেদন আপনাদের আস্থা অর্জনের জন্য কঠোর যাচাই-বাছাই প্রক্রিয়ার মধ্য দিয়ে যায়।
-                    <br /><br />
-                     আমাদের সাংবাদিক দল নিরলস পরিশ্রম করে প্রতিদিন আপনাদের জন্য স্থানীয়, জাতীয় এবং আন্তর্জাতিক অঙ্গনের গুরুত্বপূর্ণ খবর সংগ্রহ করছে। আমাদের টিম কেবল খবর সরবরাহে সীমাবদ্ধ নয়, বরং সেই খবরের পেছনের সত্য এবং এর প্রভাব বিশ্লেষণ করতেও নিবেদিত। আমরা বিশ্বাস করি, তথ্য এবং বিশ্লেষণের সমন্বয় একটি সচেতন এবং প্রগতিশীল সমাজ গঠনে সহায়ক। 
-                     <br /><br />
-                     আমাদের প্ল্যাটফর্মে প্রযুক্তির সর্বোচ্চ ব্যবহারের মাধ্যমে পাঠকদের জন্য সহজ এবং ব্যবহারবান্ধব অভিজ্ঞতা নিশ্চিত করা হয়েছে। আমরা শুধুমাত্র খবর প্রকাশই নয়, বরং আপনাদের মতামত, প্রতিক্রিয়া এবং অংশগ্রহণকেও গুরুত্ব দিই। আমরা বিশ্বাস করি, পাঠক এবং সংবাদমাধ্যমের মধ্যে একটি সুদৃঢ় বন্ধনই আমাদের এগিয়ে নিয়ে যাবে।
-                     <br /><br />
-                      আপনাদের মূল্যবান সময় এবং চাইল্ড মেসেজ এর প্রতি বিশ্বাসের জন্য আমরা কৃতজ্ঞ। আমরা প্রতিজ্ঞাবদ্ধ, যেন আমাদের প্ল্যাটফর্মটি সত্য, ন্যায় এবং নির্ভরযোগ্যতার প্রতীক হয়ে ওঠে। আসুন, আমরা একসঙ্গে একটি সচেতন, সৎ এবং প্রগতিশীল সমাজ গড়ে তুলি। আপনাদের মূল্যবান সময় এবং চাইল্ড মেসেজ এর প্রতি বিশ্বাসের জন্য আমরা কৃতজ্ঞ। আমরা প্রতিজ্ঞাবদ্ধ, যেন আমাদের প্ল্যাটফর্মটি সত্য, ন্যায় এবং নির্ভরযোগ্যতার প্রতীক হয়ে ওঠে। আসুন, আমরা একসঙ্গে একটি সচেতন, সৎ এবং প্রগতিশীল সমাজ গড়ে তুলি। 
-                      <br /><br />
-                      আপনাদের মূল্যবান সময় এবং চাইল্ড মেসেজ এর প্রতি বিশ্বাসের জন্য আমরা কৃতজ্ঞ। আমরা প্রতিজ্ঞাবদ্ধ, যেন আমাদের প্ল্যাটফর্মটি সত্য, ন্যায় এবং নির্ভরযোগ্যতার প্রতীক হয়ে ওঠে। আসুন, আমরা একসঙ্গে একটি সচেতন, সৎ এবং প্রগতিশীল সমাজ গড়ে তুলি। 
-                      
-                      <br /><br />
-                      অশেষ ধন্যবাদ এবং শুভকামনা জানাই।
-                </p>
-            </div>
+      <!-- Content -->
+      <div class="grid grid-cols-12 gap-6">
+          <!-- Text Section -->
+          <div class="col-span-12 lg:col-span-8">
+              <p class="text-justify leading-relaxed text-sm sm:text-base md:text-lg">
+                  {{ page.body.0.value.note|default:"Note will go here" }}
+                  <!-- Additional static content goes here if needed -->
+              </p>
+          </div>
 
-            <!-- Image Section -->
-            <div class="col-span-12 lg:col-span-4 flex flex-col items-center ">
-                <img src="{% static 'assets/md.png' %}" alt="md" class="w-[200px] sm:w-[250px] h-[250px] sm:h-[300px] border border-black rounded-md shadow-md">
-                <h1 class="text-[#616161] font-bold text-xl mt-4">আরিফ রহমান</h1>
-                <p class="text-[#616161] mt-2">প্রধান নির্বাহী, চাইল্ড মেসেজ</p>
-            </div>
-        </div>
-        <div class="flex justify-center mt-8">
-            <img src="{% static 'assets/add8.png' %}" alt="add" class="w-full max-w-[1200px] h-auto rounded-md shadow-md">
-        </div>
-    </div>
+          <!-- Image Section -->
+          <div class="col-span-12 lg:col-span-4 flex flex-col items-center">
+              <img src="{{ page.body.0.value.image.file.url|default:'/path/to/default-image.jpg' }}" alt="Chief Image"
+                  class="w-[200px] sm:w-[250px] h-[250px] sm:h-[300px] border border-black rounded-md shadow-md">
+              <h1 class="text-[#616161] font-bold text-xl mt-4">
+                  {{ page.body.0.value.name|default:"Name will go here" }}
+              </h1>
+              <p class="text-[#616161] mt-2">
+                  {{ page.body.0.value.designation|default:"Designation will go here" }}
+              </p>
+          </div>
+      </div>
+
+      <div class="flex justify-center mt-8">
+        {% if horizontal_adv_url_1 %}
+          <img src="{{ horizontal_adv_url_1  }}" alt="advertisement" class="w-full max-w-[1200px] h-auto rounded-md shadow-md">
+        {% endif %}
+      </div>
+      <div class="flex justify-center mt-8">
+        {% if poster_adv_url %}
+          <img src="{{ poster_adv_url  }}" alt="advertisement" class="w-full max-w-[1200px] h-auto rounded-md shadow-md">
+        {% endif %}
+      </div>
+      <div class="flex justify-center mt-8">
+        {% if box_adv_url %}
+          <img src="{{ box_adv_url  }}" alt="advertisement" class="w-full max-w-[1200px] h-auto rounded-md shadow-md">
+        {% endif %}
+      </div>
+  </div>
 </section>
+
 
 <!-- 
 ########  #######   #######  ######## ######## ########  

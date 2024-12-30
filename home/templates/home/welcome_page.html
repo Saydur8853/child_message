@@ -519,116 +519,47 @@
     </section>
 
     <!-- Modal -->
-    <div
-      id="myModal"
-      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 hidden"
-    >
+    <div id="myModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 hidden">
       <div class="bg-white rounded-lg shadow-lg p-6 w-3/4 max-w-4xl z-1000">
-        <span
-          class="close cursor-pointer text-red-500 float-right text-2xl"
-          onclick="closeModal()"
-          >&times;</span
-        >
-        <h2
-          id="modalHeading"
-          class="text-base text-center text-black font-bold mb-4"
-        >
-          মডাল শিরোনাম
-        </h2>
-
-        <form id="childJournalistForm">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div>
-              <label for="name" class="block text-sm font-medium text-gray-700"
-                >নাম</label
-              >
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                class="mt-1 block w-full border border-gray-300 text-black bg-[#EAEAEA] rounded-md shadow-sm p-2"
-              />
-            </div>
-            <div>
-              <label
-                for="fathers-name"
-                class="block text-sm font-medium text-gray-700"
-                >বাবার নাম</label
-              >
-              <input
-                type="text"
-                id="fathers-name"
-                name="father's-name"
-                required
-                class="mt-1 block w-full border border-gray-300 text-black bg-[#EAEAEA] rounded-md shadow-sm p-2"
-              />
-            </div>
-            <div>
-              <label
-                for="mothers-name"
-                class="block text-sm font-medium text-gray-700"
-                >মায়ের নাম</label
-              >
-              <input
-                type="text"
-                id="mothers-name"
-                name="mother's-name"
-                required
-                class="mt-1 block w-full border border-gray-300 text-black bg-[#EAEAEA] rounded-md shadow-sm p-2"
-              />
-            </div>
-            <div>
-              <label for="class" class="block text-sm font-medium text-gray-700"
-                >শ্রেনী</label
-              >
-              <input
-                type="text"
-                id="class"
-                name="class"
-                required
-                class="mt-1 block w-full border border-gray-300 text-black bg-[#EAEAEA] rounded-md shadow-sm p-2"
-              />
-            </div>
-            <div>
-              <label
-                for="district"
-                class="block text-sm font-medium text-gray-700"
-                >জেলা</label
-              >
-              <input
-                type="text"
-                id="district"
-                name="district"
-                required
-                class="mt-1 block w-full border border-gray-300 text-black bg-[#EAEAEA] rounded-md shadow-sm p-2"
-              />
-            </div>
-            <div>
-              <label
-                for="mobile"
-                class="block text-sm font-medium text-gray-700"
-                >মোবাইল নাম্বার</label
-              >
-              <input
-                type="text"
-                id="mobile"
-                name="mobile"
-                required
-                class="mt-1 block w-full border border-gray-300 text-black bg-[#EAEAEA] rounded-md shadow-sm p-2"
-              />
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            class="bg-[#F67F00] text-white font-bold py-2 px-4 w-full rounded-md mt-4"
-          >
-            পাঠান
-          </button>
-        </form>
+          <span class="close cursor-pointer text-red-500 float-right text-2xl" onclick="closeModal()">&times;</span>
+          <h2 id="modalHeading" class="text-base text-center text-black font-bold mb-4">মডাল শিরোনাম</h2>
+  
+          <form method="POST" id="childForm" action="{% url 'home' %}">
+              {% csrf_token %}
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <div>
+                      <label for="id_name" class="block text-sm font-medium text-gray-700">নাম</label>
+                      {{ form.name }}
+                  </div>
+                  <div>
+                      <label for="id_father_name" class="block text-sm font-medium text-gray-700">বাবার নাম</label>
+                      {{ form.father_name }}
+                  </div>
+                  <div>
+                      <label for="id_mother_name" class="block text-sm font-medium text-gray-700">মায়ের নাম</label>
+                      {{ form.mother_name }}
+                  </div>
+                  <div>
+                      <label for="id_student_class" class="block text-sm font-medium text-gray-700">শ্রেনী</label>
+                      {{ form.student_class }}
+                  </div>
+                  <div>
+                      <label for="id_district" class="block text-sm font-medium text-gray-700">জেলা</label>
+                      {{ form.district }}
+                  </div>
+                  <div>
+                      <label for="id_phone_no" class="block text-sm font-medium text-gray-700">মোবাইল নাম্বার</label>
+                      {{ form.phone_no }}
+                  </div>
+              </div>
+  
+              <button type="submit" class="bg-[#F67F00] text-white font-bold py-2 px-4 w-full rounded-md mt-4">
+                  পাঠান
+              </button>
+          </form>
       </div>
-    </div>
+  </div>
+  
 
     <!-- Amar Barta Section -->
     <div id="amar-barta">
@@ -1439,7 +1370,7 @@
             <a href="https://www.google.com" target="_blank"
               ><img
                 src="{% static 'assets/l2.png' %}"
-                al="logo"
+                alt="logo"
                 class="w-16 h-15"
             /></a>
           </div>

@@ -1,7 +1,30 @@
+from django.http import JsonResponse
+from .forms import ChildGeneralistForm, ChildPresenterForm
+from django.views.decorators.csrf import csrf_exempt
 from datetime import timedelta
 from django.shortcuts import render
 from .models import *
 from wagtail.models import Site
+
+
+# @csrf_exempt
+# def submit_child_form(request):
+#     if request.method == 'POST':
+#         form_type = request.POST.get('form_type')  # Form type (Child Generalist or Presenter)
+
+#         if form_type == 'শিশু সাংবাদিকের তথ্য':
+#             form = ChildGeneralistForm(request.POST)
+#         else:
+#             form = ChildPresenterForm(request.POST)
+
+#         if form.is_valid():
+#             form.save()
+#             return JsonResponse({'success': True})
+#         else:
+#             return JsonResponse({'success': False, 'error': form.errors})
+
+#     return JsonResponse({'success': False, 'error': 'Invalid request'})
+
 
 def menu_items(request):
     # Find the site based on the request
@@ -209,6 +232,8 @@ def focus_video_view(request):
 ##       ##     ## ##     ## ##     ##  ##  ##  #### ##       
 ##    ## ##     ## ##     ## ##     ##  ##  ##   ### ##       
  ######   #######  ##     ## ########  #### ##    ## ########  
+ 
+ 
 def combined_view(request):
     vertical_adv_urls = vertical_advertisement_view(request)
     horizontal_adv_urls = horizontal_advertisement_view(request)
@@ -221,13 +246,30 @@ def combined_view(request):
     live_streaming = live_streaming_view(request)
     focus_video = focus_video_view(request)
     site_associate = Site_associate.objects.first()
+
+    # Determine which form to use
+    form_type = request.GET.get('form_type', 'generalist')  # Default to 'generalist'
+    form = None
+
+    if form_type == 'presenter':
+        form = ChildPresenterForm(request.POST or None)
+    else:
+        form = ChildGeneralistForm(request.POST or None)
+
+    # Handle form submission
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()  # Save the form if it's valid
+            return JsonResponse({'success': True, 'message': 'Form submitted successfully!'})
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors})
+
     return render(
         request,
         'home/home_page.html',
         {
             "vertical_adv_left_url": vertical_adv_urls[0],
             "vertical_adv_right_url": vertical_adv_urls[1],
-
             "horizontal_adv_url_1": horizontal_adv_urls[0],
             "horizontal_adv_url_2": horizontal_adv_urls[1],
             "horizontal_adv_url_3": horizontal_adv_urls[2],
@@ -235,9 +277,6 @@ def combined_view(request):
             "horizontal_adv_url_5": horizontal_adv_urls[4],
             "horizontal_adv_url_6": horizontal_adv_urls[5],
             "horizontal_adv_url_7": horizontal_adv_urls[6],
-
-
-            # 'horizontal_adv_url': horizontal_adv_url,
             "poster_adv_url": poster_adv_url,
             "box_adv_url": box_adv_url,
             "popup_adv_url": popup_adv_url,
@@ -246,5 +285,7 @@ def combined_view(request):
             "live_streaming": live_streaming,
             "focus_video": focus_video,
             "site_associate": site_associate,
+            "form": form, 
         }
     )
+
