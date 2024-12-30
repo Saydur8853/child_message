@@ -62,53 +62,122 @@
       {% endif %}
     </div>
 
-    <!-- Header -->
+    <!-- 
+##     ## ########    ###    ########  ######## ########  
+##     ## ##         ## ##   ##     ## ##       ##     ## 
+##     ## ##        ##   ##  ##     ## ##       ##     ## 
+######### ######   ##     ## ##     ## ######   ########  
+##     ## ##       ######### ##     ## ##       ##   ##   
+##     ## ##       ##     ## ##     ## ##       ##    ##  
+##     ## ######## ##     ## ########  ######## ##     ## 
+    -->
 
-    <div id="navbar" class="bg-gradient-to-b from-[#F67F00] to-[#fff] text-white w-full top-0 z-50 sticky-navbar">
-      <div class="max-w-[1200px] mx-auto flex items-center justify-between p-4">
-        <div class="grid grid-cols-12 items-center mx-auto w-full text-center">
-          <div class="col-span-2 flex items-start justify-start">
-            <img src="{% static 'assets/logo.png' %}" alt="Logo" class="w-[129px] h-[100px] object-contain mr-3" />
-          </div>
+    <div
+        id="navbar"
+        class="bg-gradient-to-b from-[#F67F00] to-[#fff] text-white w-full top-0 z-50 sticky-navbar">
+        <div
+          class="max-w-[1200px] mx-auto flex items-center justify-between p-4">
+          <div
+            class="grid grid-cols-12 items-center mx-auto w-full text-center">
+            <div class="col-span-2 flex items-start justify-start">
+              {% if site_associate and site_associate.logo %}
+              <img
+                src="{{ site_associate.logo.file.url }}"
+                alt="Site Logo"
+                class="w-[129px] h-[100px] object-contain mr-3"
+              />
+              {% else %}
+              <img
+                src="{% static 'assets/logo.png' %}"
+                alt="Default Logo"
+                class="w-[129px] h-[100px] object-contain mr-3"
+              />
+              {% endif %}
+            </div>
 
-          <div class="col-span-9 flex flex-col gap-10 justify-center items-center sticky top-0 z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-15 space-y-1">
-              <div class="flex mx-auto">
-                <ul class="flex gap-8">
-                  <li>
-                    <i class="hover:text-gray-100 fa-brands fa-facebook-f text-black"></i>
-                  </li>
-                  <li>
-                    <i class="hover:text-gray-100 fa-brands fa-twitter text-black"></i>
-                  </li>
-                  <li>
-                    <i class="hover:text-gray-100 fa-brands fa-instagram text-black"></i>
-                  </li>
-                  <li>
-                    <i class="hover:text-gray-100 fa-brands fa-youtube text-black"></i>
-                  </li>
-                </ul>
-              </div>
-              <div class="text-xs flex mx-auto font-bold text-black">
-                <span id="gregorian-date"></span>,
-                <span id="bangla-date"></span>
-              </div>
-              <div class="flex mx-auto gap-5">
-                <!-- live  -->
-                <div class="inline-flex items-center">
-                  {% if live_streaming and live_streaming.link %}
-                    <a href="{{ live_streaming.link }}" target="_blank" class="inline-flex items-center">
-                      <span class="blink-animation h-3 w-3 rounded-full mr-2"></span>
+            <div
+              class="col-span-9 flex flex-col gap-10 justify-center items-center sticky top-0"
+            >
+              <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-15 space-y-1">
+                <div class="flex mx-auto">
+                  <ul class="flex gap-8">
+                    {% if site_associate.facebook %}
+                    <li>
+                      <a
+                        href="{{ site_associate.facebook }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i
+                          class="hover:text-gray-100 fa-brands fa-facebook-f text-black"
+                        ></i>
+                      </a>
+                    </li>
+                    {% endif %} {% if site_associate.twitter %}
+                    <li>
+                      <a
+                        href="{{ site_associate.twitter }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i
+                          class="hover:text-gray-100 fa-brands fa-twitter text-black"
+                        ></i>
+                      </a>
+                    </li>
+                    {% endif %} {% if site_associate.instagram %}
+                    <li>
+                      <a
+                        href="{{ site_associate.instagram }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i
+                          class="hover:text-gray-100 fa-brands fa-instagram text-black"
+                        ></i>
+                      </a>
+                    </li>
+                    {% endif %} {% if site_associate.youtube %}
+                    <li>
+                      <a
+                        href="{{ site_associate.youtube }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i
+                          class="hover:text-gray-100 fa-brands fa-youtube text-black"
+                        ></i>
+                      </a>
+                    </li>
+                    {% endif %}
+                  </ul>
+                </div>
+
+                <div class="text-xs flex mx-auto font-bold text-black">
+                  <span id="gregorian-date"></span>,
+                  <span id="bangla-date"></span>
+                </div>
+                <div class="flex mx-auto gap-5">
+                  <!-- live  -->
+                  <div class="inline-flex items-center">
+                    {% if live_streaming and live_streaming.link %}
+                    <a
+                      href="{{ live_streaming.link }}"
+                      target="_blank"
+                      class="inline-flex items-center"
+                    >
+                      <span
+                        class="blink-animation h-3 w-3 rounded-full mr-2"
+                      ></span>
                       <span class="text-black">LIVE</span>
                     </a>
-                  {% else %}
+                    {% else %}
                     <span class="h-3 w-3 rounded-full mr-2 bg-gray-500"></span>
                     <span class="text-black">LIVE</span>
-                  {% endif %}
-                </div>
-                
+                    {% endif %}
+                  </div>
 
-                <!-- stock video -->
+                  <!-- stock video -->
                   <!-- Video Container -->
                   <div class="video-container">
                     {% if focus_video %} {% if focus_video.video %}
@@ -167,46 +236,58 @@
                       >English</span
                     >
                   </div> -->
+                </div>
               </div>
-            </div>
 
-            <div>
-              <nav class="hidden lg:flex text-black space-x-2 uppercase">
-                {% for item in menu_items %}
+              <div>
+                <nav class="hidden lg:flex text-black space-x-2 uppercase">
+                  {% for item in menu_items %}
                   <a
                     href="{{ item.get_url }}"
                     class="md:text-sm hover:text-gray-500 {% if request.path == item.get_url %}bg-white rounded px-2{% endif %}"
                   >
-                    {{ item.page.title }}  
+                    {{ item.page.title }}
                   </a>
                   {% if not forloop.last %}
-                    <span>
-                      <div
-                        style="
-                          height: 24px;
-                          width: 1px;
-                          background: black;
-                          margin: 0 1px;
-                        "
-                      ></div>
-                    </span>
-                  {% endif %}
-                {% endfor %}
-              </nav>
+                  <span>
+                    <div
+                      style="
+                        height: 24px;
+                        width: 1px;
+                        background: black;
+                        margin: 0 1px;
+                      "
+                    ></div>
+                  </span>
+                  {% endif %} {% endfor %}
+                </nav>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="flex items-center space-x-4">
-          <button id="menu-toggle" class="lg:hidden hover:text-gray-300 focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
-          </button>
+          <div class="flex items-center space-x-4">
+            <button
+              id="menu-toggle"
+              class="lg:hidden hover:text-gray-300 focus:outline-none"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-6 h-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
     <div class="flex justify-center mx-auto w-full">
       <div class="grid grid-cols-12 max-w-[1200px] w-full">
         <!-- Left Section -->
