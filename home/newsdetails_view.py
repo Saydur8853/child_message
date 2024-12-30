@@ -10,7 +10,7 @@
 from django.shortcuts import render
 from .models import *
 
-from .views import current_news_view
+from .views import current_news_view,live_streaming_view
 from django.shortcuts import render, get_object_or_404
 
 
@@ -132,6 +132,8 @@ def newsdetails_combined_view(request,category_slug,news_slug):
     popup_adv_url = popup_advertisement_view(request,news_slug)
 
     current_news = current_news_view(request)  
+    live_streaming = live_streaming_view(request)
+
 
     # Create the context
     context = {
@@ -148,6 +150,7 @@ def newsdetails_combined_view(request,category_slug,news_slug):
         "box_adv_url": box_adv_url,
         "popup_adv_url": popup_adv_url,
         "current_news": current_news,
+        "live_streaming": live_streaming,
     }
 
     # Render the template

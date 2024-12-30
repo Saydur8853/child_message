@@ -142,11 +142,18 @@
                 <div class="flex mx-auto gap-5">
                   <!-- live  -->
                   <div class="inline-flex items-center">
-                    <span
-                      class="blink-animation h-3 w-3 rounded-full mr-2"
-                    ></span>
-                    <span class="text-black">LIVE</span>
+                    {% if live_streaming and live_streaming.link %}
+                      <a href="{{ live_streaming.link }}" target="_blank" class="inline-flex items-center">
+                        <span class="blink-animation h-3 w-3 rounded-full mr-2"></span>
+                        <span class="text-black">LIVE</span>
+                      </a>
+                    {% else %}
+                      <span class="h-3 w-3 rounded-full mr-2 bg-gray-500"></span>
+                      <span class="text-black">LIVE</span>
+                    {% endif %}
                   </div>
+                  
+
                   <!-- stock video -->
                   <div class="video-container">
                     <img
@@ -166,29 +173,26 @@
               <div>
                 <nav class="hidden lg:flex text-black space-x-2 uppercase">
                   {% for item in menu_items %}
-                    <a
-                      href="{{ item.get_url }}"
-                      class="md:text-sm hover:text-gray-500 {% if request.path == item.get_url %}bg-white rounded px-2{% endif %}"
-                    >
-                      {{ item.page.title }}  
-                    </a>
-                    {% if not forloop.last %}
-                      <span>
-                        <div
-                          style="
-                            height: 24px;
-                            width: 1px;
-                            background: black;
-                            margin: 0 1px;
-                          "
-                        ></div>
-                      </span>
-                    {% endif %}
-                  {% endfor %}
+                  <a
+                    href="{{ item.get_url }}"
+                    class="md:text-sm hover:text-gray-500 {% if request.path == item.get_url %}bg-white rounded px-2{% endif %}"
+                  >
+                    {{ item.page.title }}
+                  </a>
+                  {% if not forloop.last %}
+                  <span>
+                    <div
+                      style="
+                        height: 24px;
+                        width: 1px;
+                        background: black;
+                        margin: 0 1px;
+                      "
+                    ></div>
+                  </span>
+                  {% endif %} {% endfor %}
                 </nav>
-                
               </div>
-              
             </div>
           </div>
 
@@ -377,78 +381,159 @@
       </section>
     </div>
     <!-- reporter section -->
-<section id="law-section" class="py-10">
-  <div class="flex flex-col mx-auto justify-center items-center max-w-[1200px] px-4">
+    <section id="law-section" class="py-10">
+      <div
+        class="flex flex-col mx-auto justify-center items-center max-w-[1200px] px-4"
+      >
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+          <div class="space-y-2">
+            <img
+              src="{% static 'assets/reporter.png' %}"
+              alt="image"
+              class="w-full h-auto"
+            />
+            <button
+              onclick="openModal('শিশু সাংবাদিকের তথ্য')"
+              class="bg-[#F67F00] rounded-md text-white font-bold py-3 mx-auto flex justify-center w-full text-center"
+            >
+              শিশু সাংবাদিক হতে চাই
+            </button>
+          </div>
+          <div class="space-y-2">
+            <img
+              src="{% static 'assets/presenter.png' %}"
+              alt="image"
+              class="w-full h-auto"
+            />
+            <button
+              onclick="openModal('শিশু উপস্থাপক এর তথ্য')"
+              class="bg-[#F67F00] rounded-md text-white font-bold py-3 mx-auto flex justify-center w-full text-center"
+            >
+              শিশু উপস্থাপক হতে চাই
+            </button>
+          </div>
+          <div class="space-y-2">
+            <img
+              src="{% static 'assets/add4.png' %}"
+              alt="image"
+              class="w-full h-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-      <div class="space-y-2">
-        <img src="{% static 'assets/reporter.png' %}" alt="image" class="w-full h-auto" />
-        <button onclick="openModal('শিশু সাংবাদিকের তথ্য')"
-          class="bg-[#F67F00] rounded-md text-white font-bold py-3 mx-auto flex justify-center w-full text-center">শিশু
-          সাংবাদিক হতে চাই</button>
-      </div>
-      <div class="space-y-2">
-        <img src="{% static 'assets/presenter.png' %}" alt="image" class="w-full h-auto" />
-        <button onclick="openModal('শিশু উপস্থাপক এর তথ্য')"
-          class="bg-[#F67F00] rounded-md text-white font-bold py-3 mx-auto flex justify-center w-full text-center">শিশু
-          উপস্থাপক হতে চাই</button>
-      </div>
-      <div class="space-y-2">
-        <img src="{% static 'assets/add4.png' %}" alt="image" class="w-full h-auto" />
+    <!-- Modal -->
+    <div
+      id="myModal"
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 hidden"
+    >
+      <div class="bg-white rounded-lg shadow-lg p-6 w-3/4 max-w-4xl z-1000">
+        <span
+          class="close cursor-pointer text-red-500 float-right text-2xl"
+          onclick="closeModal()"
+          >&times;</span
+        >
+        <h2
+          id="modalHeading"
+          class="text-base text-center text-black font-bold mb-4"
+        >
+          মডাল শিরোনাম
+        </h2>
+
+        <form id="childJournalistForm">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700"
+                >নাম</label
+              >
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="mt-1 block w-full border border-gray-300 text-black bg-[#EAEAEA] rounded-md shadow-sm p-2"
+              />
+            </div>
+            <div>
+              <label
+                for="fathers-name"
+                class="block text-sm font-medium text-gray-700"
+                >বাবার নাম</label
+              >
+              <input
+                type="text"
+                id="fathers-name"
+                name="father's-name"
+                required
+                class="mt-1 block w-full border border-gray-300 text-black bg-[#EAEAEA] rounded-md shadow-sm p-2"
+              />
+            </div>
+            <div>
+              <label
+                for="mothers-name"
+                class="block text-sm font-medium text-gray-700"
+                >মায়ের নাম</label
+              >
+              <input
+                type="text"
+                id="mothers-name"
+                name="mother's-name"
+                required
+                class="mt-1 block w-full border border-gray-300 text-black bg-[#EAEAEA] rounded-md shadow-sm p-2"
+              />
+            </div>
+            <div>
+              <label for="class" class="block text-sm font-medium text-gray-700"
+                >শ্রেনী</label
+              >
+              <input
+                type="text"
+                id="class"
+                name="class"
+                required
+                class="mt-1 block w-full border border-gray-300 text-black bg-[#EAEAEA] rounded-md shadow-sm p-2"
+              />
+            </div>
+            <div>
+              <label
+                for="district"
+                class="block text-sm font-medium text-gray-700"
+                >জেলা</label
+              >
+              <input
+                type="text"
+                id="district"
+                name="district"
+                required
+                class="mt-1 block w-full border border-gray-300 text-black bg-[#EAEAEA] rounded-md shadow-sm p-2"
+              />
+            </div>
+            <div>
+              <label
+                for="mobile"
+                class="block text-sm font-medium text-gray-700"
+                >মোবাইল নাম্বার</label
+              >
+              <input
+                type="text"
+                id="mobile"
+                name="mobile"
+                required
+                class="mt-1 block w-full border border-gray-300 text-black bg-[#EAEAEA] rounded-md shadow-sm p-2"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="bg-[#F67F00] text-white font-bold py-2 px-4 w-full rounded-md mt-4"
+          >
+            পাঠান
+          </button>
+        </form>
       </div>
     </div>
-
-  </div>
-</section>
-
-
-<!-- Modal -->
-<div id="myModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 hidden">
-  <div class="bg-white rounded-lg shadow-lg p-6 w-3/4 max-w-4xl z-1000">
-    <span class="close cursor-pointer text-red-500 float-right text-2xl" onclick="closeModal()">&times;</span>
-    <h2 id="modalHeading" class="text-base text-center text-black font-bold mb-4">মডাল শিরোনাম</h2>
-
-    <form id="childJournalistForm">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div>
-          <label for="name" class="block text-sm font-medium text-gray-700">নাম</label>
-          <input type="text" id="name" name="name" required
-            class="mt-1 block w-full border border-gray-300 text-black bg-[#EAEAEA] rounded-md shadow-sm p-2" />
-        </div>
-        <div>
-          <label for="fathers-name" class="block text-sm font-medium text-gray-700">বাবার নাম</label>
-          <input type="text" id="fathers-name" name="father's-name" required
-            class="mt-1 block w-full border border-gray-300 text-black bg-[#EAEAEA] rounded-md shadow-sm p-2" />
-        </div>
-        <div>
-          <label for="mothers-name" class="block text-sm font-medium text-gray-700">মায়ের নাম</label>
-          <input type="text" id="mothers-name" name="mother's-name" required
-            class="mt-1 block w-full border border-gray-300 text-black bg-[#EAEAEA] rounded-md shadow-sm p-2" />
-        </div>
-        <div>
-          <label for="class" class="block text-sm font-medium text-gray-700">শ্রেনী</label>
-          <input type="text" id="class" name="class" required
-            class="mt-1 block w-full border border-gray-300 text-black bg-[#EAEAEA] rounded-md shadow-sm p-2" />
-        </div>
-        <div>
-          <label for="district" class="block text-sm font-medium text-gray-700">জেলা</label>
-          <input type="text" id="district" name="district" required
-            class="mt-1 block w-full border border-gray-300 text-black bg-[#EAEAEA] rounded-md shadow-sm p-2" />
-        </div>
-        <div>
-          <label for="mobile" class="block text-sm font-medium text-gray-700">মোবাইল নাম্বার</label>
-          <input type="text" id="mobile" name="mobile" required
-            class="mt-1 block w-full border border-gray-300 text-black bg-[#EAEAEA] rounded-md shadow-sm p-2" />
-        </div>
-      </div>
-
-      <button type="submit" class="bg-[#F67F00] text-white font-bold py-2 px-4 w-full rounded-md mt-4">পাঠান</button>
-    </form>
-  </div>
-</div>
-
-
-
 
     <!-- Amar Barta Section -->
     <div id="amar-barta">
@@ -623,9 +708,7 @@
                 class="w-full max-w-sm h-auto mx-auto rounded-lg shadow-md"
                 alt="image news"
               />
-              <p
-                class=" top-2 text-sm font-bold text-black px-2 py-1 rounded"
-              >
+              <p class="top-2 text-sm font-bold text-black px-2 py-1 rounded">
                 আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
                 প্রেস সচিব
               </p>
@@ -637,9 +720,7 @@
                 class="w-full max-w-sm h-auto mx-auto rounded-lg shadow-md"
                 alt="image news"
               />
-              <p
-                class=" top-2 text-sm font-bold text-black px-2 py-1 rounded"
-              >
+              <p class="top-2 text-sm font-bold text-black px-2 py-1 rounded">
                 আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
                 প্রেস সচিব
               </p>
@@ -650,9 +731,7 @@
                 class="w-full max-w-sm h-auto mx-auto rounded-lg shadow-md"
                 alt="image news"
               />
-              <p
-                class=" top-2 text-sm font-bold text-black px-2 py-1 rounded"
-              >
+              <p class="top-2 text-sm font-bold text-black px-2 py-1 rounded">
                 আইনি প্রক্রিয়ার পর ভারতের কাছে শেখ হাসিনাকে ফেরত চাওয়া হবে:
                 প্রেস সচিব
               </p>
@@ -1211,8 +1290,6 @@
         </div>
       </div>
     </section>
-
-    
 
     <!-- script file connections area -->
     <script src="{% static 'js/navbar.js' %}"></script>

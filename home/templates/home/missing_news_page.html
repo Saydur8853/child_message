@@ -94,10 +94,21 @@
                 <span id="bangla-date"></span>
               </div>
               <div class="flex mx-auto gap-5">
+                <!-- live  -->
                 <div class="inline-flex items-center">
-                  <span class="blink-animation h-3 w-3 rounded-full mr-2"></span>
-                  <span class="text-black">LIVE</span>
+                  {% if live_streaming and live_streaming.link %}
+                    <a href="{{ live_streaming.link }}" target="_blank" class="inline-flex items-center">
+                      <span class="blink-animation h-3 w-3 rounded-full mr-2"></span>
+                      <span class="text-black">LIVE</span>
+                    </a>
+                  {% else %}
+                    <span class="h-3 w-3 rounded-full mr-2 bg-gray-500"></span>
+                    <span class="text-black">LIVE</span>
+                  {% endif %}
                 </div>
+                
+
+                <!-- stock video -->
                 <div class="video-container">
                   <img src="{% static 'assets/video.svg' %}" alt="Video Icon" />
                 </div>
