@@ -133,6 +133,7 @@ def news_combined_view(request, category_slug):
     current_news = current_news_view(request)
     live_streaming = live_streaming_view(request)  
     focus_video = focus_video_view(request)
+    site_associate = Site_associate.objects.first()
 
     # Create the context
     context = {
@@ -151,6 +152,7 @@ def news_combined_view(request, category_slug):
         "current_news": current_news,
         "live_streaming": live_streaming,
         "focus_video": focus_video,
+        "site_associate": site_associate,
     }
 
     # Render the template

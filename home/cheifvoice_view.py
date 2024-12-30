@@ -133,6 +133,7 @@ def cheif_voice_view(request):
     current_news = current_news_view(request) 
     live_streaming = live_streaming_view(request) 
     focus_video = focus_video_view(request)
+    site_associate = Site_associate.objects.first()
     # Create the context
     context = {
         "vertical_adv_left_url": vertical_adv_urls[0],
@@ -150,6 +151,7 @@ def cheif_voice_view(request):
         "current_news": current_news,
         'live_streaming': live_streaming,
         "focus_video": focus_video,
+        "site_associate": site_associate,
     }
 
     # Render the template

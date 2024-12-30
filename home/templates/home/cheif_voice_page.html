@@ -330,98 +330,172 @@
 ##       ##     ## ##     ##    ##    ##       ##    ##  
 ##        #######   #######     ##    ######## ##     ##  -->
 
-  <section>
-    <div class="footers justify-center bg-[#E5841C] items-center py-6" style="position: relative; z-index: 10;">
-      <div class="mx-auto w-full max-w-[1400px]">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-10">
-          <!-- First Div -->
-          <div class="flex flex-col justify-center w-[70%] sm:w-[50%] md:w-full lg:w-full mx-auto">
-            <div class="mx-auto">
-              <h1 class="text-left mx-auto font-bold text-lg md:text-xl text-white mt-3 md:mt-5">
-                চাইল্ড মেসেজ
-              </h1>
-              <p class="text-white w-full md:w-[70%] mt-3 md:mt-5 text-sm leading-loose">
-                আপত্তিকর স্বত্ত্বাধীন পদোন্নতি বিধান এবং ওহ এটা নিজেদের সাথে
-                পরামর্শ করা. আশীর্বাদ স্বাগত ভদ্রমহিলা সে দেখা হাস্যরস স্যার
-                তার প্রজনন.
-              </p>
+<section>
+  <div
+    class="footers justify-center bg-[#E5841C] items-center py-6"
+    style="position: relative; z-index: 10"
+  >
+    <div class="mx-auto w-full max-w-[1400px]">
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-10"
+      >
+        <!-- First Div -->
+        <div
+          class="flex flex-col justify-center w-[70%] sm:w-[50%] md:w-full lg:w-full mx-auto"
+        >
+          <div class="mx-auto">
+            <h1
+              class="text-left mx-auto font-bold text-lg md:text-xl text-white mt-3 md:mt-5"
+            >
+              চাইল্ড মেসেজ
+            </h1>
+            <p
+              class="text-white w-full md:w-[70%] mt-3 md:mt-5 text-sm leading-loose">
+              {% if site_associate and site_associate.short_message %} {{site_associate.short_message }} {% endif %}
+            </p>
 
-              <ul class="flex flex-row gap-5 mt-5">
-                <li class="bg-white p-3 rounded-full">
-                  <a href="#"> <img src="{% static 'assets/fb.png' %}" /></a>
-                </li>
-                <li class="bg-white p-3 rounded-full">
-                  <a href="#">
-                    <img src="{% static 'assets/twitter.png' %}" /></a>
-                </li>
-                <li class="bg-white p-3 rounded-full">
-                  <a href="#">
-                    <img src="{% static 'assets/instagram.png' %}" /></a>
-                </li>
-                <li class="bg-white p-3 rounded-full">
-                  <a href="#">
-                    <img src="{% static 'assets/youtube.png' %}" /></a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Second Div -->
-          <div class="flex flex-col justify-center mx-auto">
-            <p class="text-white mb-3 md:mb-5">দ্রুত লিঙ্ক</p>
-            <ul class="space-y-2 md:space-y-4 text-white">
-              <li>
-                <a href="#" class="hover:text-gray-400">
-                  > মহিলা ও শিশু বিষয়ক মন্ত্রণালয়</a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-gray-400">
-                  > প্রধান উপদেষ্টার কার্যালয়
+            <ul class="flex flex-row gap-5 mt-5">
+              {% if site_associate %} {% if site_associate.facebook %}
+              <li class="bg-white p-3 rounded-full">
+                <a href="{{ site_associate.facebook }}" target="_blank">
+                  <img src="{% static 'assets/fb.png' %}" alt="Facebook" />
                 </a>
               </li>
-              <li><a href="#" class="hover:text-gray-400"> > ইউনিসেফ</a></li>
-            </ul>
-          </div>
-
-          <!-- Third Div -->
-          <div class="flex justify-center md:justify-start lg:justify-end">
-            <ul class="space-y-2 md:space-y-4 text-white mt-3 md:mt-10">
-              <li>
-                <a href="#" class="hover:text-gray-400">
-                  > তথ্য ও যোগাযোগ বিষয় মন্ত্রণালয়</a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-gray-400">
-                  > প্রধান উপদেষ্টার কার্যালয়
+              {% endif %} {% if site_associate.twitter %}
+              <li class="bg-white p-3 rounded-full">
+                <a href="{{ site_associate.twitter }}" target="_blank">
+                  <img
+                    src="{% static 'assets/twitter.png' %}"
+                    alt="Twitter"
+                  />
                 </a>
               </li>
-              <li>
-                <a href="speech.html" class="hover:text-gray-400"> > অর্জন</a>
+              {% endif %} {% if site_associate.instagram %}
+              <li class="bg-white p-3 rounded-full">
+                <a href="{{ site_associate.instagram }}" target="_blank">
+                  <img
+                    src="{% static 'assets/instagram.png' %}"
+                    alt="Instagram"
+                  />
+                </a>
               </li>
+              {% endif %} {% if site_associate.youtube %}
+              <li class="bg-white p-3 rounded-full">
+                <a href="{{ site_associate.youtube }}" target="_blank">
+                  <img
+                    src="{% static 'assets/youtube.png' %}"
+                    alt="YouTube"
+                  />
+                </a>
+              </li>
+              {% endif %} {% endif %}
             </ul>
           </div>
         </div>
+
+        <!-- Second Div -->
+      <div class="flex flex-col justify-center mx-auto">
+        <p class="text-white mb-3 md:mb-5">দ্রুত লিঙ্ক</p>
+        <ul class="space-y-2 md:space-y-4 text-white">
+          {% if site_associate %} {% if site_associate.quick_link_1_url %}
+          <li>
+            <a
+              href="{{ site_associate.quick_link_1_url }}"
+              target="_blank"
+              class="hover:text-gray-400">
+              <span class="font-bold text-xl"> > </span>{{ site_associate.quick_link_1_name }}
+            </a>
+          </li>
+          {% endif %} {% if site_associate.quick_link_2_url %}
+          <li>
+            <a
+              href="{{ site_associate.quick_link_2_url }}"
+              target="_blank"
+              class="hover:text-gray-400"> 
+              <span class="font-bold text-xl"> > </span>{{ site_associate.quick_link_2_name }}
+            </a>
+          </li>
+          {% endif %} {% if site_associate.quick_link_3_url %}
+          <li>
+            <a
+              href="{{ site_associate.quick_link_3_url }}"
+              target="_blank"
+              class="hover:text-gray-400">
+              <span class="font-bold text-xl"> > </span>{{ site_associate.quick_link_3_name }}
+            </a>
+          </li>
+          {% endif %} {% else %}
+          <li>No quick links available</li>
+          {% endif %}
+        </ul>
       </div>
-      <hr class="mt-5" />
-      <div class="grid grid-cols-12 mx-auto">
-        <div class="col-span-1">
-          <!-- <p class="text-white font-medium text-center mt-5 mx-auto">© 2023 All rights reserved</p> -->
-        </div>
-        <div class="mx-auto col-span-9">
-          <p class="text-white font-medium text-center mt-5 mx-auto">
-            © 2023 All rights reserved
-          </p>
-        </div>
-        <div class="col-span-1">
-          <p class="text-white font-medium text-right mt-5">Made By</p>
-        </div>
-        <div class="col-span-1">
-          <a href="https://www.google.com" target="_blank"><img src="{% static 'assets/l2.png' %}" al="logo"
-              class="w-16 h-15" /></a>
-        </div>
+
+      <!-- Third Div -->
+      <div class="flex justify-center md:justify-start lg:justify-end">
+        <ul class="space-y-2 md:space-y-4 text-white mt-3 md:mt-10">
+          {% if site_associate %} {% if site_associate.quick_link_4_url %}
+          <li>
+            <a
+              href="{{ site_associate.quick_link_4_url }}"
+              target="_blank"
+              class="hover:text-gray-400">
+              <span class="font-bold text-xl"> > </span>{{ site_associate.quick_link_4_name }}
+            </a>
+          </li>
+          {% endif %} {% if site_associate.quick_link_5_url %}
+          <li>
+            <a
+              href="{{ site_associate.quick_link_5_url }}"
+              target="_blank"
+              class="hover:text-gray-400">
+              <span class="font-bold text-xl"> > </span>{{ site_associate.quick_link_5_name }}
+            </a>
+          </li>
+          {% endif %} {% if site_associate.quick_link_6_url %}
+          <li>
+            <a
+              href="{{ site_associate.quick_link_6_url }}"
+              target="_blank"
+              class="hover:text-gray-400">
+              <span class="font-bold text-xl"> > </span>{{ site_associate.quick_link_6_name }}
+            </a>
+          </li>
+          {% endif %} {% else %}
+          <li>No quick links available</li>
+          {% endif %}
+        </ul>
+      </div>
+
       </div>
     </div>
-  </section>
+    <hr class="mt-5" />
+    <div class="grid grid-cols-12 mx-auto">
+      <div class="col-span-1">
+        <!-- <p class="text-white font-medium text-center mt-5 mx-auto">© 2023 All rights reserved</p> -->
+      </div>
+      <div class="mx-auto col-span-9">
+        <p class="text-white font-medium text-center mt-5 mx-auto">
+          {% if site_associate and site_associate.copyright_line %}
+            {{ site_associate.copyright_line }}
+          {% else %}
+            Copyright © 2024 Child Message. All rights reserved.
+          {% endif %}
+        </p>            
+      </div>
+      <div class="col-span-1">
+        <p class="text-white font-medium text-right mt-5">Made By</p>
+      </div>
+      <div class="col-span-1">
+        <a href="https://www.google.com" target="_blank"
+          ><img
+            src="{% static 'assets/l2.png' %}"
+            al="logo"
+            class="w-16 h-15"
+        /></a>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- script file connections area -->
   <script src="{% static 'js/navbar.js' %}"></script>

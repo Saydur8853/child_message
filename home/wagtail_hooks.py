@@ -17,15 +17,7 @@ class FocusVideoAdmin(ModelAdmin):
     list_display = ("video", "link", "published_date")
     search_fields = ("video", "link")
 
-class HotlineAdmin(ModelAdmin):
-    model = Hotline
-    menu_label = "Hotlines"
-    menu_icon = "mobile-alt"  # Use an appropriate Wagtail icon
-    list_display = ("hotline_name", "number")  # Fields to display in the list view
-    search_fields = ("hotline_name", "number")  # Fields to include in search
 
-
-modeladmin_register(HotlineAdmin)
 modeladmin_register(LiveStreamingAdmin)
 modeladmin_register(FocusVideoAdmin)
 
@@ -142,3 +134,17 @@ class ChildAdminGroup(ModelAdminGroup):
     items = (StudentClassAdmin,ChildGeneralistAdmin, ChildPresenterAdmin)
 
 modeladmin_register(ChildAdminGroup)
+
+
+class SiteAssociateAdmin(ModelAdmin):
+    model = Site_associate
+    menu_label = "Site Associate"  
+    menu_icon = "cogs"
+    menu_order = 500  
+    add_to_settings_menu = True  
+    exclude_from_explorer = False  
+    list_display = ("hotline_number", "child_helpline_number", "copyright_line")
+    search_fields = ("hotline_number", "child_helpline_number", "copyright_line")
+
+# Register the model admin class
+modeladmin_register(SiteAssociateAdmin)

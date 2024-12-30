@@ -220,6 +220,7 @@ def combined_view(request):
     current_news = current_news_view(request)
     live_streaming = live_streaming_view(request)
     focus_video = focus_video_view(request)
+    site_associate = Site_associate.objects.first()
     return render(
         request,
         'home/home_page.html',
@@ -244,5 +245,6 @@ def combined_view(request):
             "current_news": current_news,
             "live_streaming": live_streaming,
             "focus_video": focus_video,
+            "site_associate": site_associate,
         }
     )

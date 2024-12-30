@@ -15,6 +15,7 @@ from modelcluster.models import ClusterableModel
 from django.core.exceptions import ValidationError
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.images import get_image_model_string
+IMAGE_MODEL = get_image_model_string()
 
 ##     ##    ###    #### ##    ##    ##     ## ######## ##    ## ##     ## 
 ###   ###   ## ##    ##  ###   ##    ###   ### ##       ###   ## ##     ## 
@@ -109,17 +110,6 @@ class FocusVideo(models.Model):
         if not self.video and not self.link:
             raise ValidationError("You must provide either a video or a link.")
         
-class Hotline(models.Model):
-    hotline_name = models.CharField(max_length=255, help_text="Name of the hotline")
-    number = models.CharField(max_length=20, help_text="Contact number")
-
-    def __str__(self):
-        return f"{self.hotline_name} ({self.number})"
-
-    class Meta:
-        verbose_name = "Hotline"
-        verbose_name_plural = "Hotlines"
-    
     
 ##    ## ######## ##      ##  ######     ########  ##     ## ##       ##       ######## ######## #### ##    ## 
 ###   ## ##       ##  ##  ## ##    ##    ##     ## ##     ## ##       ##       ##          ##     ##  ###   ## 
@@ -543,118 +533,61 @@ class ChildPresenter(models.Model):
         verbose_name = "Child Presenter Form"
         verbose_name_plural = "Child Presenter Forms"  
 
+ ######  #### ######## ########       ###     ######   ######   #######   ######  ####    ###    ######## ######## 
+##    ##  ##     ##    ##            ## ##   ##    ## ##    ## ##     ## ##    ##  ##    ## ##      ##    ##       
+##        ##     ##    ##           ##   ##  ##       ##       ##     ## ##        ##   ##   ##     ##    ##       
+ ######   ##     ##    ######      ##     ##  ######   ######  ##     ## ##        ##  ##     ##    ##    ######   
+      ##  ##     ##    ##          #########       ##       ## ##     ## ##        ##  #########    ##    ##       
+##    ##  ##     ##    ##          ##     ## ##    ## ##    ## ##     ## ##    ##  ##  ##     ##    ##    ##       
+ ######  ####    ##    ########    ##     ##  ######   ######   #######   ######  #### ##     ##    ##    ######## 
 
-########  #######   #######  ######## ######## ########  
-##       ##     ## ##     ##    ##    ##       ##     ## 
-##       ##     ## ##     ##    ##    ##       ##     ## 
-######   ##     ## ##     ##    ##    ######   ########  
-##       ##     ## ##     ##    ##    ##       ##   ##   
-##       ##     ## ##     ##    ##    ##       ##    ##  
-##        #######   #######     ##    ######## ##     ## 
-
-
-
-IMAGE_MODEL = get_image_model_string()
-@register_setting
-class FooterSettings(BaseSiteSetting):
-    
+class Site_associate(models.Model):
     logo = models.ForeignKey(
         IMAGE_MODEL,
-        verbose_name=_("Footer logo"),
+        verbose_name=_("Site logo"),
         on_delete=models.SET_NULL,
-        help_text="Optimal_Dimension : max width 190px",
+        help_text="Optimal Dimension: max width 190px",
         null=True,
         blank=True,
     )
-    
-    menu_title_1 = models.CharField(
-        _("Menu Title 1"),
-        max_length=200,
-        null=True,
-        blank=True,
-    )
-
-    text = models.CharField(
-        _("Text"),
-        max_length=200,
-        null=True,
-        blank=True,
-    )
-
     facebook = models.URLField(_("Facebook"), max_length=255, blank=True)
     twitter = models.URLField(_("Twitter"), max_length=255, blank=True)
     instagram = models.URLField(_("Instagram"), max_length=255, blank=True)
     youtube = models.URLField(_("Youtube"), max_length=255, blank=True)
 
+    hotline_number = models.CharField(max_length=25, help_text="Hotline number", blank=True)
+    child_helpline_number = models.CharField(max_length=20, help_text="Child helpline number", blank=True)
+    
+    short_message = models.CharField(max_length=255, help_text="Short message", blank=True)
 
-    menu_column_title_1 = models.CharField(
-        _("Menu Column Title 1"),
-        max_length=200,
-        null=True,
-        blank=True,
-    )
+    quick_link_1_name = models.CharField(max_length=255, help_text="Quick link 1 name", blank=True)
+    quick_link_1_url = models.URLField(_("Quick link 1 URL"), max_length=255, blank=True)
 
-    menu_column_1 = models.ForeignKey(
-        "wagtailmenus.FlatMenu",
-        verbose_name=_("Menu Column 1"),
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name="+",
-    )
+    quick_link_2_name = models.CharField(max_length=255, help_text="Quick link 2 name", blank=True)
+    quick_link_2_url = models.URLField(_("Quick link 2 URL"), max_length=255, blank=True)
 
-    menu_column_title_2 = models.CharField(
-        _("Menu Column Title 2"),
-        max_length=200,
-        null=True,
-        blank=True,
-    )
-    menu_column_2 = models.ForeignKey(
-        "wagtailmenus.FlatMenu",
-        verbose_name=_("Menu Column 2"),
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name="+",
-    )
+    quick_link_3_name = models.CharField(max_length=255, help_text="Quick link 3 name", blank=True)
+    quick_link_3_url = models.URLField(_("Quick link 3 URL"), max_length=255, blank=True)
 
+    quick_link_4_name = models.CharField(max_length=255, help_text="Quick link 4 name", blank=True)
+    quick_link_4_url = models.URLField(_("Quick link 4 URL"), max_length=255, blank=True)
+
+    quick_link_5_name = models.CharField(max_length=255, help_text="Quick link 5 name", blank=True)
+    quick_link_5_url = models.URLField(_("Quick link 5 URL"), max_length=255, blank=True)
+
+    quick_link_6_name = models.CharField(max_length=255, help_text="Quick link 6 name", blank=True)
+    quick_link_6_url = models.URLField(_("Quick link 6 URL"), max_length=255, blank=True)
+    
     copyright_line = models.CharField(
         _("copyright"),
         max_length=255,
         blank=True,
-        default="Copyright © 2024 Child Message. All right reserved.",
+        default="Copyright © 2024 Child Message. All rights reserved.",
     )
 
-    panels = [
-        
-        MultiFieldPanel(
-            [
-                FieldPanel("logo"),
-            ],
-            heading="Organization logo",
-        ),
-        MultiFieldPanel(
-            [
-                FieldPanel("menu_title_1"),
-                FieldPanel("text"),
-                FieldPanel("menu_column_title_1"),
-                FieldPanel("menu_column_1"),
-                FieldPanel("menu_column_title_2"),
-                FieldPanel("menu_column_2"),
-            ],
-            heading="Menus",
-        ),
-        MultiFieldPanel(
-            [
-                FieldPanel("facebook"),
-                FieldPanel("twitter"),
-                FieldPanel("instagram"),
-                FieldPanel("youtube"),
-            ],
-            heading="Social Links",
-        ),
-        FieldPanel("copyright_line"),
-    ]
+
+    def __str__(self):
+        return f"{self.hotline_number} ({self.child_helpline_number})"
 
     class Meta:
-        verbose_name = "Footer Settings"
+        verbose_name = "Site associate"
