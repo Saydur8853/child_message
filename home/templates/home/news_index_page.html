@@ -109,12 +109,64 @@
                 
 
                 <!-- stock video -->
-                <div class="video-container">
-                  <img src="{% static 'assets/video.svg' %}" alt="Video Icon" />
-                </div>
-                <div>
-                  <span class="bg-[#FBDEC1] px-3 py-1 text-black font-semibold rounded-md">English</span>
-                </div>
+                  <!-- Video Container -->
+                  <div class="video-container">
+                    {% if focus_video %} {% if focus_video.video %}
+                    <!-- Icon to trigger the modal -->
+                    <a
+                      href="javascript:void(0);"
+                      onclick="openVideoModal('{{ focus_video.video.url }}')"
+                    >
+                      <img
+                        src="{% static 'assets/video.svg' %}"
+                        alt="Video Icon"
+                      />
+                    </a>
+                    {% elif focus_video.link %}
+                    <a href="{{ focus_video.link }}" target="_blank">
+                      <img
+                        src="{% static 'assets/video.svg' %}"
+                        alt="Video Icon"
+                      />
+                    </a>
+                    {% endif %} {% else %}
+                    <img
+                      src="{% static 'assets/video.svg' %}"
+                      alt="Video Icon"
+                    />
+                    {% endif %}
+                  </div>
+
+                  <!-- Video Modal Structure -->
+                  <div
+                    id="videoModal"
+                    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50"
+                    onclick="closeVideoModal()"
+                  >
+                    <div
+                      class="relative p-0 w-3/4 max-w-3xl max-h-4/5 overflow-auto border-2 border-white z-100"
+                      onclick="event.stopPropagation()"
+                    >
+                      <button
+                        onclick="closeVideoModal()"
+                        class="absolute top-10 right-10 text-2xl text-red-500 hover:text-red-700 z-300"
+                      >
+                        &times;
+                      </button>
+                      <video controls class="w-full h-auto" id="modalVideo">
+                        <source id="modalVideoSource" type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                  </div>
+
+                  <!-- Language change -->
+                  <!-- <div>
+                    <span
+                      class="bg-[#FBDEC1] px-3 py-1 text-black font-semibold rounded-md"
+                      >English</span
+                    >
+                  </div> -->
               </div>
             </div>
 
@@ -466,6 +518,7 @@
 
   <!-- script file connections area -->
   <script src="{% static 'js/navbar.js' %}"></script>
+  <script src="{% static 'js/video_modal.js' %}"></script>
   <script type="module" src="{% static 'js/swiper-popup.js' %}"></script>
   <script type="module" src="{% static 'js/datetime.js' %}"></script>
   <script src="https://cdn.tailwindcss.com"></script>

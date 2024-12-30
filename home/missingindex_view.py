@@ -10,7 +10,7 @@
 from django.shortcuts import render
 from .models import *
 
-from .views import current_news_view, live_streaming_view
+from .views import current_news_view, live_streaming_view,focus_video_view
 from django.shortcuts import render, get_object_or_404
 
 # Fetch the popup advertisement
@@ -132,6 +132,7 @@ def missing_news_view(request):
 
     current_news = current_news_view(request)  
     live_streaming = live_streaming_view(request)
+    focus_video = focus_video_view(request)
 
 
     # Create the context
@@ -150,6 +151,7 @@ def missing_news_view(request):
         "popup_adv_url": popup_adv_url,
         "current_news": current_news,
         "live_streaming": live_streaming,
+        "focus_video": focus_video,
 
     }
 
