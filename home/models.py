@@ -86,7 +86,11 @@ class HomePage(Page):
         "home.MissingNewsPage",
     ]
 
-
+class LiveStreaming(models.Model):
+    link = models.URLField(blank=True, null=True, help_text="External link.")
+    published_date = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.link
 
 
 
