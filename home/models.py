@@ -238,14 +238,6 @@ class NewsIndexPage(Page):
         FieldPanel('advertisement'),
         
     ]
-    # subpage_types = ["home.NewsDetailsPage",]
-    
-    # @cached_property
-    # def parent_page(self):
-    #     return self.get_parent().specific
-    
-    
-    
     # ---------------------------------------------------------------------
     #                             NewsDetailsPage
     # ---------------------------------------------------------------------

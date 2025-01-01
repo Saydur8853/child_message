@@ -31,7 +31,7 @@ urlpatterns = [
     
     
     # Parent page:
-    path('<slug:category_slug>/', news_combined_view, name='news_combined'),
+    path('<slug:slug>/', news_combined_view, name='news_combined'),
     # Child page:
     # path('<slug:category_slug>/<slug:news_slug>/', newsdetails_combined_view, name='newsdetails_combined'),   //suppress// 
     
