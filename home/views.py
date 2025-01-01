@@ -246,6 +246,14 @@ def combined_view(request):
     live_streaming = live_streaming_view(request)
     focus_video = focus_video_view(request)
     site_associate = Site_associate.objects.first()
+    
+    featured_news = NewsDetails.objects.filter(make_featured_news=True).order_by('-published_date')
+    latest_featured_news = featured_news.last()
+    # Second latest featured news
+    second_featured_news = featured_news[1] if len(featured_news) > 1 else None  # Use index 1 for second latest
+    third_featured_news = featured_news[2] if len(featured_news) > 2 else None
+
+    
 
     # Determine which form to use
     form_type = request.GET.get('form_type', 'generalist')  # Default to 'generalist'
@@ -263,6 +271,8 @@ def combined_view(request):
             return JsonResponse({'success': True, 'message': 'Form submitted successfully!'})
         else:
             return JsonResponse({'success': False, 'errors': form.errors})
+        
+    videos = FocusVideo.objects.all()
 
     return render(
         request,
@@ -286,6 +296,10 @@ def combined_view(request):
             "focus_video": focus_video,
             "site_associate": site_associate,
             "form": form, 
+            "latest_featured_news": latest_featured_news, 
+            "second_featured_news": second_featured_news,
+            "third_featured_news": third_featured_news,
+            "videos": videos,
         }
     )
 

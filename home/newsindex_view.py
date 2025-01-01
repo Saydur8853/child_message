@@ -248,3 +248,4 @@ def news_combined_view(request, slug):
 
     # Render the template
     return render(request, 'home/news_index_page.html', context)
+

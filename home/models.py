@@ -94,7 +94,13 @@ class LiveStreaming(models.Model):
         return self.link
 
 
-
+##     ## #### ########  ########  #######  
+##     ##  ##  ##     ## ##       ##     ## 
+##     ##  ##  ##     ## ##       ##     ## 
+##     ##  ##  ##     ## ######   ##     ## 
+ ##   ##   ##  ##     ## ##       ##     ## 
+  ## ##    ##  ##     ## ##       ##     ## 
+   ###    #### ########  ########  #######  
 class FocusVideo(models.Model):
     video = models.FileField(upload_to='videos/', blank=True, null=True)
     link = models.URLField(blank=True, null=True, help_text="External link.")
