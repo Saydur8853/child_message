@@ -135,9 +135,11 @@ def missing_news_view(request):
     focus_video = focus_video_view(request)
     site_associate = Site_associate.objects.first()
     missing_person = MissingMessage.objects.last() 
-    other_missing_messages = MissingMessage.objects.exclude(id=missing_person.id).order_by('-published_date')[:4]
-    
-
+    # Check if missing_person exists
+    if missing_person:
+        other_missing_messages = MissingMessage.objects.exclude(id=missing_person.id).order_by('-published_date')[:4]
+    else:
+        other_missing_messages = MissingMessage.objects.order_by('-published_date')[:4]
 
     # Create the context
     context = {

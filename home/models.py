@@ -7,6 +7,7 @@ from wagtail.admin.panels import FieldPanel,MultiFieldPanel, InlinePanel, PageCh
 from wagtail.images.models import Image
 from wagtail.search import index
 from child_message.blocks import *
+from wagtail.blocks import StructBlock, ChoiceBlock
 from django.utils.translation import gettext_lazy as _
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from modelcluster.fields import ParentalKey
@@ -16,6 +17,20 @@ from django.core.exceptions import ValidationError
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.images import get_image_model_string
 IMAGE_MODEL = get_image_model_string()
+
+
+class NewsCategory(models.Model):
+    category = models.CharField(_("News Category"), max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        return self.category
+
+    class Meta:
+        verbose_name = "News Category"
+        verbose_name_plural = "News Categories" 
+        
+def get_news_category_choices():
+    return [(cat.id, cat.category) for cat in NewsCategory.objects.all()]
 
 ##     ##    ###    #### ##    ##    ##     ## ######## ##    ## ##     ## 
 ###   ###   ## ##    ##  ###   ##    ###   ### ##       ###   ## ##     ## 
@@ -78,8 +93,23 @@ class HomePage(Page):
         null=True,
         blank=True,
     )
+    news_categories = StreamField(
+        [
+            ("News_Category", StructBlock([
+                ("category", ChoiceBlock(
+                    choices=get_news_category_choices,
+                    label="News Category",
+                ))
+            ])),
+        ],
+        null=True,
+        blank=True,
+    )
+
+
     content_panels = Page.content_panels + [
         FieldPanel('advertisement'),
+        FieldPanel('news_categories'),
     ]
     subpage_types = [
         "home.NewsIndexPage",
@@ -200,15 +230,7 @@ class MissingNewsPage(Page):
     ##   ### ##       ##  ##  ## ##    ## 
     ##    ## ########  ###  ###   ######  
 
-class NewsCategory(models.Model):
-    category = models.CharField(_("News Category"), max_length=50, blank=True, null=True)
-
-    def __str__(self):
-        return self.category
-
-    class Meta:
-        verbose_name = "News Category"
-        verbose_name_plural = "News Categories"   
+  
     
     
     # ---------------------------------------------------------------------
