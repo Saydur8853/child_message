@@ -135,10 +135,24 @@ def newsdetails_combined_view(request,category_slug,news_slug):
     live_streaming = live_streaming_view(request)
     focus_video = focus_video_view(request)
     site_associate = Site_associate.objects.first()
+    
+    news_details = NewsDetailsPage.objects.filter(
+        news_category__slug=category_slug,
+        slug=news_slug
+    ).first()
+
 
 
     # Create the context
     context = {
+        "main_heading": news_details.main_heading,
+        "subtitle": news_details.subtitle,
+        "image": news_details.image,
+        "published_date": news_details.published_date,
+        "updated_date": news_details.updated_date,
+        "details": news_details.details,
+        "make_featured_news": news_details.make_featured_news,
+        "advertisement": news_details.advertisement,
         "vertical_adv_left_url": vertical_adv_urls[0],
         "vertical_adv_right_url": vertical_adv_urls[1],
         "horizontal_adv_url_1": horizontal_adv_urls[0],

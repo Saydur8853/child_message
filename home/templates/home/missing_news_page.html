@@ -361,28 +361,32 @@
                   </div>
               </div>
           </div>
+
           <!-- Image -->
+          {% if missing_person and missing_person.image %}
           <div class="mb-4">
-              <img src="{% static 'assets/missing.png' %}" class="h-auto w-full rounded-md shadow-md" alt="Missing Person">
+              <img src="{{ missing_person.image.file.url }}" class="h-auto w-full rounded-md shadow-md" alt="{{ missing_person.name }}">
           </div>
+          {% else %}
+          <p class="text-red-500">No image available for the missing person.</p>
+          {% endif %}
 
           <!-- Description -->
+          {% if missing_person %}
           <p class="text-sm mt-3 leading-relaxed text-justify">
-              ৯ বছর বয়সী একটি শিশু, হাসান আহমেদ, চট্টগ্রামের নিউ মার্কেট এলাকা থেকে নিখোঁজ হয়েছে। গত ১০ ডিসেম্বর ২০২৪ তারিখে বিকাল ৪টার দিকে সে খেলতে বের হয়ে আর বাড়ি ফিরে আসেনি।
+            নাম : {{ missing_person.name }}, বয়স : {{ missing_person.age }} বছর, গায়ের রং : {{ missing_person.skin_tone }}, পরনে ছিল : {{ missing_person.dress }}, নিখোঁজ হওয়ার সময় : {{ missing_person.missing_time_date|date:"d M Y, h:i A" }},
           </p>
 
           <p class="mt-5 leading-loose text-justify">
-              ৯ বছর বয়সী একটি শিশু, হাসান আহমেদ, চট্টগ্রামের নিউ মার্কেট এলাকা থেকে নিখোঁজ হয়েছে।
-              গত ১০ ডিসেম্বর ২০২৪ তারিখে বিকাল ৪টার দিকে সে খেলতে বের হয়ে আর বাড়ি ফিরে আসেনি। হাসানের উচ্চতা ৪ ফুট ২ ইঞ্চি, গায়ের রং ফর্সা, এবং চুল কালো ও মাঝারি লম্বা।
-              নিখোঁজ হওয়ার সময় তার পরনে ছিল লাল রঙের গেঞ্জি এবং নীল প্যান্ট। শিশুটি খুব শান্ত স্বভাবের এবং পরিবারের সবার খুব প্রিয়। তার ডান গালে একটি ছোট কাটা দাগ রয়েছে, যা তাকে সহজে শনাক্ত করতে সাহায্য করবে।
-              <br /><br />
-              পরিবারের সদস্যরা ইতোমধ্যে তার খোঁজে বিভিন্ন জায়গায় অনুসন্ধান চালিয়েছেন, কিন্তু এখনো কোনো তথ্য পাওয়া যায়নি। তারা অত্যন্ত দুশ্চিন্তাগ্রস্ত এবং যেকোনো সম্ভাব্য সাহায্যের জন্য সকলের প্রতি আবেদন জানাচ্ছেন।
-              যদি কেউ এই শিশুটিকে কোথাও দেখে থাকেন বা তার সম্পর্কে কোনো তথ্য জানেন, দয়া করে ০১৮xxxxxxxx নম্বরে দ্রুত যোগাযোগ করার অনুরোধ করা হচ্ছে। হাসানকে তার পরিবারের কাছে নিরাপদে ফিরিয়ে আনতে সকলের সহায়তা কাম্য।
+            {{ missing_person.detail_story }}
           </p>
+          {% else %}
+          <p class="text-red-500">No missing person message available.</p>
+          {% endif %}
 
           <!-- Ad Section -->
           <div class="flex justify-center mt-8">
-              <img src="{% static 'assets/add6.png' %}" alt="add" class="w-full max-w-[1200px] h-auto rounded-md shadow-md">
+              <img src="{{ horizontal_adv_url_1 }}" alt="Advertisement" class="w-full max-w-[1200px] h-auto rounded-md shadow-md">
           </div>
 
           <!-- Divider with More Reads -->
@@ -398,24 +402,20 @@
               </div>
           </div>
 
-          <!-- More Images -->
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-5">
-              <div>
-                  <img src="{% static 'assets/add6.png' %}" alt="news" class="w-full h-auto rounded-md shadow-md">
-              </div>
-              <div>
-                  <img src="{% static 'assets/add6.png' %}" alt="news" class="w-full h-auto rounded-md shadow-md">
-              </div>
-              <div>
-                  <img src="{% static 'assets/add6.png' %}" alt="news" class="w-full h-auto rounded-md shadow-md">
-              </div>
-              <div>
-                  <img src="{% static 'assets/add6.png' %}" alt="news" class="w-full h-auto rounded-md shadow-md">
-              </div>
-          </div>
+            {% for message in other_missing_messages %}
+            <div>
+                <img src="{{ message.image.file.url }}" 
+                    alt="{{ message.name }}" 
+                    class="w-full h-48 rounded-md shadow-md cursor-pointer object-cover">
+            </div>
+            {% endfor %}
+        </div>
+        
       </div>
   </div>
 </section>
+
 
 
 <!-- 

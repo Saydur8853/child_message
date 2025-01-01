@@ -134,6 +134,9 @@ def missing_news_view(request):
     live_streaming = live_streaming_view(request)
     focus_video = focus_video_view(request)
     site_associate = Site_associate.objects.first()
+    missing_person = MissingMessage.objects.last() 
+    other_missing_messages = MissingMessage.objects.exclude(id=missing_person.id).order_by('-published_date')[:4]
+    
 
 
     # Create the context
@@ -154,6 +157,8 @@ def missing_news_view(request):
         "live_streaming": live_streaming,
         "focus_video": focus_video,
         "site_associate": site_associate,
+        "missing_person": missing_person,
+        "other_missing_messages": other_missing_messages,
 
     }
 

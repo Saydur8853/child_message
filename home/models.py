@@ -238,7 +238,7 @@ class NewsIndexPage(Page):
         FieldPanel('advertisement'),
         
     ]
-    subpage_types = ["home.NewsDetailsPage",]
+    # subpage_types = ["home.NewsDetailsPage",]
     
     # @cached_property
     # def parent_page(self):
@@ -249,56 +249,116 @@ class NewsIndexPage(Page):
     # ---------------------------------------------------------------------
     #                             NewsDetailsPage
     # ---------------------------------------------------------------------
-    
-    
-    
-class NewsDetailsPage(Page):
-    news_category = models.ForeignKey(
-        NewsCategory,
-        verbose_name=_("Select a Category"),
+class NewsDetails(models.Model):
+    page_choice = models.ForeignKey(
+        NewsIndexPage,
+        verbose_name=_("Associated page"),
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="news_details_page",
+        related_name="news_page",
     )
-    main_heading = models.CharField(max_length=255, help_text="Main Heading of the News",blank=True,)
-    subtitle = models.CharField(max_length=255, blank=True, null=True, help_text="Subtitle of the News")
+    news_category = models.ForeignKey(
+        'NewsCategory',
+        verbose_name=_("News Category"),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="news_category",
+    )
+    main_heading = models.CharField(
+        max_length=255, 
+        help_text="Main Heading of the News",
+        blank=True,
+    )
+    subtitle = models.CharField(
+        max_length=255, 
+        blank=True, 
+        null=True, 
+        help_text="Subtitle of the News",
+    )
     image = models.ForeignKey(
-        "wagtailimages.Image",
+        'wagtailimages.Image',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         help_text="Optimal_Dimension : 520x365",
         related_name="+",
     )
-    published_date = models.DateTimeField(default=timezone.now, help_text="Publish Date and Time")
-    updated_date = models.DateTimeField(auto_now=True, help_text="Updated Date and Time")
-    details = RichTextField(blank=True, help_text="Details of the news")
-    make_featured_news = models.BooleanField(
-        _("Make it featured?"), default=False, blank=True
+    published_date = models.DateTimeField(
+        default=timezone.now, 
+        help_text="Publish Date and Time",
     )
-    advertisement = StreamField(
-        [
-            ("Vertical_Adv", VerticalAddBlock()),
-            ("Horizontal_Adv", HorizontalAddBlock()),
-            ("Poster_Adv", PosterAddBlock()),
-            ("Box_Adv", BoxAddBlock()),
-            ("Popup_Adv", PopupAddBlock()),
-        ],
-        null=True,
+    updated_date = models.DateTimeField(
+        auto_now=True, 
+        help_text="Updated Date and Time",
+    )
+    details = models.TextField(
+        blank=True, 
+        help_text="Details of the news",
+    )
+    make_featured_news = models.BooleanField(
+        _("Make it featured?"), 
+        default=False, 
         blank=True,
     )
-    content_panels = Page.content_panels + [
-        FieldPanel('advertisement'),
-        FieldPanel('news_category'),
-        FieldPanel('main_heading'),
-        FieldPanel('subtitle'),
-        FieldPanel('image'),
-        FieldPanel('published_date'),
-        FieldPanel('details'),
-        FieldPanel('make_featured_news'),
+
+    def __str__(self):
+        return self.main_heading or "Untitled News"
+    class Meta:
+        verbose_name = "News detail"
+        verbose_name_plural = "News details"
+    
+    
+# class NewsDetailsPage(Page):
+#     news_category = models.ForeignKey(
+#         NewsCategory,
+#         verbose_name=_("Select a Category"),
+#         on_delete=models.SET_NULL,
+#         null=True,
+#         blank=True,
+#         related_name="news_details_page",
+#     )
+#     main_heading = models.CharField(max_length=255, help_text="Main Heading of the News",blank=True,)
+#     subtitle = models.CharField(max_length=255, blank=True, null=True, help_text="Subtitle of the News")
+#     image = models.ForeignKey(
+#         "wagtailimages.Image",
+#         null=True,
+#         blank=True,
+#         on_delete=models.SET_NULL,
+#         help_text="Optimal_Dimension : 520x365",
+#         related_name="+",
+#     )
+#     published_date = models.DateTimeField(default=timezone.now, help_text="Publish Date and Time")
+#     updated_date = models.DateTimeField(auto_now=True, help_text="Updated Date and Time")
+#     details = RichTextField(blank=True, help_text="Details of the news")
+#     make_featured_news = models.BooleanField(
+#         _("Make it featured?"), default=False, blank=True
+#     )
+#     advertisement = StreamField(
+#         [
+#             ("Vertical_Adv", VerticalAddBlock()),
+#             ("Horizontal_Adv", HorizontalAddBlock()),
+#             ("Poster_Adv", PosterAddBlock()),
+#             ("Box_Adv", BoxAddBlock()),
+#             ("Popup_Adv", PopupAddBlock()),
+#         ],
+#         null=True,
+#         blank=True,
+#     )
+#     content_panels = Page.content_panels + [
+#         FieldPanel('advertisement'),
+#         FieldPanel('news_category'),
+#         FieldPanel('main_heading'),
+#         FieldPanel('subtitle'),
+#         FieldPanel('image'),
+#         FieldPanel('published_date'),
+#         FieldPanel('details'),
+#         FieldPanel('make_featured_news'),
         
-    ]
+#     ]
+
+
    
    
  ######  ##     ## ######## #### ########    ##     ##  #######  ####  ######  ######## 

@@ -11,7 +11,7 @@ from search import views as search_views
 
 from home.views import *
 from home.newsindex_view import *
-from home.newsdetails_view import *
+# from home.newsdetails_view import *
 from home.cheifvoice_view import *
 from home.missingindex_view import *
 urlpatterns = [
@@ -33,7 +33,7 @@ urlpatterns = [
     # Parent page:
     path('<slug:category_slug>/', news_combined_view, name='news_combined'),
     # Child page:
-    path('<slug:category_slug>/<slug:news_slug>/', newsdetails_combined_view, name='newsdetails_combined'),
+    # path('<slug:category_slug>/<slug:news_slug>/', newsdetails_combined_view, name='newsdetails_combined'),   //suppress// 
     
     ]
 

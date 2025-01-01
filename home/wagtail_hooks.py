@@ -41,18 +41,19 @@ class NewsCategoryAdmin(ModelAdmin):
     search_fields = ("category",)
     
 class NewsDetailsAdmin(ModelAdmin):
-    model = NewsDetailsPage
+    model = NewsDetails
     menu_label = "Newsroom"
     menu_icon = "form"
     menu_order = 210
     list_display = (
         "main_heading",
+        "page_choice",
         "news_category",
         "published_date",
         "make_featured_news",
     )
-    list_display = ("news_category",)
-    search_fields = ("news_category",)
+    search_fields = ("news_category__name",)
+    list_filter = ("page_choice","news_category","published_date","make_featured_news",)
     
 class Newsroom(ModelAdminGroup):
     menu_label = "Newsroom"
