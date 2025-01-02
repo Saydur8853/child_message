@@ -372,7 +372,7 @@
               {% if latest_featured_news %}
                 <div>
                   <!-- Wrap the clickable content in an anchor tag -->
-                  <a href="{% url 'news_combined' latest_featured_news.page_choice.title %}" class="block">
+                  <a href="{% url 'news_combined' latest_featured_news.page_choice.slug %}" class="block">
                     <h1 class="font-bold text-xl lg:text-2xl text-[#F67F00]">
                       {{ latest_featured_news.main_heading }}
                     </h1>
@@ -945,14 +945,15 @@
                           {% elif video.link %}
                               <!-- Display external link (YouTube video) -->
                               <iframe
-                                  src="https://www.youtube.com/embed/{{ video.link|slice:':11' }}"
-                                  class="w-full h-[200px]"
-                                  title="YouTube video player"
-                                  frameborder="0"
-                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                  referrerpolicy="strict-origin-when-cross-origin"
-                                  allowfullscreen
-                              ></iframe>
+                                src="https://www.youtube.com/embed/{{ video.link|cut:'https://youtu.be/'|cut:'https://www.youtube.com/watch?v=' }}"
+                                class="w-full h-[200px]"
+                                title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin"
+                                allowfullscreen
+                            ></iframe>
+
                           {% endif %}
                       </div>
                   {% endfor %}
