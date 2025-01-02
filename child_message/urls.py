@@ -25,7 +25,7 @@ urlpatterns = [
         name="wagtailimages_serve",
     ),
     path("", combined_view, name="home"),
-    path("chiefs-message/", cheif_voice_view, name="cheif_voice_combined"),
+    path("chief-message/", cheif_voice_view, name="cheif_voice_combined"),
     path('missing-news/', missing_news_view, name='missing_news_combined'),
 
     
