@@ -145,13 +145,6 @@ def newsdetails_combined_view(request,category_slug,news_slug):
 
     # Create the context
     context = {
-        "main_heading": news_details.main_heading,
-        "subtitle": news_details.subtitle,
-        "image": news_details.image,
-        "published_date": news_details.published_date,
-        "updated_date": news_details.updated_date,
-        "details": news_details.details,
-        "make_featured_news": news_details.make_featured_news,
         "advertisement": news_details.advertisement,
         "vertical_adv_left_url": vertical_adv_urls[0],
         "vertical_adv_right_url": vertical_adv_urls[1],

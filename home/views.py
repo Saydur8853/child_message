@@ -247,7 +247,7 @@ def combined_view(request):
     focus_video = focus_video_view(request)
     site_associate = Site_associate.objects.first()
     
-    featured_news = NewsDetails.objects.filter(make_featured_news=True).order_by('-published_date')
+    featured_news = NewsDetails.objects.all()
     latest_featured_news = featured_news.last()
     # Second latest featured news
     second_featured_news = featured_news[1] if len(featured_news) > 1 else None  # Use index 1 for second latest

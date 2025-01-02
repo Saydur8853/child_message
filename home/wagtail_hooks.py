@@ -50,10 +50,10 @@ class NewsDetailsAdmin(ModelAdmin):
         "page_choice",
         "news_category",
         "published_date",
-        "make_featured_news",
+        # "make_featured_news",
     )
     search_fields = ("news_category__name",)
-    list_filter = ("page_choice","news_category","published_date","make_featured_news",)
+    list_filter = ("page_choice","news_category","published_date",)
     
 class Newsroom(ModelAdminGroup):
     menu_label = "Newsroom"

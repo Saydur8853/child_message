@@ -370,39 +370,46 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
               <!-- Left Column -->
               {% if latest_featured_news %}
-              <div>
-                <h1 class="font-bold text-xl lg:text-2xl text-[#F67F00]">
-                  {{ latest_featured_news.main_heading }}
-                </h1>
-                <p class="text-[#616161] text-sm mt-3 lg:mt-5">
-                  {{ latest_featured_news.published_date|timesince }} Ago
-                </p>
-                <p class="text-[#616161] mt-3 lg:mt-5 mb-5">
-                  {{ latest_featured_news.subtitle }}
-                </p>
-                {% if latest_featured_news.image %}
-                  <img
-                    src="{{ latest_featured_news.image.file.url }}"
-                    class="w-full h-auto rounded-lg shadow-md"
-                    alt="news"
-                  />
-                {% endif %}
-                <p class="mt-5">
-                  {% if site_associate %}
-                    {% if site_associate.hotline_number %}
-                      <span class="text-[#E7252D]">
-                        শিশু হেল্প লাইন নাম্বার : {{ site_associate.hotline_number }}
-                      </span>
+                <div>
+                  <!-- Wrap the clickable content in an anchor tag -->
+                  <a href="{% url 'news_combined' latest_featured_news.page_choice.title %}" class="block">
+                    <h1 class="font-bold text-xl lg:text-2xl text-[#F67F00]">
+                      {{ latest_featured_news.main_heading }}
+                    </h1>
+                    <p class="text-[#616161] text-sm mt-3 lg:mt-5">
+                      {{ latest_featured_news.published_date|timesince }} Ago
+                    </p>
+                    <p class="text-[#616161] mt-3 lg:mt-5 mb-5">
+                      {{ latest_featured_news.subtitle }}
+                    </p>
+                    {% if latest_featured_news.image %}
+                      <img
+                        src="{{ latest_featured_news.image.file.url }}"
+                        class="w-full h-auto rounded-lg shadow-md"
+                        alt="news"
+                      />
                     {% endif %}
-                    {% if site_associate.child_helpline_number %}
-                      <span class="ml-2 text-[#F67F00]">
-                        হেল্প লাইন নাম্বার : {{ site_associate.child_helpline_number }}
-                      </span>
+                  </a>
+
+                  <!-- Helpline numbers are outside the clickable area -->
+                  <p class="mt-5">
+                    {% if site_associate %}
+                      {% if site_associate.hotline_number %}
+                        <span class="text-[#E7252D]">
+                          শিশু হেল্প লাইন নাম্বার : {{ site_associate.hotline_number }}
+                        </span>
+                      {% endif %}
+                      {% if site_associate.child_helpline_number %}
+                        <span class="ml-2 text-[#F67F00]">
+                          হেল্প লাইন নাম্বার : {{ site_associate.child_helpline_number }}
+                        </span>
+                      {% endif %}
                     {% endif %}
-                  {% endif %}
-                </p>
-              </div>
-            {% endif %}
+                  </p>
+                </div>
+              {% endif %}
+
+
 
               <!-- Right Column -->
               {% if missing_person %}
