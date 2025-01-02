@@ -46,7 +46,6 @@ class MainMenu(BaseSiteSetting, ClusterableModel):
         InlinePanel('menu_items', label="Menu Items"),
     ]
 
-
 class MenuItem(models.Model):
     """Menu item for the main menu."""
     menu = ParentalKey(MainMenu, related_name='menu_items', on_delete=models.CASCADE)
@@ -649,8 +648,14 @@ class Site_associate(models.Model):
     quick_link_3_name = models.CharField(max_length=255, help_text="Quick link 3 name", blank=True)
     quick_link_3_url = models.URLField(_("Quick link 3 URL"), max_length=255, blank=True)
 
-    quick_link_4_name = models.CharField(max_length=255, help_text="Quick link 4 name", blank=True)
-    quick_link_4_url = models.URLField(_("Quick link 4 URL"), max_length=255, blank=True)
+    quick_link_4_page = models.ForeignKey(
+        Page,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        help_text="Link to a Wagtail page (required)."
+    )
 
     quick_link_5_name = models.CharField(max_length=255, help_text="Quick link 5 name", blank=True)
     quick_link_5_url = models.URLField(_("Quick link 5 URL"), max_length=255, blank=True)
